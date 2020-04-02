@@ -5,6 +5,7 @@
   align-items: center;
   padding: 0 4rem;
   height: 6vh;
+  //   transition: all 0.5s ease;
 
   header {
     width: 25%;
@@ -27,8 +28,37 @@
   }
 
   .search {
+    display: flex;
+    transition: all 0.5s ease;
+
+    //  padding: 0.4rem;
+    //  background: rgba(0, 0, 0, 0.9);
+
     .icon {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      margin-right: 0.9rem;
+      color: #f4f4f4;
+      cursor: pointer;
     }
+
+    .form {
+      input {
+        font-size: 1.1rem;
+        border: none;
+        //   padding: 0.2rem;
+        height: 100%;
+        background: transparent;
+        color: #f4f4f4;
+        width: 250px;
+        //   font-weight: 400;
+      }
+    }
+  }
+
+  .showForm {
+    border: 1px solid red;
+    padding: 0.4rem;
+    background: rgba(0, 0, 0, 0.9);
+    transition: all 0.5s ease;
   }
 }

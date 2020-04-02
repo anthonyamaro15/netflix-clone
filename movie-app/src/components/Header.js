@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
+import NavForm from "./NavForm";
+
 const Header = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
   return (
     <div className="header-container">
       <header>
@@ -16,10 +23,11 @@ const Header = () => {
           <NavLink to="/mylist">my list</NavLink>
         </nav>
       </header>
-      <div className="search">
-        <div className="icon">
+      <div className={showForm ? "search showForm" : "search"}>
+        <div className="icon" onClick={toggleForm}>
           <FaSearch />
         </div>
+        {showForm ? <NavForm /> : ""}
       </div>
     </div>
   );
