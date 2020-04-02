@@ -1,0 +1,34 @@
+.header-container {
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
+  height: 6vh;
+
+  header {
+    width: 25%;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 1.7rem;
+    }
+
+    nav {
+      border: 1px solid red;
+      width: 65%;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0.4rem;
+      text-transform: capitalize;
+    }
+  }
+
+  .search {
+    .icon {
+      font-size: 1.5rem;
+    }
+  }
+}
