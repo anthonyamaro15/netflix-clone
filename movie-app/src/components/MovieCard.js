@@ -10,7 +10,7 @@ const MovieCard = ({ movie, movieId }) => {
   const params = useParams();
   //   console.log(movieId);
 
-  const { poster_path, title, vote_average } = movie;
+  const { poster_path, title, name, vote_average } = movie;
   return (
     <div className="single-movie-container">
       <Link to={`/info/${movieId}`}>
@@ -20,7 +20,7 @@ const MovieCard = ({ movie, movieId }) => {
             alt={title}
           />
           <div className="hover-info">
-            <h3>{title}</h3>
+            <h3>{name ? name : title}</h3>
             <p>rating: {vote_average}</p>
             <div className="add-icon">
               <div>

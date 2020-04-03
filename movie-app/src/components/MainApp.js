@@ -19,7 +19,7 @@ const MainApp = () => {
   const { tvPopular } = reducer.tvPopularReducer;
   const { latestRated } = reducer.ratedReducer;
   const { playingMovie } = reducer.playingNowReducer;
-  console.log("playing now movies ", playingMovie);
+  console.log(reducer);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
