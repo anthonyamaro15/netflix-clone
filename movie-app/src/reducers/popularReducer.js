@@ -17,7 +17,7 @@ export const popularReducer = (state = initialValue, action) => {
     case "GETTING_DATA":
       return {
         ...state,
-        popular: [...state.popular, action.payload],
+        popular: action.payload,
         loading: false
       };
     case "ERROR":

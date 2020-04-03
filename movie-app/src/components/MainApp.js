@@ -23,7 +23,7 @@ const MainApp = () => {
       )
       .then(res => {
         console.log(res.data);
-        dispatch({ type: "GETTING_DATA", payload: res.data });
+        dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
       .catch(err => {
         dispatch({ type: "ERROR", payload: err.response });
@@ -33,12 +33,19 @@ const MainApp = () => {
 
   //   console.log(reducer.popularReducer);
   const { popular, loading, error } = reducer.popularReducer;
+
+  const randomMovie = () => {
+    let random = Math.floor(Math.random() * popular.length);
+    return popular[random];
+  };
+
+  //   console.log("random movie ", randomMovie());
   return (
     <div className="MainApp">
       <Navbar />
       <Route exact path="/">
-        <Header />
-        <MovieContent />
+        <Header randomMovie={randomMovie} loading={loading} />
+        <MovieContent popular={popular} />
       </Route>
       <Route path="/tvshows">
         <Header />
@@ -55,9 +62,9 @@ const MainApp = () => {
       <Route path="/mylist">
         <MyList />
       </Route>
-      <Route exact path="/:name/:id">
+      <Route exact path="/info/:id">
         <SingleMovieInfo />
-        <MovieContent />
+        <MovieContent popular={popular} />
       </Route>
       ;
       <Footer />
