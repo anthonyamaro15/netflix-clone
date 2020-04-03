@@ -11,7 +11,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  color: white;
+  color: #f4f4f4;
   transition: all 0.5s ease;
 
   //   .transparent {
@@ -38,8 +38,14 @@
       justify-content: space-between;
       padding-top: 0.3rem;
       text-transform: capitalize;
+
       a {
         color: white;
+        transition: color 0.5s ease;
+
+        &:hover {
+          color: grey;
+        }
       }
     }
   }
@@ -96,4 +102,13 @@
 
 .black {
   background: rgba(0, 0, 0, 0.9);
+}
+
+.active {
+  font-weight: bold;
+
+  &:hover {
+    cursor: not-allowed;
+    color: white;
+  }
 }

@@ -10,7 +10,7 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY <= 500) {
+      if (window.scrollY >= 3) {
         setScrolling(true);
       } else {
         setScrolling(false);
@@ -37,10 +37,21 @@ const Navbar = () => {
           <h2>Movie App</h2>
         </div>
         <nav>
-          <NavLink to="/home">home</NavLink>
-          <NavLink to="/tvshows">TV shows</NavLink>
-          <NavLink to="/movies">movies</NavLink>
-          <NavLink to="/mylist">my list</NavLink>
+          <NavLink exact to="/" activeClassName="active">
+            home
+          </NavLink>
+          <NavLink to="/tvshows" activeClassName="active">
+            TV shows
+          </NavLink>
+          <NavLink to="/movies" activeClassName="active">
+            movies
+          </NavLink>
+          <NavLink to="/latest" activeClassName="active">
+            Latest
+          </NavLink>
+          <NavLink to="/mylist" activeClassName="active">
+            my list
+          </NavLink>
         </nav>
       </header>
       <div className={showForm ? "search showForm" : "search"}>
