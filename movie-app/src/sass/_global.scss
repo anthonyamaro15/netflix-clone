@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;600;700&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,7 +7,10 @@
 }
 
 body {
-  background-color: rgb(174, 172, 172);
+  //   background-color: rgb(174, 172, 172);
+  font-family: "Open Sans", sans-serif;
+  background: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
 }
 
 a {
@@ -13,6 +18,12 @@ a {
 }
 
 a,
-span {
+span,
+input {
   display: inline-block;
+}
+
+input,
+button {
+  outline: none;
 }

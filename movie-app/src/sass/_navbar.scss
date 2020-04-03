@@ -1,0 +1,114 @@
+.navbar-container {
+  //   border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //   background: transparent;
+  padding: 0 $padd-lr;
+  height: 6vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  color: #f4f4f4;
+  transition: all 0.5s ease;
+
+  //   .transparent {
+  //      background: transparent;
+  //   }
+
+  header {
+    width: 25%;
+    //  border: 1px solid blue;
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 1.5rem;
+      // color: #d81f26;
+      color: #ff1d25;
+      // color: tomato;
+    }
+
+    nav {
+      // border: 1px solid red;
+      width: 65%;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0.3rem;
+      text-transform: capitalize;
+
+      a {
+        color: white;
+        transition: color 0.5s ease;
+
+        &:hover {
+          color: grey;
+        }
+      }
+    }
+  }
+
+  .search {
+    display: flex;
+    transition: all 0.5s ease;
+
+    //  padding: 0.4rem;
+    //  background: rgba(0, 0, 0, 0.9);
+
+    .icon {
+      font-size: 1.3rem;
+      margin-right: 0.9rem;
+      color: #f4f4f4;
+      cursor: pointer;
+    }
+
+    .form {
+      input {
+        font-size: 1.1rem;
+        border: none;
+        //   padding: 0.2rem;
+        height: 100%;
+        background: transparent;
+        color: #f4f4f4;
+        width: 250px;
+        //   font-weight: 400;
+      }
+    }
+  }
+
+  .showForm {
+    border: 1px solid rgb(228, 228, 228);
+    padding: 0.4rem;
+    background: rgba(0, 0, 0, 0.9);
+    transition: all 0.5s ease;
+  }
+}
+
+// window.addEventListener("scroll", e => {
+//   e.preventDefault();
+
+//   if (window.scrollY <= 5000) {
+//     navlinks.style.backgroundColor = "rgba(115, 195, 40, 0.8)";
+//   } else {
+//     navlinks.style.backgroundColor = "transparent";
+//   }
+
+//   if (window.scrollY === 0) {
+//     navlinks.style.backgroundColor = "transparent";
+//   }
+// });
+
+.black {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.active {
+  font-weight: bold;
+
+  &:hover {
+    cursor: not-allowed;
+    color: white;
+  }
+}
