@@ -18,6 +18,10 @@ const MovieContent = () => {
         <MovieCard />
         <MovieCard />
         <MovieCard />
+        <MovieCard />
+        <MovieCard />
+        <MovieCard />
+        <MovieCard />
       </div>
     </div>
   );

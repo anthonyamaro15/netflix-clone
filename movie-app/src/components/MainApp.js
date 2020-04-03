@@ -5,10 +5,11 @@ import Header from "./Header";
 import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
+import Footer from "./Footer";
 
 const MainApp = () => {
   return (
-    <div>
+    <div className="MainApp">
       <Navbar />
       <Route exact path="/">
         <Header />
@@ -29,6 +30,8 @@ const MainApp = () => {
       <Route path="/mylist">
         <MyList />
       </Route>
+
+      <Footer />
     </div>
   );
 };

@@ -1,0 +1,40 @@
+.footer-container {
+  padding: 5rem 0 3rem;
+  background: rgb(5, 5, 5);
+  margin-top: 15rem;
+
+  footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    //  border: 1px solid red;
+    color: grey;
+    padding: 0 1rem;
+
+    .web-links {
+      font-size: 3rem;
+      // border: 1px solid red;
+      margin-bottom: 1rem;
+      text-align: center;
+
+      a {
+        color: grey;
+        transition: color 0.5s ease;
+
+        &:first-child {
+          //  color: red;
+          margin-right: 1rem;
+        }
+
+        &:hover {
+          color: #f4f4f4;
+        }
+      }
+    }
+
+    p {
+      margin: 2rem 0 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  }
+}
