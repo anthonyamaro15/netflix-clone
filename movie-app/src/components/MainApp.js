@@ -4,12 +4,12 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
+import MyList from "./MyList";
 
 const MainApp = () => {
   return (
     <div>
       <Navbar />
-
       <Route exact path="/">
         <Header />
         <MovieContent />
@@ -26,13 +26,16 @@ const MainApp = () => {
         <Header />
         <MovieContent />
       </Route>
-
-      <Route exact path="/:id">
-        <SingleMovieInfo />
-        <MovieContent />
+      <Route path="/mylist">
+        <MyList />
       </Route>
     </div>
   );
 };
 
 export default MainApp;
+
+//  <Route exact path="/:id">
+//    <SingleMovieInfo />
+//    <MovieContent />
+//  </Route>;
