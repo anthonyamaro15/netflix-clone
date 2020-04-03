@@ -1,6 +1,14 @@
 import { combineReducers } from "redux";
-import { popularReducer } from "./popularReducer";
+import {
+  popularReducer,
+  tvPopularReducer,
+  ratedReducer,
+  playingNowReducer
+} from "./popularReducer";
 
 export const rootReducer = combineReducers({
-  popularReducer
+  popularReducer,
+  tvPopularReducer,
+  ratedReducer,
+  playingNowReducer
 });

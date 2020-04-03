@@ -18,7 +18,7 @@ const SingleMovieInfo = () => {
   //   console.log("path  here", path);
   //   console.log("url here", url);
   //   console.log("id here", id);
-  console.log("right movie ", movie);
+  //   console.log("right movie ", movie);
 
   return (
     <div className="single-movie-info-container">

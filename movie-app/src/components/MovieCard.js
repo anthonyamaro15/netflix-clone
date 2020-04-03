@@ -8,7 +8,7 @@ import { MdAddCircleOutline } from "react-icons/md";
 const MovieCard = ({ movie, movieId }) => {
   const { path, url } = useRouteMatch();
   const params = useParams();
-  console.log(movieId);
+  //   console.log(movieId);
 
   const { poster_path, title, vote_average } = movie;
   return (
