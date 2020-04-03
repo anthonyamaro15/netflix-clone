@@ -1,20 +1,37 @@
 import React from "react";
+import { useParams, useRouteMatch } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa";
 import image from "../img/header.jpg";
 
 const SingleMovieInfo = () => {
+  const { id } = useParams();
+  const { path, url } = useRouteMatch();
+  const reducer = useSelector(state => ({
+    ...state
+  }));
+
+  const { popular } = reducer.popularReducer;
+  //   console.log("from singleMovie ", popular);
+
+  const movie = popular.find(item => item.id === Number(id));
+  //   console.log("path  here", path);
+  //   console.log("url here", url);
+  //   console.log("id here", id);
+  //   console.log("right movie ", movie);
+
   return (
     <div className="single-movie-info-container">
       <div className="single-movie-info">
-        <h1>all american</h1>
+        <h1>{movie.title}</h1>
         <div className="display-movie-info">
-          <span className="rating">Rating 7.2</span>
-          <span className="date-release"> date released: {""} 2014-10-22</span>
+          <span className="rating">Rating {movie.vote_average}</span>
+          <span className="date-release">
+            {" "}
+            date released: {""} {movie.release_date}
+          </span>
         </div>
-        <p className="single-movie-description">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum,
-          commodi?
-        </p>
+        <p className="single-movie-description">{movie.overview}</p>
         <div className="single-more-info">
           <button>
             {" "}
@@ -26,7 +43,10 @@ const SingleMovieInfo = () => {
         </div>
       </div>
       <div className="image-movie-info">
-        <img src={image} alt="" />
+        <img
+          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          alt=""
+        />
       </div>
     </div>
   );
