@@ -1,19 +1,11 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-const MovieContent = () => {
+const MyList = () => {
   return (
-    <div className="movie-content-container">
-      <h2>Most popular</h2>
+    <div className="my-list">
+      <h1>my list</h1>
       <div className="display-cards">
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
         <MovieCard />
         <MovieCard />
         <MovieCard />
@@ -27,4 +19,4 @@ const MovieContent = () => {
   );
 };
 
-export default MovieContent;
+export default MyList;

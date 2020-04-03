@@ -1,108 +1,94 @@
 .movie-content-container {
   //   border: 1px solid red;
   padding: 0 $padd-lr;
-  position: absolute;
-  top: 88%;
-  left: 0;
-  z-index: 500;
+  z-index: 100;
   color: white;
+  height: auto;
+  flex: 1;
 
   h2 {
-    margin-bottom: 1rem;
+    margin: 1rem 0;
+    font-weight: normal;
+    font-size: 1.7rem;
   }
+}
 
-  .display-cards {
-    display: flex;
-    flex-wrap: wrap;
-    //  background: rgba(0, 0, 0, 0.8);
-    //  justify-content: center;
-    //  border: 1px solid red;
-  }
+.display-cards {
+  display: flex;
+  flex-wrap: wrap;
+  //  border: 1px solid red;
+}
 
-  // MovieCard component
-  .single-movie-container {
-    width: 396px;
-    height: 200px;
-    margin: 0 0.2rem 5rem 0;
-    //  border: 1px solid red;
+.single-movie-container {
+  width: 396px;
+  height: 200px;
+  margin: 0 0.2rem 5rem 0;
+  //  border: 1px solid red;
 
-    a {
+  a {
+    width: 100%;
+    height: 99%;
+
+    .img-container {
       width: 100%;
       height: 99%;
+      transition: transform 0.5s ease;
 
-      .img-container {
-        width: 100%;
-        height: 99%;
-        // margin: 0 0.5rem 0 0;
-        transition: transform 0.5s ease;
+      position: relative;
 
-        position: relative;
-
-        &:hover {
-          transform: scale(1.7);
-          //   display: block;
-          z-index: 10;
-
-          .hover-info {
-            display: block;
-          }
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          //   transition: transform 0.5s ease;
-          //   margin: 0 0.5rem 0 0;
-          cursor: pointer;
-          z-index: 0;
-
-          //   &:hover {
-          //     transform: scale(1.9);
-          //     //  display: block;
-          //     z-index: 10;
-          //   }
-        }
+      &:hover {
+        transform: scale(1.7);
+        z-index: 10;
 
         .hover-info {
-          width: 100%;
-          height: 50%;
-          position: absolute;
-          top: 50%;
-          left: 0;
-          padding: 0 1rem;
-          //   border: 1px solid red;
-          display: none;
-          box-shadow: inset 0px -40px 30px 2px rgba(0, 0, 0, 0.75);
+          display: block;
+        }
+      }
 
-          h3 {
-            text-transform: capitalize;
-            font-weight: 500;
-            font-size: 1rem;
-            color: white;
-            //  margin-bottom: 0.5rem;
-          }
-          p {
-            color: green;
-            font-size: 0.8rem;
-            //  font-weight: bold;
-          }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        z-index: 0;
+      }
 
-          .add-icon {
-            display: flex;
-            justify-content: flex-end;
-            font-size: 1.5rem;
-            color: grey;
-            //  border: 1px solid red;
-            //  width: 50px;
+      .hover-info {
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        padding: 0 1rem;
+        //   border: 1px solid red;
+        display: none;
+        box-shadow: inset 0px -40px 30px 2px rgba(0, 0, 0, 0.75);
 
-            div {
-              // border: 1px solid red;
-              cursor: pointer;
+        h3 {
+          text-transform: capitalize;
+          font-weight: 500;
+          font-size: 1rem;
+          color: white;
+        }
+        p {
+          color: rgb(41, 255, 41);
 
-              &:hover {
-                color: white;
-              }
+          font-size: 0.8rem;
+        }
+
+        .add-icon {
+          display: flex;
+          justify-content: flex-end;
+          font-size: 1.5rem;
+          color: grey;
+          //  border: 1px solid red;
+
+          div {
+            // border: 1px solid red;
+            cursor: pointer;
+
+            &:hover {
+              color: white;
             }
           }
         }
