@@ -15,72 +15,67 @@ const MainApp = () => {
     ...state
   }));
 
-  const { popular, loading, error } = reducer.popularReducer;
+  const { popular, loading, error, favoriteList } = reducer.popularReducer;
   const { tvPopular } = reducer.tvPopularReducer;
   const { latestRated } = reducer.ratedReducer;
   const { playingMovie } = reducer.playingNowReducer;
-  console.log("playing now movies ", playingMovie);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=8686dd23d65d8d4c4b1c1ad132fcc4fd&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
-        //   console.log(res.data);
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
       .catch(err => {
         dispatch({ type: "ERROR", payload: err.response });
         console.log(err);
       });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_TV_DATA" });
     axios
       .get(
-        `https://api.themoviedb.org/3/tv/popular?api_key=8686dd23d65d8d4c4b1c1ad132fcc4fd&language=en-US&page=1`
+        `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
-        //   console.log(res.data.results);
         dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
       })
       .catch(err => {
         dispatch({ type: "ERROR_TV", payload: err.response });
       });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_RATED_DATA" });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=8686dd23d65d8d4c4b1c1ad132fcc4fd&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
-        //   console.log("rated data ", res.data);
         dispatch({ type: "GETTING_RATED_DATA", payload: res.data.results });
       })
       .catch(err => {
         dispatch({ type: "ERROR_RATED", payload: err.response });
       });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_LATEST_DATA" });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=8686dd23d65d8d4c4b1c1ad132fcc4fd&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
-        //   console.log("playing ", res.data);
         dispatch({ type: "GETTING_LATEST_DATA", payload: res.data.results });
       })
       .catch(err => {
         dispatch({ type: "ERROR_LATEST", payload: err.response });
       });
-  }, []);
+  }, [dispatch]);
 
   //   console.log(reducer.popularReducer);
   //   const { popular, loading, error } = reducer.popularReducer;
@@ -91,6 +86,10 @@ const MainApp = () => {
   //   };
 
   //   console.log("random movie ", randomMovie());
+  // const addToFavorites = movie => {
+  //   dispatch({ type: "ADD_FAVORITE", payload: movie });
+  // };
+
   return (
     <div className="MainApp">
       <Navbar />
@@ -111,21 +110,16 @@ const MainApp = () => {
         <MovieContent popular={playingMovie} />
       </Route>
       <Route path="/mylist">
-        <MyList />
+        <MyList favoriteList={favoriteList} />
       </Route>
-      <Route exact path="/info/:id">
+      <Route exact path="/:des/:id">
         <SingleMovieInfo />
         <MovieContent popular={popular} />
       </Route>
-      ;
+
       <Footer />
     </div>
   );
 };
 
 export default MainApp;
-
-//  <Route exact path="/:id">
-//    <SingleMovieInfo />
-//    <MovieContent />
-//  </Route>;

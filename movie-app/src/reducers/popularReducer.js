@@ -4,7 +4,8 @@ const initialValue = {
   latestRated: [],
   playingMovie: [],
   loading: false,
-  error: ""
+  error: "",
+  favoriteList: []
 };
 
 export const popularReducer = (state = initialValue, action) => {
@@ -19,6 +20,11 @@ export const popularReducer = (state = initialValue, action) => {
         ...state,
         popular: action.payload,
         loading: false
+      };
+    case "ADD_FAVORITE":
+      return {
+        ...state,
+        favoriteList: [...state.favoriteList, action.payload]
       };
     case "ERROR":
       return {
