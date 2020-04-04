@@ -1,12 +1,12 @@
 import React from "react";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaPlus } from "react-icons/fa";
-import image from "../img/header.jpg";
+// import image from "../img/header.jpg";
 
 const SingleMovieInfo = () => {
   const { id } = useParams();
-  const { path, url } = useRouteMatch();
+  //   const { path } = useRouteMatch();
   const reducer = useSelector(state => ({
     ...state
   }));
