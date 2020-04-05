@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Header from "./Header";
@@ -22,9 +22,9 @@ const MainApp = () => {
 
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
-    axios
+    axiosWithAuth()
       .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
@@ -37,9 +37,9 @@ const MainApp = () => {
 
   useEffect(() => {
     dispatch({ type: "FETCHING_TV_DATA" });
-    axios
+    axiosWithAuth()
       .get(
-        `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
         dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
@@ -51,9 +51,9 @@ const MainApp = () => {
 
   useEffect(() => {
     dispatch({ type: "FETCHING_RATED_DATA" });
-    axios
+    axiosWithAuth()
       .get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
         dispatch({ type: "GETTING_RATED_DATA", payload: res.data.results });
@@ -65,9 +65,9 @@ const MainApp = () => {
 
   useEffect(() => {
     dispatch({ type: "FETCHING_LATEST_DATA" });
-    axios
+    axiosWithAuth()
       .get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
       .then(res => {
         dispatch({ type: "GETTING_LATEST_DATA", payload: res.data.results });
