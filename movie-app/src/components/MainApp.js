@@ -91,6 +91,10 @@ const MainApp = () => {
       });
   }, [dispatch]);
 
+  const addToFavorites = (movies) => {
+    dispatch({ type: "ADD_FAVORITE", payload: movies });
+  };
+
   //   console.log(reducer.popularReducer);
   //   const { popular, loading, error } = reducer.popularReducer;
 
@@ -140,6 +144,7 @@ const MainApp = () => {
           playingMovie={playingMovie}
           latestRated={latestRated}
           tvPopular={tvPopular}
+          addToFavorites={addToFavorites}
         />
         <MovieContent popular={popular} />
       </Route>

@@ -2,7 +2,13 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 
-const SingleMovieInfo = ({ popular, playingMovie, latestRated, tvPopular }) => {
+const SingleMovieInfo = ({
+  popular,
+  playingMovie,
+  latestRated,
+  tvPopular,
+  addToFavorites,
+}) => {
   const { browse, id } = useParams();
 
   const findPathMovie = (arr) => {
@@ -38,7 +44,7 @@ const SingleMovieInfo = ({ popular, playingMovie, latestRated, tvPopular }) => {
         </div>
         <p className="single-movie-description">{movie.overview}</p>
         <div className="single-more-info">
-          <button>
+          <button onClick={() => addToFavorites(movie)}>
             {" "}
             <span>
               <FaPlus />{" "}
