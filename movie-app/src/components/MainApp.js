@@ -25,8 +25,8 @@ import Footer from "./Footer";
 
 const MainApp = () => {
   const dispatch = useDispatch();
-  const reducer = useSelector(state => ({
-    ...state
+  const reducer = useSelector((state) => ({
+    ...state,
   }));
 
   const { popular, loading, error, favoriteList } = reducer.popularReducer;
@@ -40,10 +40,10 @@ const MainApp = () => {
       .get(
         `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
-      .then(res => {
+      .then((res) => {
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "ERROR", payload: err.response });
         console.log(err);
       });
@@ -55,10 +55,10 @@ const MainApp = () => {
       .get(
         `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
-      .then(res => {
+      .then((res) => {
         dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "ERROR_TV", payload: err.response });
       });
   }, [dispatch]);
@@ -69,10 +69,10 @@ const MainApp = () => {
       .get(
         `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
-      .then(res => {
+      .then((res) => {
         dispatch({ type: "GETTING_RATED_DATA", payload: res.data.results });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "ERROR_RATED", payload: err.response });
       });
   }, [dispatch]);
@@ -83,10 +83,10 @@ const MainApp = () => {
       .get(
         `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
       )
-      .then(res => {
+      .then((res) => {
         dispatch({ type: "GETTING_LATEST_DATA", payload: res.data.results });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "ERROR_LATEST", payload: err.response });
       });
   }, [dispatch]);
@@ -104,30 +104,40 @@ const MainApp = () => {
   //   dispatch({ type: "ADD_FAVORITE", payload: movie });
   // };
 
+  //   console.log(popular);
+
   return (
     <div className="MainApp">
       <Navbar />
-      <Route exact path="/">
+      <Route exact path="/browse">
         <Header />
         <MovieContent popular={popular} />
       </Route>
+
       <Route path="/tvshows">
         <Header />
+        <SingleMovieInfo moviesArray={tvPopular} />
         <MovieContent popular={tvPopular} />
       </Route>
+
       <Route path="/movies">
         <Header />
+        <SingleMovieInfo moviesArray={latestRated} />
         <MovieContent popular={latestRated} />
       </Route>
+
       <Route path="/latest">
         <Header />
+        <SingleMovieInfo moviesArray={playingMovie} />
         <MovieContent popular={playingMovie} />
       </Route>
+
       <Route path="/mylist">
         <MyList favoriteList={favoriteList} />
       </Route>
-      <Route exact path="/:des/:id">
-        <SingleMovieInfo />
+
+      <Route exact path="/:browse/:id">
+        <SingleMovieInfo moviesArray={popular} />
         <MovieContent popular={popular} />
       </Route>
 

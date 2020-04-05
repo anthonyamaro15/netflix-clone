@@ -37,7 +37,7 @@ const Navbar = () => {
           <h2>Movie App</h2>
         </div>
         <nav>
-          <NavLink exact to="/" activeClassName="active">
+          <NavLink exact to="/browse" activeClassName="active">
             home
           </NavLink>
           <NavLink to="/tvshows" activeClassName="active">

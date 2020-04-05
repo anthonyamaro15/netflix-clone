@@ -1,5 +1,5 @@
 import React from "react";
-// import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router-dom";
 // import {useDispatch} from 'react-redux';
 import { Link } from "react-router-dom";
 // import img from "../img/bg.jpg";
@@ -8,8 +8,8 @@ import { MdAddCircleOutline } from "react-icons/md";
 
 const MovieCard = ({ movie, movieId, addToFavorites }) => {
   // const dispatch = useDispatch();
-  //   const { url } = useRouteMatch();
-  //   const params = useParams();
+  const { path, url } = useRouteMatch();
+  const params = useParams();
   //   console.log(movieId);
 
   //   const trimName = movie.name ? movie.name.join("") : movie.title.join("");
@@ -24,7 +24,7 @@ const MovieCard = ({ movie, movieId, addToFavorites }) => {
 
   return (
     <div className="single-movie-container">
-      <Link to={`/des/${movieId}`} href="#top">
+      <Link to={`${url}/${movieId}`}>
         <div className="img-container">
           <img
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
