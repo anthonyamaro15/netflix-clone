@@ -16,7 +16,7 @@ import Footer from "./Footer";
 // TRY ADDING VIDEOS TO IT.
 
 // FOR FUTURE BUILD A HOME PAGE WITH LOGIN AND SIGN UP BUTTONS.
-/// CREATE USER PROFILES//
+/// CREATE USER PROFILES
 
 const MainApp = () => {
   const dispatch = useDispatch();
