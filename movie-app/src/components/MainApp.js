@@ -29,6 +29,21 @@ const MainApp = () => {
   const { latestRated } = reducer.ratedReducer;
   const { playingMovie } = reducer.playingNowReducer;
 
+  //   useEffect(() => {
+  //     window.addEventListener("scroll", () => {
+  //       // if (window.scrollY >= 3) {
+  //       //    setScrolling(true);
+  //       // } else {
+  //       //    setScrolling(false);
+  //       // }
+  //       console.log("from mainApp ", window.scrollY);
+
+  //       // if (window.scrollY === 0) {
+  //       //    setScrolling(false);
+  //       // }
+  //     });
+  //   }, []);
+
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
     axiosWithAuth()

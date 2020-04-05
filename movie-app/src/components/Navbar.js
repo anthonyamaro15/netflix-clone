@@ -20,7 +20,7 @@ const Navbar = () => {
         setScrolling(false);
       }
     });
-  });
+  }, []);
 
   const toggleForm = () => {
     setShowForm(!showForm);
