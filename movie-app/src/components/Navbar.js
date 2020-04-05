@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div className={isUserScrolling}>
-      <header>
+      <header id="top">
         <div className="logo">
           <h2>Movie App</h2>
         </div>

@@ -24,7 +24,7 @@ const MovieCard = ({ movie, movieId, addToFavorites }) => {
 
   return (
     <div className="single-movie-container">
-      <Link to={`/des/${movieId}`}>
+      <Link to={`/des/${movieId}`} href="#top">
         <div className="img-container">
           <img
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
