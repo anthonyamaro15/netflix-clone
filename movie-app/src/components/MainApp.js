@@ -95,42 +95,27 @@ const MainApp = () => {
     dispatch({ type: "ADD_FAVORITE", payload: movies });
   };
 
-  //   console.log(reducer.popularReducer);
-  //   const { popular, loading, error } = reducer.popularReducer;
-
-  //   const randomMovie = () => {
-  //     let random = Math.floor(Math.random() * popular.length);
-  //     return popular[random];
-  //   };
-
-  //   console.log("random movie ", randomMovie());
-  // const addToFavorites = movie => {
-  //   dispatch({ type: "ADD_FAVORITE", payload: movie });
-  // };
-
-  //   console.log(popular);
-
   return (
     <div className="MainApp">
       <Navbar />
       <Route exact path="/browse">
-        <Header />
+        <Header popular={popular} loading={loading} />
+
         <MovieContent popular={popular} />
       </Route>
 
       <Route exact path="/tvshows">
-        <Header />
-
+        <Header popular={tvPopular} />
         <MovieContent popular={tvPopular} />
       </Route>
 
       <Route exact path="/movies">
-        <Header />
+        <Header popular={latestRated} />
         <MovieContent popular={latestRated} />
       </Route>
 
       <Route exact path="/latest">
-        <Header />
+        <Header popular={playingMovie} />
         <MovieContent popular={playingMovie} />
       </Route>
 
