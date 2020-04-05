@@ -8,6 +8,7 @@ import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 import Footer from "./Footer";
+// import { FaPoop } from "react-icons/fa";
 
 /// NEED TO WORK IN THE SEARCH FORM TO GET SPECIFIC MOVIE AS WELL.
 
@@ -24,7 +25,13 @@ const MainApp = () => {
     ...state,
   }));
 
-  const { popular, loading, error, favoriteList } = reducer.popularReducer;
+  const {
+    popular,
+    loading,
+    error,
+    favoriteList,
+    popularPage,
+  } = reducer.popularReducer;
   const { tvPopular } = reducer.tvPopularReducer;
   const { latestRated } = reducer.ratedReducer;
   const { playingMovie } = reducer.playingNowReducer;
@@ -44,20 +51,23 @@ const MainApp = () => {
   //     });
   //   }, []);
 
+  //   console.log("popular page ", popularPage);
+
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
     axiosWithAuth()
       .get(
-        `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`
       )
       .then((res) => {
+        console.log(res.data);
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
       .catch((err) => {
         dispatch({ type: "ERROR", payload: err.response });
         console.log(err);
       });
-  }, [dispatch]);
+  }, [popularPage, dispatch]);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_TV_DATA" });
@@ -105,48 +115,59 @@ const MainApp = () => {
     dispatch({ type: "ADD_FAVORITE", payload: movies });
   };
 
+  const nextPage = () => {
+    dispatch({ type: "NEXT_PAGE" });
+  };
+
+  console.log("popular here ", popular);
+
   return (
     <div className="MainApp">
       <Navbar />
       <Route exact path="/browse">
         <Header popular={popular} loading={loading} />
 
-        <MovieContent popular={popular} />
+        <MovieContent popular={popular} nextPage={nextPage} />
       </Route>
-
-      <Route exact path="/tvshows">
-        <Header popular={tvPopular} />
-        <MovieContent popular={tvPopular} />
-      </Route>
-
-      <Route exact path="/movies">
-        <Header popular={latestRated} />
-        <MovieContent popular={latestRated} />
-      </Route>
-
-      <Route exact path="/latest">
-        <Header popular={playingMovie} />
-        <MovieContent popular={playingMovie} />
-      </Route>
-
-      <Route exact path="/mylist">
-        <MyList favoriteList={favoriteList} />
-      </Route>
-
-      <Route exact path="/:browse/:id">
-        <SingleMovieInfo
-          popular={popular}
-          playingMovie={playingMovie}
-          latestRated={latestRated}
-          tvPopular={tvPopular}
-          addToFavorites={addToFavorites}
-        />
-        <MovieContent popular={popular} />
-      </Route>
-
       <Footer />
     </div>
   );
 };
 
 export default MainApp;
+
+// <Route exact path="/browse">
+//    <Header popular={popular} loading={loading} />
+
+//    <MovieContent popular={popular} nextPage={nextPage} />
+// </Route>
+
+//    <Route exact path="/tvshows">
+//       <Header popular={tvPopular} />
+//       <MovieContent popular={tvPopular} />
+//    </Route>
+
+//    <Route exact path="/movies">
+//       <Header popular={latestRated} />
+//       <MovieContent popular={latestRated} />
+//    </Route>
+
+//    <Route exact path="/latest">
+//       <Header popular={playingMovie} />
+//       <MovieContent popular={playingMovie} />
+//    </Route>
+
+//    <Route exact path="/mylist">
+//       <MyList favoriteList={favoriteList} />
+//    </Route>
+
+//    <Route exact path="/:browse/:id">
+//       <SingleMovieInfo
+//          popular={popular}
+//          playingMovie={playingMovie}
+//          latestRated={latestRated}
+//          tvPopular={tvPopular}
+//          addToFavorites={addToFavorites}
+//       />
+//       <MovieContent popular={popular} />
+//    </Route>
