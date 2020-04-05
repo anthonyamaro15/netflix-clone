@@ -1,13 +1,9 @@
 import React from "react";
-import { useParams, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 
 const SingleMovieInfo = ({ popular, playingMovie, latestRated, tvPopular }) => {
   const { browse, id } = useParams();
-  const { path, url } = useRouteMatch();
-
-  //   const { popular } = reducer.popularReducer;
-  //   console.log("from singleMovie ", popular);
 
   const findPathMovie = (arr) => {
     let rightMovie = arr.find((movie) => movie.id === Number(id));
@@ -15,10 +11,6 @@ const SingleMovieInfo = ({ popular, playingMovie, latestRated, tvPopular }) => {
   };
 
   let movie = "";
-  //   console.log("path  here", path);
-  //   console.log("function  here", findPathMovie(tvPopular));
-  //   console.log("id here", id);
-  //   console.log("right movie ", movie);
 
   if (browse === "browse") {
     movie = findPathMovie(popular);
@@ -29,17 +21,19 @@ const SingleMovieInfo = ({ popular, playingMovie, latestRated, tvPopular }) => {
   } else {
     movie = findPathMovie(playingMovie);
   }
-  console.log("from single movie component ", movie);
+
+  console.log(movie);
 
   return (
     <div className="single-movie-info-container">
       <div className="single-movie-info">
-        <h1>{movie.title}</h1>
+        <h1>{movie.original_name ? movie.original_name : movie.title}</h1>
         <div className="display-movie-info">
           <span className="rating">Rating {movie.vote_average}</span>
           <span className="date-release">
             {" "}
-            date released: {""} {movie.release_date}
+            date released: {""}{" "}
+            {movie.first_air_date ? movie.first_air_date : movie.release_date}
           </span>
         </div>
         <p className="single-movie-description">{movie.overview}</p>
