@@ -114,30 +114,33 @@ const MainApp = () => {
         <MovieContent popular={popular} />
       </Route>
 
-      <Route path="/tvshows">
+      <Route exact path="/tvshows">
         <Header />
-        <SingleMovieInfo moviesArray={tvPopular} />
+
         <MovieContent popular={tvPopular} />
       </Route>
 
-      <Route path="/movies">
+      <Route exact path="/movies">
         <Header />
-        <SingleMovieInfo moviesArray={latestRated} />
         <MovieContent popular={latestRated} />
       </Route>
 
-      <Route path="/latest">
+      <Route exact path="/latest">
         <Header />
-        <SingleMovieInfo moviesArray={playingMovie} />
         <MovieContent popular={playingMovie} />
       </Route>
 
-      <Route path="/mylist">
+      <Route exact path="/mylist">
         <MyList favoriteList={favoriteList} />
       </Route>
 
       <Route exact path="/:browse/:id">
-        <SingleMovieInfo moviesArray={popular} />
+        <SingleMovieInfo
+          popular={popular}
+          playingMovie={playingMovie}
+          latestRated={latestRated}
+          tvPopular={tvPopular}
+        />
         <MovieContent popular={popular} />
       </Route>
 
