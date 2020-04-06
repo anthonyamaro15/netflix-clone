@@ -3,6 +3,8 @@ const initialValue = {
   tvPopular: [],
   latestRated: [],
   playingMovie: [],
+  movieSearch: "",
+  movieSearchResponse: [],
   loading: false,
   error: "",
   favoriteList: [],
@@ -12,6 +14,7 @@ const initialValue = {
   playingMoviePage: 1,
 };
 
+// popular reducer
 export const popularReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_DATA":
@@ -46,6 +49,7 @@ export const popularReducer = (state = initialValue, action) => {
   }
 };
 
+//tv popular reducer
 export const tvPopularReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_TV_DATA":
@@ -75,6 +79,7 @@ export const tvPopularReducer = (state = initialValue, action) => {
   }
 };
 
+// rated reducer
 export const ratedReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_RATED_DATA":
@@ -104,6 +109,7 @@ export const ratedReducer = (state = initialValue, action) => {
   }
 };
 
+// playing reducer
 export const playingNowReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_LATEST":
@@ -123,6 +129,36 @@ export const playingNowReducer = (state = initialValue, action) => {
         playingMoviePage: state.playingMoviePage + 1,
       };
     case "ERROR_LATEST":
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+//movie search reducer
+export const searchReducer = (state = initialValue, action) => {
+  switch (action.type) {
+    case "SEARCH_MOVIE":
+      return {
+        ...state,
+        movieSearch: action.payload,
+      };
+    case "FETCHING_SEARCH":
+      return {
+        ...state,
+        loading: true,
+      };
+    case "GETTING_SEARCH_VALUES":
+      return {
+        ...state,
+        movieSearchResponse: action.payload,
+        loading: false,
+      };
+    case "ERROR_SEARCH":
       return {
         ...state,
         error: action.payload,

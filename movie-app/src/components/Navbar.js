@@ -58,7 +58,7 @@ const Navbar = () => {
         <div className="icon" onClick={toggleForm}>
           <FaSearch />
         </div>
-        {showForm ? <NavForm /> : ""}
+        {showForm ? <NavForm setShowForm={setShowForm} /> : ""}
       </div>
     </div>
   );

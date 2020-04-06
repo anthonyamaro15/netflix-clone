@@ -35,13 +35,24 @@ const MainApp = () => {
   const { tvPopular, tvPopularPage } = reducer.tvPopularReducer;
   const { latestRated, latestRatedPage } = reducer.ratedReducer;
   const { playingMovie, playingMoviePage } = reducer.playingNowReducer;
+  const { movieSearch, movieSearchResponse } = reducer.searchReducer;
 
-  console.log(reducer.tvPopularReducer);
-  //   console.log("popular ", popular);
-  //   console.log("tvPopu ", tvPopular);
-  //   console.log("latest ", latestRated);
-  //   console.log("playing ", playingMovie);
+  // this axios call is getting the data for the search form
+  useEffect(() => {
+    dispatch({ type: "FETCHING_SEARCH" });
+    axiosWithAuth()
+      .get(
+        `/search/movie?api_key=${process.env.REACT_APP_API}&language=en-US&query=${movieSearch}&page=1&include_adult=false`
+      )
+      .then((res) => {
+        dispatch({ type: "GETTING_SEARCH_VALUES", payload: res.data.results });
+      })
+      .catch((err) => {
+        dispatch({ type: "ERROR_SEARCH", payload: err.response });
+      });
+  }, [movieSearch, dispatch]);
 
+  // this axios call is getting the data for the /browse
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
     axiosWithAuth()
@@ -49,7 +60,6 @@ const MainApp = () => {
         `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`
       )
       .then((res) => {
-        //   console.log(res.data);
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
       .catch((err) => {
@@ -58,6 +68,7 @@ const MainApp = () => {
       });
   }, [popularPage, dispatch]);
 
+  // this axios call is getting the data for the /tvshows
   useEffect(() => {
     dispatch({ type: "FETCHING_TV_DATA" });
     axiosWithAuth()
@@ -65,7 +76,6 @@ const MainApp = () => {
         `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${tvPopularPage}`
       )
       .then((res) => {
-        //   console.log(res.data);
         dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
       })
       .catch((err) => {
@@ -73,6 +83,7 @@ const MainApp = () => {
       });
   }, [tvPopularPage, dispatch]);
 
+  // this axios call is getting the data for /movies
   useEffect(() => {
     dispatch({ type: "FETCHING_RATED_DATA" });
     axiosWithAuth()
@@ -87,6 +98,7 @@ const MainApp = () => {
       });
   }, [latestRatedPage, dispatch]);
 
+  // this axios call is getting the data for /latest
   useEffect(() => {
     dispatch({ type: "FETCHING_LATEST_DATA" });
     axiosWithAuth()
@@ -109,15 +121,12 @@ const MainApp = () => {
     dispatch({ type: type });
   };
 
-  //   console.log("popular here ", tvPopular);
-
   return (
     <div className="MainApp">
       <Navbar />
 
       <Route exact path="/browse">
         <Header popular={popular} loading={loading} />
-
         <MovieContent
           popular={popular}
           nextPage={() => nextPage("NEXT_PAGE")}
@@ -152,6 +161,11 @@ const MainApp = () => {
         <MyList favoriteList={favoriteList} />
       </Route>
 
+      <Route exact path="/results">
+        <Header popular={movieSearchResponse} />
+        <MovieContent popular={movieSearchResponse} />
+      </Route>
+
       <Route exact path="/:browse/:id">
         <SingleMovieInfo
           popular={popular}
@@ -159,6 +173,7 @@ const MainApp = () => {
           latestRated={latestRated}
           tvPopular={tvPopular}
           addToFavorites={addToFavorites}
+          movieSearchResponse={movieSearchResponse}
         />
         <MovieContent popular={popular} />
       </Route>

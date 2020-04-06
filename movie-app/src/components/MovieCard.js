@@ -1,33 +1,26 @@
 import React from "react";
-import { useParams, useRouteMatch } from "react-router-dom";
-// import {useDispatch} from 'react-redux';
+import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import img from "../img/bg.jpg";
-// import MovieContent from './MovieContent';
 import { MdAddCircleOutline } from "react-icons/md";
+import la from "../img/people.jpg";
 
 const MovieCard = ({ movie, movieId, addToFavorites }) => {
-  // const dispatch = useDispatch();
-  const { path, url } = useRouteMatch();
-  const params = useParams();
-  //   console.log(movieId);
+  const { url } = useRouteMatch();
 
-  //   const trimName = movie.name ? movie.name.join("") : movie.title.join("");
-
-  //   console.log("new names ", trimName);
-
-  const { poster_path, title, name, vote_average } = movie;
-
-  //   console.log("path here", path);
-  //   console.log("url here", url);
-  //   console.log("params ", params);
+  const { poster_path, title, name, vote_average, backdrop_path } = movie;
 
   return (
     <div className="single-movie-container">
       <Link to={`${url}/${movieId}`}>
         <div className="img-container">
           <img
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            src={
+              poster_path || backdrop_path
+                ? `https://image.tmdb.org/t/p/original${
+                    poster_path || backdrop_path
+                  }`
+                : la
+            }
             alt={title}
           />
           <div className="hover-info">
