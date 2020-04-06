@@ -7,31 +7,37 @@ const Header = ({ popular }) => {
 
   //   console.log("data here ", popular[0]);
 
+  const randomNumber = () => {
+    let random = Math.floor(Math.random() * 20) + 1;
+    return random;
+  };
+  console.log(randomNumber());
+  let num = randomNumber();
   return (
     <div className="header-container">
       <img
         src={
-          popular[6] === undefined
+          popular[num] === undefined
             ? la
             : `https://image.tmdb.org/t/p/original${
-                popular[6].backdrop_path || popular[6].poster_path
+                popular[num].backdrop_path || popular[num].poster_path
               }`
         }
         alt="header of the application"
       />
       <div className="movie-info">
         <h1>
-          {popular[6] === undefined
+          {popular[num] === undefined
             ? "all american"
-            : popular[6].original_title || popular[6].original_name}
+            : popular[num].original_title || popular[num].original_name}
         </h1>
         <p className="movie-description">
-          {popular[6] === undefined ? "loading..." : popular[6].overview}
+          {popular[num] === undefined ? "loading..." : popular[num].overview}
         </p>
         <div className="more-info">
           <Link
             to={`${url}/${
-              popular[6] === undefined ? "/moreinfo" : popular[6].id
+              popular[num] === undefined ? "/moreinfo" : popular[num].id
             }`}
           >
             more info
