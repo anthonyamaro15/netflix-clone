@@ -1,5 +1,4 @@
 .header-container {
-  //   border: 1px solid blue;
   height: 88vh;
 
   img {
@@ -18,16 +17,13 @@
     height: 88vh;
     top: 0;
     left: 0;
-    //  border: 1px solid red;
     background: rgba(5, 5, 5, 0.4);
     box-shadow: inset 0px 45px 50px -1px rgba(0, 0, 0, 0.75);
 
     h1 {
       text-transform: uppercase;
       font-size: 6rem;
-      // color: #ff1d25;
-      // color: rgb(237, 52, 19);
-      color: #f4f4f4;
+      color: rgb(237, 52, 19);
       width: 45%;
     }
 
@@ -35,14 +31,11 @@
       font-size: 1.5rem;
       color: white;
       margin: 2rem 0;
-      // border: 1px solid red;
       width: 38%;
-      // font-weight: 600;
     }
 
     .more-info {
       a {
-        //   border: 1px solid red;
         padding: 0.5rem 3rem;
         font-size: 1.4rem;
         text-transform: capitalize;

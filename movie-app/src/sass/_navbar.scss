@@ -1,9 +1,6 @@
 .navbar-container {
-  //   border: 1px solid red;
-  display: flex;
-  justify-content: space-between;
+  @include flex(space-between);
   align-items: center;
-  //   background: transparent;
   padding: 0 $padd-lr;
   height: 6vh;
   position: fixed;
@@ -14,28 +11,18 @@
   color: #f4f4f4;
   transition: all 0.5s ease;
 
-  //   .transparent {
-  //      background: transparent;
-  //   }
-
   header {
     width: 25%;
-    //  border: 1px solid blue;
-    display: flex;
-    justify-content: space-between;
+    @include flex(space-between);
 
     h2 {
       font-size: 1.5rem;
-      // color: #d81f26;
       color: #ff1d25;
-      // color: tomato;
     }
 
     nav {
-      // border: 1px solid red;
       width: 65%;
-      display: flex;
-      justify-content: space-between;
+      @include flex(space-between);
       padding-top: 0.3rem;
       text-transform: capitalize;
 
@@ -54,9 +41,6 @@
     display: flex;
     transition: all 0.5s ease;
 
-    //  padding: 0.4rem;
-    //  background: rgba(0, 0, 0, 0.9);
-
     .icon {
       font-size: 1.3rem;
       margin-right: 0.9rem;
@@ -65,15 +49,22 @@
     }
 
     .form {
+      position: relative;
       input {
         font-size: 1.1rem;
         border: none;
-        //   padding: 0.2rem;
         height: 100%;
         background: transparent;
         color: #f4f4f4;
         width: 250px;
-        //   font-weight: 400;
+      }
+
+      .error {
+        position: absolute;
+        top: 2.5rem;
+        left: 0;
+        text-transform: uppercase;
+        font-size: 0.8rem;
       }
     }
   }

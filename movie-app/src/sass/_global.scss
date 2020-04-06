@@ -7,7 +7,6 @@
 }
 
 body {
-  //   background-color: rgb(174, 172, 172);
   font-family: "Open Sans", sans-serif;
   background: rgba(0, 0, 0, 0.95);
   //   background: rgb(3, 3, 3);
@@ -29,4 +28,10 @@ input {
 input,
 button {
   outline: none;
+}
+
+.error-found {
+  text-align: center;
+  color: #f4f4f4;
+  padding: 10rem 0 0;
 }
