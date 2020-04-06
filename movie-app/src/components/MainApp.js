@@ -36,12 +36,7 @@ const MainApp = () => {
   const { latestRated, latestRatedPage } = reducer.ratedReducer;
   const { playingMovie, playingMoviePage } = reducer.playingNowReducer;
 
-  console.log(reducer.tvPopularReducer);
-  //   console.log("popular ", popular);
-  //   console.log("tvPopu ", tvPopular);
-  //   console.log("latest ", latestRated);
-  //   console.log("playing ", playingMovie);
-
+  // this axios call is getting the data for the /browse
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
     axiosWithAuth()
@@ -49,7 +44,6 @@ const MainApp = () => {
         `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`
       )
       .then((res) => {
-        //   console.log(res.data);
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
       .catch((err) => {
@@ -58,6 +52,7 @@ const MainApp = () => {
       });
   }, [popularPage, dispatch]);
 
+  // this axios call is getting the data for the /tvshows
   useEffect(() => {
     dispatch({ type: "FETCHING_TV_DATA" });
     axiosWithAuth()
@@ -65,7 +60,6 @@ const MainApp = () => {
         `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${tvPopularPage}`
       )
       .then((res) => {
-        //   console.log(res.data);
         dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
       })
       .catch((err) => {
@@ -73,6 +67,7 @@ const MainApp = () => {
       });
   }, [tvPopularPage, dispatch]);
 
+  // this axios call is getting the data for /movies
   useEffect(() => {
     dispatch({ type: "FETCHING_RATED_DATA" });
     axiosWithAuth()
@@ -87,6 +82,7 @@ const MainApp = () => {
       });
   }, [latestRatedPage, dispatch]);
 
+  // this axios call is getting the data for /latest
   useEffect(() => {
     dispatch({ type: "FETCHING_LATEST_DATA" });
     axiosWithAuth()
@@ -108,8 +104,6 @@ const MainApp = () => {
   const nextPage = (type) => {
     dispatch({ type: type });
   };
-
-  //   console.log("popular here ", tvPopular);
 
   return (
     <div className="MainApp">

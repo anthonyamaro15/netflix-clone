@@ -11,6 +11,30 @@
     font-weight: normal;
     font-size: 1.7rem;
   }
+
+  .load-more-btn {
+    display: flex;
+    justify-content: center;
+    //  border: 1px solid red;
+
+    button {
+      font-size: 1.4rem;
+      padding: 0.5rem 3rem;
+      border: none;
+      text-transform: capitalize;
+      background: rgba(100, 100, 100, 0.9);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: #333;
+        background: #f4f4f4;
+        transform: scale(1.1);
+      }
+    }
+  }
 }
 
 .display-cards {

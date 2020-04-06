@@ -12,6 +12,7 @@ const initialValue = {
   playingMoviePage: 1,
 };
 
+// popular reducer
 export const popularReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_DATA":
@@ -46,6 +47,7 @@ export const popularReducer = (state = initialValue, action) => {
   }
 };
 
+//tv popular reducer
 export const tvPopularReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_TV_DATA":
@@ -75,6 +77,7 @@ export const tvPopularReducer = (state = initialValue, action) => {
   }
 };
 
+// rated reducer
 export const ratedReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_RATED_DATA":
@@ -104,6 +107,7 @@ export const ratedReducer = (state = initialValue, action) => {
   }
 };
 
+// playing reducer
 export const playingNowReducer = (state = initialValue, action) => {
   switch (action.type) {
     case "FETCHING_LATEST":

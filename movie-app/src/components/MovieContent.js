@@ -26,7 +26,9 @@ const MovieContent = ({ popular, nextPage }) => {
           />
         ))}
       </div>
-      <button onClick={nextPage}>see more</button>
+      <div className="load-more-btn">
+        <button onClick={nextPage}>see more</button>
+      </div>
     </div>
   );
 };
