@@ -9,8 +9,6 @@ import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 import Footer from "./Footer";
 
-/// NEED TO WORK IN THE SEARCH FORM TO GET SPECIFIC MOVIE AS WELL.
-
 // WORK ON THE RESPONSINESS OF THE APP,
 
 // TRY ADDING VIDEOS TO IT.
@@ -48,7 +46,11 @@ const MainApp = () => {
         dispatch({ type: "GETTING_SEARCH_VALUES", payload: res.data.results });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR_SEARCH", payload: err.response });
+        console.log(err);
+        dispatch({
+          type: "ERROR_SEARCH",
+          payload: err.response.data.status_message,
+        });
       });
   }, [movieSearch, dispatch]);
 
@@ -63,8 +65,8 @@ const MainApp = () => {
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR", payload: err.response });
-        console.log(err);
+        dispatch({ type: "ERROR", payload: err.response.data.status_message });
+        console.log(err.response.data.status_message);
       });
   }, [popularPage, dispatch]);
 
@@ -79,7 +81,10 @@ const MainApp = () => {
         dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR_TV", payload: err.response });
+        dispatch({
+          type: "ERROR_TV",
+          payload: err.response.data.status_message,
+        });
       });
   }, [tvPopularPage, dispatch]);
 
@@ -94,7 +99,10 @@ const MainApp = () => {
         dispatch({ type: "GETTING_RATED_DATA", payload: res.data.results });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR_RATED", payload: err.response });
+        dispatch({
+          type: "ERROR_RATED",
+          payload: err.response.data.status_message,
+        });
       });
   }, [latestRatedPage, dispatch]);
 
@@ -109,7 +117,10 @@ const MainApp = () => {
         dispatch({ type: "GETTING_LATEST_DATA", payload: res.data.results });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR_LATEST", payload: err.response });
+        dispatch({
+          type: "ERROR_LATEST",
+          payload: err.response.data.status_message,
+        });
       });
   }, [playingMoviePage, dispatch]);
 
@@ -123,61 +134,66 @@ const MainApp = () => {
 
   return (
     <div className="MainApp">
-      <Navbar />
+      {error ? (
+        <h1 className="error-found">{error}</h1>
+      ) : (
+        <div>
+          <Navbar />
+          <Route exact path="/browse">
+            <Header popular={popular} loading={loading} />
+            <MovieContent
+              popular={popular}
+              nextPage={() => nextPage("NEXT_PAGE")}
+            />
+          </Route>
 
-      <Route exact path="/browse">
-        <Header popular={popular} loading={loading} />
-        <MovieContent
-          popular={popular}
-          nextPage={() => nextPage("NEXT_PAGE")}
-        />
-      </Route>
+          <Route exact path="/tvshows">
+            <Header popular={tvPopular} />
+            <MovieContent
+              popular={tvPopular}
+              nextPage={() => nextPage("NEXT_PAGE_POPULAR")}
+            />
+          </Route>
 
-      <Route exact path="/tvshows">
-        <Header popular={tvPopular} />
-        <MovieContent
-          popular={tvPopular}
-          nextPage={() => nextPage("NEXT_PAGE_POPULAR")}
-        />
-      </Route>
+          <Route exact path="/movies">
+            <Header popular={latestRated} />
+            <MovieContent
+              popular={latestRated}
+              nextPage={() => nextPage("NEXT_PAGE_LATEST")}
+            />
+          </Route>
 
-      <Route exact path="/movies">
-        <Header popular={latestRated} />
-        <MovieContent
-          popular={latestRated}
-          nextPage={() => nextPage("NEXT_PAGE_LATEST")}
-        />
-      </Route>
+          <Route exact path="/latest">
+            <Header popular={playingMovie} />
+            <MovieContent
+              popular={playingMovie}
+              nextPage={() => nextPage("NEXT_PAGE_PLAYING")}
+            />
+          </Route>
 
-      <Route exact path="/latest">
-        <Header popular={playingMovie} />
-        <MovieContent
-          popular={playingMovie}
-          nextPage={() => nextPage("NEXT_PAGE_PLAYING")}
-        />
-      </Route>
+          <Route exact path="/mylist">
+            <MyList favoriteList={favoriteList} />
+          </Route>
 
-      <Route exact path="/mylist">
-        <MyList favoriteList={favoriteList} />
-      </Route>
+          <Route exact path="/results">
+            <Header popular={movieSearchResponse} />
+            <MovieContent popular={movieSearchResponse} />
+          </Route>
 
-      <Route exact path="/results">
-        <Header popular={movieSearchResponse} />
-        <MovieContent popular={movieSearchResponse} />
-      </Route>
-
-      <Route exact path="/:browse/:id">
-        <SingleMovieInfo
-          popular={popular}
-          playingMovie={playingMovie}
-          latestRated={latestRated}
-          tvPopular={tvPopular}
-          addToFavorites={addToFavorites}
-          movieSearchResponse={movieSearchResponse}
-        />
-        <MovieContent popular={popular} />
-      </Route>
-      <Footer />
+          <Route exact path="/:browse/:id">
+            <SingleMovieInfo
+              popular={popular}
+              playingMovie={playingMovie}
+              latestRated={latestRated}
+              tvPopular={tvPopular}
+              addToFavorites={addToFavorites}
+              movieSearchResponse={movieSearchResponse}
+            />
+            <MovieContent popular={popular} />
+          </Route>
+          <Footer />
+        </div>
+      )}
     </div>
   );
 };
