@@ -1,1 +1,6 @@
 $padd-lr: 4rem;
+
+@mixin flex($justify) {
+  display: flex;
+  justify-content: $justify;
+}

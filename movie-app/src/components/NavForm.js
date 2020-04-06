@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
 const NavForm = (props) => {
-  const { status, setShowForm } = props;
+  const { status, setShowForm, touched, errors } = props;
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -28,6 +28,9 @@ const NavForm = (props) => {
           placeholder="Movie title"
         />
       </label>
+      {errors.search && touched.search && (
+        <p className="error">{errors.search}</p>
+      )}
     </Form>
   );
 };
@@ -37,7 +40,7 @@ export default withFormik({
     search: "",
   }),
   validationSchema: yup.object().shape({
-    search: yup.string().required("please enter value"),
+    search: yup.string().required("please enter movie title"),
   }),
   handleSubmit: (values, { resetForm, setStatus }) => {
     setStatus(values);

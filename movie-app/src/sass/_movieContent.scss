@@ -1,10 +1,8 @@
 .movie-content-container {
-  //   border: 1px solid red;
   padding: 0 $padd-lr;
   z-index: 100;
   color: white;
   height: auto;
-  //   flex: 1;
 
   h2 {
     margin: 1rem 0;
@@ -13,9 +11,7 @@
   }
 
   .load-more-btn {
-    display: flex;
-    justify-content: center;
-    //  border: 1px solid red;
+    @include flex(center);
 
     button {
       font-size: 1.4rem;
@@ -40,14 +36,11 @@
 .display-cards {
   display: flex;
   flex-wrap: wrap;
-  //  border: 1px solid red;
 }
 
 .single-movie-container {
   width: 396px;
-  //   height: 250px;
   margin: 0 0.2rem 5rem 0;
-  //  border: 1px solid red;
 
   a {
     width: 100%;
@@ -86,7 +79,6 @@
         top: 0;
         left: 0;
         padding: 1rem;
-        //   border: 1px solid red;
         display: none;
         box-shadow: inset 0px 40px 30px 2px rgba(0, 0, 0, 0.75);
 
@@ -108,10 +100,8 @@
           justify-content: flex-end;
           font-size: 1.7rem;
           color: grey;
-          //  border: 1px solid red;
 
           div {
-            // border: 1px solid red;
             cursor: pointer;
 
             &:hover {

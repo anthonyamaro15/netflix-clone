@@ -1,15 +1,12 @@
 .single-movie-info-container {
-  //   border: 1px solid red;
   height: 55vh;
   display: flex;
 
   .single-movie-info {
     width: 50%;
-    //  border: 1px solid red;
     padding: 8rem $padd-lr;
     background: black;
     //  box-shadow: 40px 0px 50px 10px rgba(0, 0, 0, 1);
-    //  z-index: 10;
 
     h1 {
       font-size: 4rem;
@@ -23,7 +20,6 @@
       .rating {
         color: rgb(41, 255, 41);
         font-size: 1.5rem;
-        //   font-weight: bold;
       }
 
       .date-release {

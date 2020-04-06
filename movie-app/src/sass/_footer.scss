@@ -6,13 +6,11 @@
   footer {
     max-width: 1200px;
     margin: 0 auto;
-    //  border: 1px solid red;
     color: grey;
     padding: 0 1rem;
 
     .web-links {
       font-size: 3rem;
-      // border: 1px solid red;
       margin-bottom: 1rem;
       text-align: center;
 
@@ -21,7 +19,6 @@
         transition: color 0.5s ease;
 
         &:first-child {
-          //  color: red;
           margin-right: 1rem;
         }
 
