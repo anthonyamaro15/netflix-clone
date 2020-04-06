@@ -86,20 +86,6 @@
   }
 }
 
-// window.addEventListener("scroll", e => {
-//   e.preventDefault();
-
-//   if (window.scrollY <= 5000) {
-//     navlinks.style.backgroundColor = "rgba(115, 195, 40, 0.8)";
-//   } else {
-//     navlinks.style.backgroundColor = "transparent";
-//   }
-
-//   if (window.scrollY === 0) {
-//     navlinks.style.backgroundColor = "transparent";
-//   }
-// });
-
 .black {
   background: rgba(0, 0, 0, 0.9);
 }

@@ -5,13 +5,11 @@ import la from "../img/people.jpg";
 const Header = ({ popular }) => {
   const { url } = useRouteMatch();
 
-  //   console.log("data here ", popular[0]);
-
   const randomNumber = () => {
-    let random = Math.floor(Math.random() * 20) + 1;
+    let random = Math.floor(Math.random() * popular.length) + 1;
     return random;
   };
-  console.log(randomNumber());
+
   let num = randomNumber();
   return (
     <div className="header-container">
@@ -21,7 +19,7 @@ const Header = ({ popular }) => {
             ? la
             : `https://image.tmdb.org/t/p/original${
                 popular[num].backdrop_path || popular[num].poster_path
-              }`
+              }` || la
         }
         alt="header of the application"
       />

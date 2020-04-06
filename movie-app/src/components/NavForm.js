@@ -4,17 +4,19 @@ import { withFormik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
-const NavForm = ({ status }) => {
+const NavForm = (props) => {
+  const { status, setShowForm } = props;
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     status && dispatch({ type: "SEARCH_MOVIE", payload: status.search });
-  }, [status, dispatch]);
+    status && setShowForm(false);
+  }, [status, dispatch, setShowForm]);
 
   useEffect(() => {
     status && history.push("/results");
-  }, [status]);
+  }, [status, history]);
 
   return (
     <Form className="form">
@@ -38,7 +40,6 @@ export default withFormik({
     search: yup.string().required("please enter value"),
   }),
   handleSubmit: (values, { resetForm, setStatus }) => {
-    console.log(values);
     setStatus(values);
     resetForm();
   },
