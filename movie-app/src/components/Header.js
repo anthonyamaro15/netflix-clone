@@ -11,25 +11,27 @@ const Header = ({ popular }) => {
     <div className="header-container">
       <img
         src={
-          popular[18] === undefined
+          popular[6] === undefined
             ? la
-            : `https://image.tmdb.org/t/p/original${popular[18].backdrop_path}`
+            : `https://image.tmdb.org/t/p/original${
+                popular[6].backdrop_path || popular[6].poster_path
+              }`
         }
         alt="header of the application"
       />
       <div className="movie-info">
         <h1>
-          {popular[18] === undefined
+          {popular[6] === undefined
             ? "all american"
-            : popular[18].original_title || popular[18].original_name}
+            : popular[6].original_title || popular[6].original_name}
         </h1>
         <p className="movie-description">
-          {popular[18] === undefined ? "loading..." : popular[18].overview}
+          {popular[6] === undefined ? "loading..." : popular[6].overview}
         </p>
         <div className="more-info">
           <Link
             to={`${url}/${
-              popular[18] === undefined ? "/moreinfo" : popular[18].id
+              popular[6] === undefined ? "/moreinfo" : popular[6].id
             }`}
           >
             more info

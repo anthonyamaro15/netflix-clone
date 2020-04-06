@@ -129,7 +129,6 @@ const MainApp = () => {
 
       <Route exact path="/browse">
         <Header popular={popular} loading={loading} />
-
         <MovieContent
           popular={popular}
           nextPage={() => nextPage("NEXT_PAGE")}
@@ -164,6 +163,11 @@ const MainApp = () => {
         <MyList favoriteList={favoriteList} />
       </Route>
 
+      <Route exact path="/results">
+        <Header popular={movieSearchResponse} />
+        <MovieContent popular={movieSearchResponse} />
+      </Route>
+
       <Route exact path="/:browse/:id">
         <SingleMovieInfo
           popular={popular}
@@ -171,6 +175,7 @@ const MainApp = () => {
           latestRated={latestRated}
           tvPopular={tvPopular}
           addToFavorites={addToFavorites}
+          movieSearchResponse={movieSearchResponse}
         />
         <MovieContent popular={popular} />
       </Route>

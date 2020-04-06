@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { withFormik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
 const NavForm = ({ status }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     status && dispatch({ type: "SEARCH_MOVIE", payload: status.search });
   }, [status, dispatch]);
+
+  useEffect(() => {
+    status && history.push("/results");
+  }, [status]);
 
   return (
     <Form className="form">

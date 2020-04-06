@@ -2,18 +2,25 @@ import React from "react";
 import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { MdAddCircleOutline } from "react-icons/md";
+import la from "../img/people.jpg";
 
 const MovieCard = ({ movie, movieId, addToFavorites }) => {
   const { url } = useRouteMatch();
 
-  const { poster_path, title, name, vote_average } = movie;
+  const { poster_path, title, name, vote_average, backdrop_path } = movie;
 
   return (
     <div className="single-movie-container">
       <Link to={`${url}/${movieId}`}>
         <div className="img-container">
           <img
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            src={
+              poster_path || backdrop_path
+                ? `https://image.tmdb.org/t/p/original${
+                    poster_path || backdrop_path
+                  }`
+                : la
+            }
             alt={title}
           />
           <div className="hover-info">
