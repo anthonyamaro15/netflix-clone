@@ -8,7 +8,6 @@ import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 import Footer from "./Footer";
-// import { FaPoop } from "react-icons/fa";
 
 /// NEED TO WORK IN THE SEARCH FORM TO GET SPECIFIC MOVIE AS WELL.
 
@@ -32,26 +31,16 @@ const MainApp = () => {
     favoriteList,
     popularPage,
   } = reducer.popularReducer;
-  const { tvPopular } = reducer.tvPopularReducer;
-  const { latestRated } = reducer.ratedReducer;
-  const { playingMovie } = reducer.playingNowReducer;
 
-  //   useEffect(() => {
-  //     window.addEventListener("scroll", () => {
-  //       // if (window.scrollY >= 3) {
-  //       //    setScrolling(true);
-  //       // } else {
-  //       //    setScrolling(false);
-  //       // }
-  //       console.log("from mainApp ", window.scrollY);
+  const { tvPopular, tvPopularPage } = reducer.tvPopularReducer;
+  const { latestRated, latestRatedPage } = reducer.ratedReducer;
+  const { playingMovie, playingMoviePage } = reducer.playingNowReducer;
 
-  //       // if (window.scrollY === 0) {
-  //       //    setScrolling(false);
-  //       // }
-  //     });
-  //   }, []);
-
-  //   console.log("popular page ", popularPage);
+  console.log(reducer.tvPopularReducer);
+  //   console.log("popular ", popular);
+  //   console.log("tvPopu ", tvPopular);
+  //   console.log("latest ", latestRated);
+  //   console.log("playing ", playingMovie);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_DATA" });
@@ -60,7 +49,7 @@ const MainApp = () => {
         `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`
       )
       .then((res) => {
-        console.log(res.data);
+        //   console.log(res.data);
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
       })
       .catch((err) => {
@@ -73,21 +62,22 @@ const MainApp = () => {
     dispatch({ type: "FETCHING_TV_DATA" });
     axiosWithAuth()
       .get(
-        `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${tvPopularPage}`
       )
       .then((res) => {
+        //   console.log(res.data);
         dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
       })
       .catch((err) => {
         dispatch({ type: "ERROR_TV", payload: err.response });
       });
-  }, [dispatch]);
+  }, [tvPopularPage, dispatch]);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_RATED_DATA" });
     axiosWithAuth()
       .get(
-        `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=${latestRatedPage}`
       )
       .then((res) => {
         dispatch({ type: "GETTING_RATED_DATA", payload: res.data.results });
@@ -95,13 +85,13 @@ const MainApp = () => {
       .catch((err) => {
         dispatch({ type: "ERROR_RATED", payload: err.response });
       });
-  }, [dispatch]);
+  }, [latestRatedPage, dispatch]);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_LATEST_DATA" });
     axiosWithAuth()
       .get(
-        `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`
+        `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=${playingMoviePage}`
       )
       .then((res) => {
         dispatch({ type: "GETTING_LATEST_DATA", payload: res.data.results });
@@ -109,25 +99,68 @@ const MainApp = () => {
       .catch((err) => {
         dispatch({ type: "ERROR_LATEST", payload: err.response });
       });
-  }, [dispatch]);
+  }, [playingMoviePage, dispatch]);
 
   const addToFavorites = (movies) => {
     dispatch({ type: "ADD_FAVORITE", payload: movies });
   };
 
-  const nextPage = () => {
-    dispatch({ type: "NEXT_PAGE" });
+  const nextPage = (type) => {
+    dispatch({ type: type });
   };
 
-  console.log("popular here ", popular);
+  //   console.log("popular here ", tvPopular);
 
   return (
     <div className="MainApp">
       <Navbar />
+
       <Route exact path="/browse">
         <Header popular={popular} loading={loading} />
 
-        <MovieContent popular={popular} nextPage={nextPage} />
+        <MovieContent
+          popular={popular}
+          nextPage={() => nextPage("NEXT_PAGE")}
+        />
+      </Route>
+
+      <Route exact path="/tvshows">
+        <Header popular={tvPopular} />
+        <MovieContent
+          popular={tvPopular}
+          nextPage={() => nextPage("NEXT_PAGE_POPULAR")}
+        />
+      </Route>
+
+      <Route exact path="/movies">
+        <Header popular={latestRated} />
+        <MovieContent
+          popular={latestRated}
+          nextPage={() => nextPage("NEXT_PAGE_LATEST")}
+        />
+      </Route>
+
+      <Route exact path="/latest">
+        <Header popular={playingMovie} />
+        <MovieContent
+          popular={playingMovie}
+          nextPage={() => nextPage("NEXT_PAGE_PLAYING")}
+        />
+      </Route>
+
+      <Route exact path="/mylist">
+        <MyList favoriteList={favoriteList} />
+      </Route>
+
+      <Route exact path="/:browse/:id">
+        <SingleMovieInfo
+          popular={popular}
+          playingMovie={playingMovie}
+          latestRated={latestRated}
+          tvPopular={tvPopular}
+          addToFavorites={addToFavorites}
+        />
+        <MovieContent popular={popular} />
       </Route>
       <Footer />
     </div>
@@ -135,39 +168,3 @@ const MainApp = () => {
 };
 
 export default MainApp;
-
-// <Route exact path="/browse">
-//    <Header popular={popular} loading={loading} />
-
-//    <MovieContent popular={popular} nextPage={nextPage} />
-// </Route>
-
-//    <Route exact path="/tvshows">
-//       <Header popular={tvPopular} />
-//       <MovieContent popular={tvPopular} />
-//    </Route>
-
-//    <Route exact path="/movies">
-//       <Header popular={latestRated} />
-//       <MovieContent popular={latestRated} />
-//    </Route>
-
-//    <Route exact path="/latest">
-//       <Header popular={playingMovie} />
-//       <MovieContent popular={playingMovie} />
-//    </Route>
-
-//    <Route exact path="/mylist">
-//       <MyList favoriteList={favoriteList} />
-//    </Route>
-
-//    <Route exact path="/:browse/:id">
-//       <SingleMovieInfo
-//          popular={popular}
-//          playingMovie={playingMovie}
-//          latestRated={latestRated}
-//          tvPopular={tvPopular}
-//          addToFavorites={addToFavorites}
-//       />
-//       <MovieContent popular={popular} />
-//    </Route>

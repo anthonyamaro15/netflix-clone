@@ -7,6 +7,9 @@ const initialValue = {
   error: "",
   favoriteList: [],
   popularPage: 1,
+  tvPopularPage: 1,
+  latestRatedPage: 1,
+  playingMoviePage: 1,
 };
 
 export const popularReducer = (state = initialValue, action) => {
@@ -22,15 +25,15 @@ export const popularReducer = (state = initialValue, action) => {
         popular: [...state.popular, ...action.payload],
         loading: false,
       };
-    case "NEXT_PAGE":
-      return {
-        ...state,
-        popularPage: state.popularPage + 1,
-      };
     case "ADD_FAVORITE":
       return {
         ...state,
         favoriteList: [...state.favoriteList, action.payload],
+      };
+    case "NEXT_PAGE":
+      return {
+        ...state,
+        popularPage: state.popularPage + 1,
       };
     case "ERROR":
       return {
@@ -48,13 +51,18 @@ export const tvPopularReducer = (state = initialValue, action) => {
     case "FETCHING_TV_DATA":
       return {
         ...state,
-        loading: false,
+        loading: true,
       };
     case "GETTING_TV_DATA":
       return {
         ...state,
-        tvPopular: action.payload,
+        tvPopular: [...state.tvPopular, ...action.payload],
         loading: false,
+      };
+    case "NEXT_PAGE_POPULAR":
+      return {
+        ...state,
+        tvPopularPage: state.tvPopularPage + 1,
       };
     case "ERROR_TV":
       return {
@@ -77,8 +85,13 @@ export const ratedReducer = (state = initialValue, action) => {
     case "GETTING_RATED_DATA":
       return {
         ...state,
-        latestRated: action.payload,
+        latestRated: [...state.latestRated, ...action.payload],
         loading: false,
+      };
+    case "NEXT_PAGE_LATEST":
+      return {
+        ...state,
+        latestRatedPage: state.latestRatedPage + 1,
       };
     case "ERROR_RATED":
       return {
@@ -101,8 +114,13 @@ export const playingNowReducer = (state = initialValue, action) => {
     case "GETTING_LATEST_DATA":
       return {
         ...state,
-        playingMovie: action.payload,
+        playingMovie: [...state.playingMovie, ...action.payload],
         loading: false,
+      };
+    case "NEXT_PAGE_PLAYING":
+      return {
+        ...state,
+        playingMoviePage: state.playingMoviePage + 1,
       };
     case "ERROR_LATEST":
       return {
