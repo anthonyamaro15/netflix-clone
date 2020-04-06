@@ -3,12 +3,14 @@ import {
   popularReducer,
   tvPopularReducer,
   ratedReducer,
-  playingNowReducer
+  playingNowReducer,
+  searchReducer,
 } from "./popularReducer";
 
 export const rootReducer = combineReducers({
   popularReducer,
   tvPopularReducer,
   ratedReducer,
-  playingNowReducer
+  playingNowReducer,
+  searchReducer,
 });

@@ -28,7 +28,7 @@ const SingleMovieInfo = ({
     movie = findPathMovie(playingMovie);
   }
 
-  console.log(movie);
+  //   console.log(movie);
 
   return (
     <div className="single-movie-info-container">

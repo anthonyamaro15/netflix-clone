@@ -35,6 +35,24 @@ const MainApp = () => {
   const { tvPopular, tvPopularPage } = reducer.tvPopularReducer;
   const { latestRated, latestRatedPage } = reducer.ratedReducer;
   const { playingMovie, playingMoviePage } = reducer.playingNowReducer;
+  const { movieSearch, movieSearchResponse } = reducer.searchReducer;
+
+  console.log(movieSearch, movieSearchResponse);
+
+  // this axios call is getting the data for the search form
+  useEffect(() => {
+    dispatch({ type: "FETCHING_SEARCH" });
+    axiosWithAuth()
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=8686dd23d65d8d4c4b1c1ad132fcc4fd&language=en-US&query=${movieSearch}&page=1&include_adult=false`
+      )
+      .then((res) => {
+        dispatch({ type: "GETTING_SEARCH_VALUES", payload: res.data.results });
+      })
+      .catch((err) => {
+        dispatch({ type: "ERROR_SEARCH", payload: err.response });
+      });
+  }, [movieSearch, dispatch]);
 
   // this axios call is getting the data for the /browse
   useEffect(() => {
