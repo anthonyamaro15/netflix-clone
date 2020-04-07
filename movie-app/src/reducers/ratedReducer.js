@@ -1,28 +1,28 @@
 import { initialValue } from "./initialValues";
 
-export const tvPopularReducer = (state = initialValue, action) => {
+export const ratedReducer = (state = initialValue, action) => {
   switch (action.type) {
-    case "FETCHING_TV_DATA":
+    case "FETCHING_RATED_DATA":
       return {
         ...state,
         loading: true,
       };
-    case "GETTING_TV_DATA":
+    case "GETTING_RATED_DATA":
       return {
         ...state,
-        tvPopular: [...state.tvPopular, ...action.payload],
+        latestRated: [...state.latestRated, ...action.payload],
         loading: false,
       };
-    case "NEXT_PAGE_POPULAR":
+    case "NEXT_PAGE_LATEST":
       return {
         ...state,
-        tvPopularPage: state.tvPopularPage + 1,
+        latestRatedPage: state.latestRatedPage + 1,
       };
-    case "ERROR_TV":
+    case "ERROR_RATED":
       return {
         ...state,
+        loading: false,
         error: action.payload,
-        loading: false,
       };
     default:
       return state;
