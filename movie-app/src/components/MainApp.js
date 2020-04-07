@@ -46,7 +46,6 @@ const MainApp = () => {
         dispatch({ type: "GETTING_SEARCH_VALUES", payload: res.data.results });
       })
       .catch((err) => {
-        console.log(err);
         dispatch({
           type: "ERROR_SEARCH",
           payload: err.response.data.status_message,
