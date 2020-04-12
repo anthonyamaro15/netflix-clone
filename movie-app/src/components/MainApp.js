@@ -187,6 +187,7 @@ const MainApp = () => {
               tvPopular={tvPopular}
               addToFavorites={addToFavorites}
               movieSearchResponse={movieSearchResponse}
+              favoriteList={favoriteList}
             />
             <MovieContent popular={popular} />
           </Route>

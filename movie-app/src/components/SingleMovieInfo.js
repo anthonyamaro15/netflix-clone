@@ -9,6 +9,7 @@ const SingleMovieInfo = ({
   tvPopular,
   addToFavorites,
   movieSearchResponse,
+  favoriteList,
 }) => {
   const { browse, id } = useParams();
 
@@ -17,7 +18,7 @@ const SingleMovieInfo = ({
     return rightMovie;
   };
 
-  console.log(id);
+  console.log(favoriteList);
   let movie = "";
 
   if (browse === "browse") {
@@ -28,6 +29,8 @@ const SingleMovieInfo = ({
     movie = findPathMovie(latestRated);
   } else if (browse === "results") {
     movie = findPathMovie(movieSearchResponse);
+  } else if (browse === "mylist") {
+    movie = findPathMovie(favoriteList);
   } else {
     movie = findPathMovie(playingMovie);
   }
