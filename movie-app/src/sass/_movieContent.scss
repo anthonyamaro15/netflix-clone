@@ -67,7 +67,7 @@
         height: 100%;
         object-fit: cover;
         //   object-fit: contain;
-        cursor: pointer;
+        //   cursor: pointer;
         z-index: 0;
         position: relative;
       }
@@ -104,7 +104,6 @@
 
           div {
             cursor: pointer;
-            border: 1px solid red;
             padding: 0 0.3rem;
             z-index: 100;
 

@@ -17,6 +17,7 @@ const SingleMovieInfo = ({
     return rightMovie;
   };
 
+  console.log(id);
   let movie = "";
 
   if (browse === "browse") {
