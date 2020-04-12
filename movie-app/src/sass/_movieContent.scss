@@ -41,6 +41,7 @@
 .single-movie-container {
   width: 396px;
   margin: 0 0.2rem 5rem 0;
+  border: 1px solid red;
 
   a {
     width: 100%;
@@ -52,9 +53,10 @@
       transition: transform 0.5s ease;
 
       position: relative;
+      transform: scale(1.2);
 
       &:hover {
-        transform: scale(1.2);
+        //   transform: scale(1.2);
         z-index: 10;
 
         .hover-info {
@@ -79,13 +81,14 @@
         top: 0;
         left: 0;
         padding: 1rem;
-        display: none;
+        z-index: 0;
+        //   display: none;
         box-shadow: inset 0px 40px 30px 2px rgba(0, 0, 0, 0.75);
 
         h3 {
           text-transform: capitalize;
           font-weight: 500;
-          font-size: 1.5rem;
+          font-size: 1.6rem;
           color: white;
           margin-bottom: 0.5rem;
         }
@@ -98,14 +101,16 @@
         .add-icon {
           display: flex;
           justify-content: flex-end;
-          font-size: 1.7rem;
-          color: grey;
+          font-size: 1.9rem;
+          color: #f4f4f4;
+          z-index: 100;
+          border: 1px solid red;
 
           div {
             cursor: pointer;
 
             &:hover {
-              color: white;
+              color: rgb(205, 197, 197);
             }
           }
         }
