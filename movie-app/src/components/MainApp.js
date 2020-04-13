@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { Route } from "react-router-dom";
+import { Route, useRouteMatch } from "react-router-dom";
+import Home from "./homePage/Home";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
@@ -17,6 +18,7 @@ import Footer from "./Footer";
 /// CREATE USER PROFILES
 
 const MainApp = () => {
+  const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const reducer = useSelector((state) => ({
     ...state,
@@ -131,14 +133,19 @@ const MainApp = () => {
     dispatch({ type: type });
   };
 
+  console.log("url home ", url);
+
   return (
     <div className="MainApp">
       {error ? (
         <h1 className="error-found">{error}</h1>
       ) : (
         <div>
-          <Navbar />
+          <Route exact path="/">
+            <Home />
+          </Route>
           <Route exact path="/browse">
+            <Navbar />
             <Header popular={popular} loading={loading} />
             <MovieContent
               popular={popular}
@@ -147,6 +154,7 @@ const MainApp = () => {
           </Route>
 
           <Route exact path="/tvshows">
+            <Navbar />
             <Header popular={tvPopular} />
             <MovieContent
               popular={tvPopular}
@@ -155,6 +163,7 @@ const MainApp = () => {
           </Route>
 
           <Route exact path="/movies">
+            <Navbar />
             <Header popular={latestRated} />
             <MovieContent
               popular={latestRated}
@@ -163,6 +172,7 @@ const MainApp = () => {
           </Route>
 
           <Route exact path="/latest">
+            <Navbar />
             <Header popular={playingMovie} />
             <MovieContent
               popular={playingMovie}
@@ -171,15 +181,18 @@ const MainApp = () => {
           </Route>
 
           <Route exact path="/mylist">
+            <Navbar />
             <MyList favoriteList={favoriteList} />
           </Route>
 
           <Route exact path="/results">
+            <Navbar />
             <Header popular={movieSearchResponse} />
             <MovieContent popular={movieSearchResponse} />
           </Route>
 
           <Route exact path="/:browse/:id">
+            <Navbar />
             <SingleMovieInfo
               popular={popular}
               playingMovie={playingMovie}
