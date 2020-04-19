@@ -1,5 +1,7 @@
 import React from "react";
 
+// add home page with sign up and login nav
+
 const Home = () => {
   return (
     <div>
