@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "./Navbar";
 
 // add home page with sign up and login nav
 // need to get the login working as well
@@ -12,6 +13,7 @@ const Home = () => {
   return (
     <div>
       <h1>this is the home page</h1>
+      <Navbar />
     </div>
   );
 };
