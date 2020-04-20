@@ -6,6 +6,11 @@
   justify-content: space-between;
   align-items: center;
   text-transform: capitalize;
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 
   h2 {
     font-size: 1.5rem;
@@ -26,6 +31,35 @@
       &:first-child {
         margin-right: 0.7rem;
       }
+    }
+  }
+}
+
+// HOME HEADER STARTS HERE
+
+.HomeHeader {
+  border: 1px solid red;
+  height: 55vh;
+  width: 100%;
+  color: #f4f4f4;
+  padding-top: 8rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .home-desc {
+    //  border: 1px solid red;
+    width: 30%;
+    text-align: center;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    span {
+      margin: 1rem 0;
+      font-size: 1.3rem;
     }
   }
 }
