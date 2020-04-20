@@ -12,7 +12,6 @@ import Navbar from "./Navbar";
 const Home = () => {
   return (
     <div>
-      <h1>this is the home page</h1>
       <Navbar />
     </div>
   );

@@ -1,0 +1,31 @@
+.Navbar {
+  width: 70%;
+  height: 6vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: capitalize;
+
+  h2 {
+    font-size: 1.5rem;
+    color: #ff1d25;
+  }
+
+  .nav-links {
+    //  border: 1px solid blue;
+
+    a {
+      display: inline-block;
+      padding: 0.4rem 1.1rem;
+      color: white;
+      background: #ff1d25;
+      border-radius: 3px;
+      font-size: 0.9rem;
+
+      &:first-child {
+        margin-right: 0.7rem;
+      }
+    }
+  }
+}
