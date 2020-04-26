@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import HomeHeader from "./HomeHeader";
+import MainContent from "./MainContent";
 
 // add home page with sign up and login nav
 // need to get the login working as well
@@ -15,6 +16,7 @@ const Home = () => {
     <div>
       <Navbar />
       <HomeHeader />
+      <MainContent />
     </div>
   );
 };
