@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
+import { axiosWithAuthDB } from "../../utils/axiosWithAuth";
 
 const validationSchema = yup.object().shape({
-  name: yup.string().required("Please enter name"),
+  username: yup.string().required("Please enter username"),
   email: yup
     .string()
     .lowercase()
@@ -22,22 +23,42 @@ const validationSchema = yup.object().shape({
 });
 
 const Signup = () => {
+  const history = useHistory();
   return (
     <div className="Signup">
       <div className="Signup-form">
         <h2>Sign Up</h2>
         <Formik
-          initialValues={{ name: "", email: "", password: "", confirm: "" }}
+          initialValues={{ username: "", email: "", password: "", confirm: "" }}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
-            console.log(values);
+            const { username, email, password } = values;
+            const storeValues = {
+              email,
+              username,
+              password,
+            };
+            axiosWithAuthDB()
+              .post("/api/auth/register", storeValues)
+              .then((res) => {
+                history.push("/login");
+              })
+              .catch((err) => {
+                console.log(err.message);
+              });
+            // console.log(storeValues);
             resetForm();
           }}
         >
           {({ errors, touched }) => (
             <Form>
-              <label htmlFor="name">
-                <Field type="text" name="name" id="name" placeholder="name" />
+              <label htmlFor="username">
+                <Field
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="username"
+                />
                 {errors && touched && (
                   <p className="error-message">{errors.name}</p>
                 )}

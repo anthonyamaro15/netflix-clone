@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
+import { axiosWithAuthDB } from "../../utils/axiosWithAuth";
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -13,6 +14,7 @@ const validationSchema = yup.object().shape({
 });
 
 const Login = () => {
+  const history = useHistory();
   return (
     <div className="Signup">
       <div className="Signup-form">
@@ -21,7 +23,13 @@ const Login = () => {
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
-            console.log(values);
+            axiosWithAuthDB()
+              .post("/api/auth/login", values)
+              .then((res) => {
+                console.log(res);
+                localStorage.setItem("token", JSON.stringify(res.data.token));
+                history.push("/browse");
+              });
             resetForm();
           }}
         >
