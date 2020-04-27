@@ -1,6 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
+import * as yup from "yup";
+
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .lowercase()
+    .email("invalid email")
+    .required("Please enter email"),
+  password: yup.string().required("Please enter password"),
+});
 
 const Login = () => {
   return (
@@ -9,12 +19,13 @@ const Login = () => {
         <h2>Log In</h2>
         <Formik
           initialValues={{ email: "", password: "" }}
+          validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             resetForm();
           }}
         >
-          {() => (
+          {({ errors, touched }) => (
             <Form>
               <label htmlFor="email">
                 <Field
@@ -23,7 +34,9 @@ const Login = () => {
                   id="email"
                   placeholder="email"
                 />
-                <p className="error-message">your name must be valid</p>
+                {errors && touched && (
+                  <p className="error-message">{errors.email}</p>
+                )}
               </label>
               <label htmlFor="password">
                 <Field
@@ -32,7 +45,9 @@ const Login = () => {
                   id="password"
                   placeholder="password"
                 />
-                <p className="error-message">your name must be valid</p>
+                {errors && touched && (
+                  <p className="error-message">{errors.password}</p>
+                )}
               </label>
               <button type="submit">Log In</button>
             </Form>
