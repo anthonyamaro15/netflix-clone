@@ -1,8 +1,10 @@
 import React from "react";
-
+import { Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import HomeHeader from "./HomeHeader";
 import MainContent from "./MainContent";
+import Signup from "./Signup";
+import Login from "./Login";
 
 // add home page with sign up and login nav
 // need to get the login working as well
@@ -15,9 +17,18 @@ import MainContent from "./MainContent";
 const Home = () => {
   return (
     <div>
-      <Navbar />
-      <HomeHeader />
-      <MainContent />
+      <Route exact path="/">
+        <Navbar />
+        <HomeHeader />
+        <MainContent />
+      </Route>
+
+      <Route exact path="/signup">
+        <Signup />
+      </Route>
+      <Route exact path="/login">
+        <Login />
+      </Route>
     </div>
   );
 };

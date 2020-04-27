@@ -34,7 +34,9 @@ const Navbar = () => {
     <div className={isUserScrolling}>
       <header id="top">
         <div className="logo">
-          <h2>Movie App</h2>
+          <h2>
+            <NavLink to="/">Main App</NavLink>
+          </h2>
         </div>
         <nav>
           <NavLink exact to="/browse" activeClassName="active">
