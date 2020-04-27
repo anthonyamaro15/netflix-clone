@@ -10,6 +10,9 @@ import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 import Footer from "./Footer";
 
+import Signup from "./homePage/Signup";
+import Login from "./homePage/Login";
+
 // WORK ON THE RESPONSINESS OF THE APP,
 
 // TRY ADDING VIDEOS TO IT.
@@ -143,6 +146,12 @@ const MainApp = () => {
         <div>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
+          </Route>
+          <Route exact path="/login">
+            <Login />
           </Route>
           <Route exact path="/browse">
             <Navbar />
