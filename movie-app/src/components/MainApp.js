@@ -2,16 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Route, useRouteMatch } from "react-router-dom";
-import Home from "./homePage/Home";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 import Footer from "./Footer";
-
-import Signup from "./homePage/Signup";
-import Login from "./homePage/Login";
 
 // WORK ON THE RESPONSINESS OF THE APP,
 
@@ -144,15 +140,6 @@ const MainApp = () => {
         <h1 className="error-found">{error}</h1>
       ) : (
         <div>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
           <Route exact path="/browse">
             <Navbar />
             <Header popular={popular} loading={loading} />
