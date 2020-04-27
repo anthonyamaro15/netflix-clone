@@ -3,17 +3,17 @@ import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import la from "../img/people.jpg";
 
-const MovieCard = ({ movie, movieId, addToFavorites }) => {
+const MovieCard = ({ movie }) => {
   const { url } = useRouteMatch();
 
   const { poster_path, title, name, vote_average, backdrop_path } = movie;
-  //   console.log("id here", movieId);
+  console.log("id here", movie);
 
   //   console.log(url);
 
   return (
     <div className="single-movie-container">
-      <Link to={`${url}/${movieId}`}>
+      <Link to={`${url}/${movie.id}`}>
         <div className="img-container">
           <img
             src={

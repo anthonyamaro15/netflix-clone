@@ -20,7 +20,6 @@ const MovieContent = ({ popular, nextPage }) => {
           <MovieCard
             key={movie.id}
             movie={movie}
-            movieId={movie.id}
             movieArr={popular}
             addToFavorites={() => addToFavorites(movie)}
           />
