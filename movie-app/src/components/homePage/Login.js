@@ -26,9 +26,11 @@ const Login = () => {
             axiosWithAuthDB()
               .post("/api/auth/login", values)
               .then((res) => {
-                console.log(res);
                 localStorage.setItem("token", JSON.stringify(res.data.token));
                 history.push("/browse");
+              })
+              .catch((err) => {
+                console.log(err);
               });
             resetForm();
           }}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
@@ -7,8 +7,10 @@ import NavForm from "./NavForm";
 const Navbar = () => {
   const [showForm, setShowForm] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const isMountedRef = useRef(null);
 
   useEffect(() => {
+    isMountedRef.current = true;
     window.addEventListener("scroll", () => {
       if (window.scrollY >= 3) {
         setScrolling(true);
@@ -20,6 +22,7 @@ const Navbar = () => {
         setScrolling(false);
       }
     });
+    return () => (isMountedRef.current = false);
   }, []);
 
   const toggleForm = () => {

@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { MdAddCircleOutline } from "react-icons/md";
 import la from "../img/people.jpg";
 
 const MovieCard = ({ movie, movieId, addToFavorites }) => {
@@ -29,11 +28,7 @@ const MovieCard = ({ movie, movieId, addToFavorites }) => {
           <div className="hover-info">
             <h3>{name ? name : title}</h3>
             <p>rating: {vote_average}</p>
-            <div className="add-icon">
-              <div onClick={addToFavorites}>
-                <MdAddCircleOutline />
-              </div>
-            </div>
+            <div className="add-icon"></div>
           </div>
         </div>
       </Link>
