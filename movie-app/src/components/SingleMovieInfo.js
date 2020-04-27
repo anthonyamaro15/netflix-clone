@@ -18,7 +18,7 @@ const SingleMovieInfo = ({
     return rightMovie;
   };
 
-  console.log(favoriteList);
+  //   console.log("id here", id, "url path hrer", browse);
   let movie = "";
 
   if (browse === "browse") {
@@ -42,7 +42,7 @@ const SingleMovieInfo = ({
       <div className="single-movie-info">
         <h1>{movie.original_name ? movie.original_name : movie.title}</h1>
         <div className="display-movie-info">
-          <span className="rating">Rating {movie.vote_average}</span>
+          <span className="rating">Rating: {movie.vote_average}</span>
           <span className="date-release">
             {" "}
             date released: {""}{" "}
