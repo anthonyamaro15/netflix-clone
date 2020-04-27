@@ -136,7 +136,7 @@ const MainApp = () => {
     dispatch({ type: type });
   };
 
-  console.log("url home ", url);
+  //   console.log("url home ", url);
 
   return (
     <div className="MainApp">

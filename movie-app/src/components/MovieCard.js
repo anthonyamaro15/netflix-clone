@@ -8,9 +8,9 @@ const MovieCard = ({ movie, movieId, addToFavorites }) => {
   const { url } = useRouteMatch();
 
   const { poster_path, title, name, vote_average, backdrop_path } = movie;
-  console.log("id here", movieId);
+  //   console.log("id here", movieId);
 
-  console.log(url);
+  //   console.log(url);
 
   return (
     <div className="single-movie-container">
