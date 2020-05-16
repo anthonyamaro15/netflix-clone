@@ -1,45 +1,37 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
 import { useDispatch } from "react-redux";
-import * as yup from "yup";
 
-const validationSchema = yup.object().shape({
-  search: yup.string().required("please enter movie title"),
-});
+const initialValues = {
+  search: "",
+};
 
 const NavForm = ({ setShowForm }) => {
+  const { register, handleSubmit, errors, reset } = useForm(initialValues);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const onSubmit = (values) => {
+    dispatch({ type: "SEARCH_MOVIE", payload: values.search });
+    history.push("/results");
+    setShowForm(false);
+    reset();
+  };
+
   return (
-    <Formik
-      initialValues={{ search: "" }}
-      validationSchema={validationSchema}
-      onSubmit={(values, { resetForm }) => {
-        dispatch({ type: "SEARCH_MOVIE", payload: values.search });
-        history.push("/results");
-        //   setShowForm(false);
-        console.log(values);
-        resetForm();
-      }}
-    >
-      {({ errors, touched }) => (
-        <Form className="form">
-          <label htmlFor="search">
-            <Field
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Movie title"
-            />
-          </label>
-          {errors.search && touched.search && (
-            <p className="error">{errors.search}</p>
-          )}
-        </Form>
-      )}
-    </Formik>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="search">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Movie title"
+          ref={register({ required: true })}
+        />
+        {errors.search && <p className="error">This Fiels is required</p>}
+      </label>
+    </form>
   );
 };
 
