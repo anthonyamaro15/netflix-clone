@@ -35,7 +35,7 @@ const SingleMovieInfo = ({
     } else {
       setData(playingMovie);
     }
-  }, []);
+  }, [browse]);
 
   useEffect(() => {
     setMovie(data.find((movie) => movie.id === Number(id)));
@@ -53,7 +53,7 @@ const SingleMovieInfo = ({
       .catch((err) => {
         dispatch({ type: "ERROR_WHILE_FETCHING_SINGLE_VIDEO", payload: err });
       });
-  }, []);
+  }, [dispatch]);
 
   const ops = {
     playerVars: {

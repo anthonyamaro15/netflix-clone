@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
-import { Route, useRouteMatch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
@@ -17,7 +17,7 @@ import Footer from "./Footer";
 /// CREATE USER PROFILES
 
 const MainApp = () => {
-  const { url } = useRouteMatch();
+  //   const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const reducer = useSelector((state) => ({
     ...state,
