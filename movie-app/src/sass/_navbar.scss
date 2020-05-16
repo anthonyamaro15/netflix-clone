@@ -45,7 +45,7 @@
 
   .search {
     display: flex;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
 
     .icon {
       font-size: 1.3rem;
@@ -54,8 +54,9 @@
       cursor: pointer;
     }
 
-    .form {
+    form {
       position: relative;
+
       input {
         font-size: 1.1rem;
         border: none;
@@ -63,14 +64,17 @@
         background: transparent;
         color: #f4f4f4;
         width: 250px;
+        font-weight: 300;
       }
 
       .error {
         position: absolute;
-        top: 2.5rem;
+        top: 2.3rem;
         left: 0;
         text-transform: uppercase;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
+        //   color: red;
+        //   font-weight: bold;
       }
     }
   }

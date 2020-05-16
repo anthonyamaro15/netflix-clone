@@ -63,6 +63,7 @@ const MainApp = () => {
       )
       .then((res) => {
         dispatch({ type: "GETTING_DATA", payload: res.data.results });
+        //   localStorage.setItem("popular", JSON.stringify(res.data.results));
       })
       .catch((err) => {
         dispatch({ type: "ERROR", payload: err.response.data.status_message });
