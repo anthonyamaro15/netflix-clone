@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 
@@ -12,32 +12,30 @@ const SingleMovieInfo = ({
   favoriteList,
 }) => {
   const { browse, id } = useParams();
+  const [data, setData] = useState([]);
+  const [movie, setMovie] = useState({});
 
-  const findPathMovie = (arr) => {
-    let rightMovie = arr.find((movie) => movie.id === Number(id));
-    return rightMovie;
-  };
+  useEffect(() => {
+    if (browse === "browse") {
+      setData(popular);
+    } else if (browse === "tvshows") {
+      setData(tvPopular);
+    } else if (browse === "movies") {
+      setData(latestRated);
+    } else if (browse === "results") {
+      setData(movieSearchResponse);
+    } else if (browse === "mylist") {
+      setData(favoriteList);
+    } else {
+      setData(playingMovie);
+    }
+  }, []);
 
-  //   console.log("id here", id, "url path hrer", browse);
-  let movie = "";
+  useEffect(() => {
+    setMovie(data.find((movie) => movie.id === Number(id)));
+  }, [data]);
 
-  if (browse === "browse") {
-    movie = findPathMovie(popular);
-  } else if (browse === "tvshows") {
-    movie = findPathMovie(tvPopular);
-  } else if (browse === "movies") {
-    movie = findPathMovie(latestRated);
-  } else if (browse === "results") {
-    movie = findPathMovie(movieSearchResponse);
-  } else if (browse === "mylist") {
-    movie = findPathMovie(favoriteList);
-  } else {
-    movie = findPathMovie(playingMovie);
-  }
-
-  //   console.log(movie);
-
-  return (
+  return movie && data ? (
     <div className="single-movie-info-container">
       <div className="single-movie-info">
         <h1>{movie.original_name ? movie.original_name : movie.title}</h1>
@@ -67,6 +65,8 @@ const SingleMovieInfo = ({
         />
       </div>
     </div>
+  ) : (
+    <h2>Loading...</h2>
   );
 };
 

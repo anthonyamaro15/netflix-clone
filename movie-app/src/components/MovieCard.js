@@ -1,19 +1,21 @@
-import React from "react";
-import { useRouteMatch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useRouteMatch, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import la from "../img/people.jpg";
 
 const MovieCard = ({ movie }) => {
   const { url } = useRouteMatch();
+  const [movies, setMovies] = useState(movie);
 
-  const { poster_path, title, name, vote_average, backdrop_path } = movie;
-  console.log("id here", movie);
+  const { poster_path, title, name, vote_average, backdrop_path, id } = movies;
 
-  //   console.log(url);
+  useEffect(() => {
+    setMovies(movie);
+  }, [movies]);
 
   return (
     <div className="single-movie-container">
-      <Link to={`${url}/${movie.id}`}>
+      <Link to={`${url}/${id}`}>
         <div className="img-container">
           <img
             src={
