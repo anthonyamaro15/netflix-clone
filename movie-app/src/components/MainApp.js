@@ -140,7 +140,7 @@ const MainApp = () => {
         <h1 className="error-found">{error}</h1>
       ) : (
         <div>
-          <Route exact path="/browse">
+          <Route exact path={`/browse`}>
             <Navbar />
             <Header popular={popular} loading={loading} />
             <MovieContent
@@ -178,6 +178,8 @@ const MainApp = () => {
 
           <Route exact path="/mylist">
             <Navbar />
+            {/**
+             */}
             <MyList favoriteList={favoriteList} />
           </Route>
 
@@ -187,7 +189,7 @@ const MainApp = () => {
             <MovieContent popular={movieSearchResponse} />
           </Route>
 
-          <Route exact path="/:browse/:id">
+          <Route exact path={`/:browse/:id`}>
             <Navbar />
             <SingleMovieInfo
               popular={popular}
@@ -198,7 +200,11 @@ const MainApp = () => {
               movieSearchResponse={movieSearchResponse}
               favoriteList={favoriteList}
             />
+
+            {/**
             <MovieContent popular={popular} />
+            
+            */}
           </Route>
           <Footer />
         </div>
@@ -206,5 +212,8 @@ const MainApp = () => {
     </div>
   );
 };
+
+///browse/419704
+///browse/419704
 
 export default MainApp;

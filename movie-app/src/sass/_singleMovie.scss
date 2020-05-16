@@ -9,9 +9,11 @@
     //  box-shadow: 40px 0px 50px 10px rgba(0, 0, 0, 1);
 
     h1 {
-      font-size: 4rem;
+      font-size: 3rem;
+      font-weight: normal;
       text-transform: capitalize;
       color: #f4f4f4;
+      margin-bottom: 1rem;
     }
 
     .display-movie-info {
@@ -19,26 +21,27 @@
       flex-direction: column;
       .rating {
         color: rgb(41, 255, 41);
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
 
       .date-release {
         color: #f4f4f4;
-        font-size: 1.5rem;
-        margin-top: 1rem;
+        font-size: 1.1rem;
+        margin-top: 1.5rem;
       }
     }
 
     .single-movie-description {
       color: grey;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       margin: 2rem 0;
+      line-height: 1.6;
     }
 
     .single-more-info {
       button {
         padding: 0.5rem 2rem;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         text-transform: uppercase;
         display: flex;
         align-items: center;
