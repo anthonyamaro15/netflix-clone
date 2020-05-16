@@ -54,7 +54,8 @@
       position: relative;
 
       &:hover {
-        transform: scale(1.1);
+        //   transform: scale(1.05);
+        //   background: rgba(0, 0, 0, 0.9);
         z-index: 10;
 
         .hover-info {
@@ -80,7 +81,8 @@
         left: 0;
         padding: 1rem;
         display: none;
-        background: rgba(0, 0, 0, 0.2);
+
+        background: rgba(0, 0, 0, 0.4);
         box-shadow: inset 0px 40px 30px 2px rgba(0, 0, 0, 0.75);
 
         h3 {
@@ -91,8 +93,8 @@
           margin-bottom: 0.5rem;
         }
         p {
-          color: rgb(41, 255, 41);
-
+          color: rgb(71, 204, 71);
+          text-transform: capitalize;
           font-size: 1.2rem;
         }
 

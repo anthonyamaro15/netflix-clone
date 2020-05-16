@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import YouTube from "react-youtube";
+
 import { FaPlus } from "react-icons/fa";
 
 const SingleMovieInfo = ({
@@ -12,8 +16,12 @@ const SingleMovieInfo = ({
   favoriteList,
 }) => {
   const { browse, id } = useParams();
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [movie, setMovie] = useState({});
+  const { singleMovie } = useSelector((state) => state.singleMovieReducer);
+  console.log("popular videos ", singleMovie);
+  //   console.log("movie ", movie);
 
   useEffect(() => {
     if (browse === "browse") {
@@ -34,6 +42,31 @@ const SingleMovieInfo = ({
   useEffect(() => {
     setMovie(data.find((movie) => movie.id === Number(id)));
   }, [data]);
+
+  useEffect(() => {
+    dispatch({ type: "FETCHING_SINGLE_VIDEO" });
+    axiosWithAuth()
+      .get(
+        `/movie/${id}/videos?api_key=${process.env.REACT_APP_API}&language=en-US`
+      )
+      .then((res) => {
+        console.log("response here ", res);
+        dispatch({ type: "SAVING_SINGLE_VIDEO_ID", payload: res.data.results });
+      })
+      .catch((err) => {
+        dispatch({ type: "ERROR_WHILE_FETCHING_SINGLE_VIDEO", payload: err });
+      });
+  }, []);
+
+  const ops = {
+    //  height: "100%",
+    //  width: "1000",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  console.log("movies", movie);
 
   return movie && data ? (
     <div className="single-movie-info-container">
@@ -59,10 +92,25 @@ const SingleMovieInfo = ({
         </div>
       </div>
       <div className="image-movie-info">
-        <img
+        {singleMovie.length > 0 ? (
+          <YouTube
+            videoId={singleMovie[0].key}
+            opts={ops}
+            className="youtubes"
+          />
+        ) : (
+          <img
+            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            alt=""
+          />
+        )}
+
+        {/**
+       <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt=""
         />
+      */}
       </div>
     </div>
   ) : (
