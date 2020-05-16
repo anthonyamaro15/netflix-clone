@@ -20,8 +20,6 @@ const SingleMovieInfo = ({
   const [data, setData] = useState([]);
   const [movie, setMovie] = useState({});
   const { singleMovie } = useSelector((state) => state.singleMovieReducer);
-  console.log("popular videos ", singleMovie);
-  //   console.log("movie ", movie);
 
   useEffect(() => {
     if (browse === "browse") {
@@ -50,7 +48,6 @@ const SingleMovieInfo = ({
         `/movie/${id}/videos?api_key=${process.env.REACT_APP_API}&language=en-US`
       )
       .then((res) => {
-        console.log("response here ", res);
         dispatch({ type: "SAVING_SINGLE_VIDEO_ID", payload: res.data.results });
       })
       .catch((err) => {
@@ -59,14 +56,10 @@ const SingleMovieInfo = ({
   }, []);
 
   const ops = {
-    //  height: "100%",
-    //  width: "1000",
     playerVars: {
       autoplay: 1,
     },
   };
-
-  console.log("movies", movie);
 
   return movie && data ? (
     <div className="single-movie-info-container">
@@ -104,13 +97,6 @@ const SingleMovieInfo = ({
             alt=""
           />
         )}
-
-        {/**
-       <img
-          src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-          alt=""
-        />
-      */}
       </div>
     </div>
   ) : (
