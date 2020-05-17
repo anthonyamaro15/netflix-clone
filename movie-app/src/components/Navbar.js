@@ -36,7 +36,7 @@ const Navbar = () => {
       <header id="top">
         <div className="logo">
           <h2>
-            <NavLink to="/">Main App</NavLink>
+            <NavLink to="/">TMovies</NavLink>
           </h2>
         </div>
         <nav>
