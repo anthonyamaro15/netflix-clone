@@ -1,7 +1,6 @@
 .movie-content-container {
   padding: 0 $padd-lr;
   z-index: 100;
-  color: white;
   height: auto;
 
   h2 {
@@ -14,19 +13,19 @@
     @include flex(center);
 
     button {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       padding: 0.5rem 3rem;
       border: none;
       text-transform: capitalize;
       background: rgba(100, 100, 100, 0.9);
-      color: white;
+      color: $white;
       border-radius: 5px;
-      cursor: pointer;
+      font-weight: 300;
       transition: all 0.2s ease;
 
       &:hover {
-        color: #333;
-        background: #f4f4f4;
+        color: $black;
+        background: $white;
         transform: scale(1.1);
       }
     }
@@ -34,8 +33,9 @@
 }
 
 .display-cards {
-  display: flex;
+  @include flex(center);
   flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .single-movie-container {
@@ -87,13 +87,13 @@
 
         h3 {
           text-transform: capitalize;
-          font-weight: 500;
+          font-weight: 300;
           font-size: 1.6rem;
-          color: white;
+          color: $white;
           margin-bottom: 0.5rem;
         }
         p {
-          color: rgb(71, 204, 71);
+          color: $green;
           text-transform: capitalize;
           font-size: 1.2rem;
         }
@@ -102,7 +102,7 @@
           display: flex;
           justify-content: flex-end;
           font-size: 1.9rem;
-          color: #f4f4f4;
+          color: $white;
 
           div {
             cursor: pointer;

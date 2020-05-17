@@ -2,8 +2,7 @@
   width: 70%;
   height: 6vh;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  @include flex(space-between);
   align-items: center;
   text-transform: capitalize;
   z-index: 100;
@@ -15,12 +14,10 @@
   .logo {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #ff1d25;
+    color: $red;
   }
 
   .nav-links {
-    //  border: 1px solid blue;
-
     .active {
       background: #921115;
     }
