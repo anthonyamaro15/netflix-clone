@@ -12,6 +12,6 @@ export const axiosWithAuthDB = () => {
     headers: {
       Authorization: token,
     },
-    baseURL: "http://localhost:5000",
+    baseURL: "https://netflix-clone-backend01.herokuapp.com",
   });
 };

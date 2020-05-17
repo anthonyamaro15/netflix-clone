@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useRouteMatch, useParams } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import la from "../img/people.jpg";
 
@@ -11,7 +11,7 @@ const MovieCard = ({ movie }) => {
 
   useEffect(() => {
     setMovies(movie);
-  }, [movies]);
+  }, [movies, movie]);
 
   return (
     <div className="single-movie-container">
