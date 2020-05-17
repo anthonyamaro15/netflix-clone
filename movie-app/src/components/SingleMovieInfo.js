@@ -35,7 +35,14 @@ const SingleMovieInfo = ({
     } else {
       setData(playingMovie);
     }
-  }, [browse]);
+  }, [
+    browse,
+    popular,
+    tvPopular,
+    latestRated,
+    movieSearchResponse,
+    favoriteList,
+  ]);
 
   useEffect(() => {
     setMovie(data.find((movie) => movie.id === Number(id)));

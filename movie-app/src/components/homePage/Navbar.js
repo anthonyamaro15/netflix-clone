@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className="Navbar">
       <Link className="logo" to="/">
-        Movie App
+        TMovies
       </Link>
       <nav className="nav-links">
         <NavLink to="/login" activeClassName="active">
