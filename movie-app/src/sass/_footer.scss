@@ -1,7 +1,7 @@
 .footer-container {
   padding: 5rem 0 3rem;
   background: rgb(5, 5, 5);
-  margin-top: 20rem;
+  margin-top: 10rem;
 
   footer {
     max-width: 1200px;
@@ -13,6 +13,10 @@
       font-size: 3rem;
       margin-bottom: 1rem;
       text-align: center;
+
+      @media (max-width: $mobile) {
+        font-size: 2rem;
+      }
 
       a {
         color: grey;

@@ -25,8 +25,8 @@
     a {
       display: inline-block;
       padding: 0.4rem 1.1rem;
-      color: white;
-      background: #ff1d25;
+      color: $white;
+      background: $red;
       border-radius: 3px;
       font-size: 0.9rem;
 
@@ -43,7 +43,6 @@
   //   border: 1px solid red;
   height: 55vh;
   width: 100%;
-  color: #f4f4f4;
   padding-top: 8rem;
   background: url("../img/home.jpg");
   background-position: center;
@@ -62,23 +61,32 @@
     background: rgba(0, 0, 0, 0.5);
   }
 
-  display: flex;
-  justify-content: center;
+  @include flex(center);
   align-items: center;
 
   .home-desc {
-    //  border: 1px solid red;
     width: 30%;
     text-align: center;
     z-index: 10;
 
+    @media (max-width: $lap-top) {
+      width: 50%;
+    }
+
     h1 {
       font-size: 3rem;
+      @media (max-width: $lap-top) {
+        font-size: 2rem;
+      }
     }
 
     span {
       margin: 1rem 0;
       font-size: 1.3rem;
+
+      @media (max-width: $lap-top) {
+        font-size: 1.1rem;
+      }
     }
   }
 }
