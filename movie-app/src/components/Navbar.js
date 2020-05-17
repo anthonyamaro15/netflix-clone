@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 import NavForm from "./NavForm";
 
 const Navbar = () => {
   const [showForm, setShowForm] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -30,6 +31,11 @@ const Navbar = () => {
   const isUserScrolling = scrolling
     ? "navbar-container black"
     : "navbar-container";
+
+  const logout = () => {
+    localStorage.clear();
+    history.push("/");
+  };
 
   return (
     <div className={isUserScrolling}>
@@ -57,11 +63,14 @@ const Navbar = () => {
           </NavLink>
         </nav>
       </header>
-      <div className={showForm ? "search showForm" : "search"}>
-        <div className="icon" onClick={toggleForm}>
-          <FaSearch />
+      <div className="search-logout">
+        <div className={showForm ? "search showForm" : "search"}>
+          <div className="icon" onClick={toggleForm}>
+            <FaSearch />
+          </div>
+          {showForm ? <NavForm setShowForm={setShowForm} /> : ""}
         </div>
-        {showForm ? <NavForm setShowForm={setShowForm} /> : ""}
+        <button onClick={logout}>logout</button>
       </div>
     </div>
   );

@@ -1,4 +1,17 @@
 $padd-lr: 4rem;
+$green: rgb(92, 204, 92);
+$white: #f4f4f4;
+$black: #333;
+$red: #ff1d25;
+$max-width: 1200px;
+
+// media queries
+
+$big-desktop: 1900px;
+$fourteen-hundred: 1440px;
+$desktop: 1040px;
+$lap-top: 800px;
+$mobile: 500px;
 
 @mixin flex($justify) {
   display: flex;
