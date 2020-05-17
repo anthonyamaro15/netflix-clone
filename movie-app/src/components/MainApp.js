@@ -126,6 +126,7 @@ const MainApp = () => {
   }, [playingMoviePage, dispatch]);
 
   const addToFavorites = (movies) => {
+    //  console.log("faavorite ", movies);
     dispatch({ type: "ADD_FAVORITE", payload: movies });
   };
 

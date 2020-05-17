@@ -61,6 +61,8 @@ const SingleMovieInfo = ({
     },
   };
 
+  //   console.log("movie", movie);
+
   return movie && data ? (
     <div className="single-movie-info-container">
       <div className="single-movie-info">
