@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Route } from "react-router-dom";
@@ -9,15 +9,10 @@ import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 import Footer from "./Footer";
 
-// WORK ON THE RESPONSINESS OF THE APP,
-
-// TRY ADDING VIDEOS TO IT.
-
-// FOR FUTURE BUILD A HOME PAGE WITH LOGIN AND SIGN UP BUTTONS.
 /// CREATE USER PROFILES
 
 const MainApp = () => {
-  //   const { url } = useRouteMatch();
+  const [favMovie, setFavMovie] = useState([]);
   const dispatch = useDispatch();
   const reducer = useSelector((state) => ({
     ...state,
@@ -125,16 +120,24 @@ const MainApp = () => {
       });
   }, [playingMoviePage, dispatch]);
 
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favMovie"));
+    if (favorites) {
+      setFavMovie(favorites);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favMovie", JSON.stringify(favMovie));
+  }, [favMovie]);
+
   const addToFavorites = (movies) => {
-    //  console.log("faavorite ", movies);
-    dispatch({ type: "ADD_FAVORITE", payload: movies });
+    setFavMovie([...favMovie, movies]);
   };
 
   const nextPage = (type) => {
     dispatch({ type: type });
   };
-
-  //   console.log("url home ", url);
 
   return (
     <div className="MainApp">
@@ -182,7 +185,7 @@ const MainApp = () => {
             <Navbar />
             {/**
              */}
-            <MyList favoriteList={favoriteList} />
+            <MyList favMovie={favMovie} />
           </Route>
 
           <Route exact path="/results">
