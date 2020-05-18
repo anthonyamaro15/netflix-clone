@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
@@ -16,6 +16,8 @@ const validationSchema = yup.object().shape({
 
 const Login = () => {
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [errorr, setError] = useState("");
   return (
     <div>
       <Navbar />
@@ -26,6 +28,7 @@ const Login = () => {
             initialValues={{ email: "", password: "" }}
             validationSchema={validationSchema}
             onSubmit={(values, { resetForm }) => {
+              setLoading(true);
               axiosWithAuthDB()
                 .post("/api/auth/login", values)
                 .then((res) => {
@@ -35,11 +38,15 @@ const Login = () => {
                     JSON.stringify(res.data.username)
                   );
                   history.push("/browse");
+                  setLoading(false);
                 })
                 .catch((err) => {
-                  console.log(err);
+                  setError(err.response.data.message);
+                  setLoading(false);
                 });
-              resetForm();
+              if (loading) {
+                resetForm();
+              }
             }}
           >
             {({ errors, touched }) => (
@@ -51,8 +58,8 @@ const Login = () => {
                     id="email"
                     placeholder="email"
                   />
-                  {errors && touched && (
-                    <p className="error-message">{errors.email}</p>
+                  {errors && touched && errorr && (
+                    <p className="error-message">{errors.email || errorr}</p>
                   )}
                 </label>
                 <label htmlFor="password">
@@ -62,11 +69,17 @@ const Login = () => {
                     id="password"
                     placeholder="password"
                   />
-                  {errors && touched && (
-                    <p className="error-message">{errors.password}</p>
+                  {errors && touched && errorr && (
+                    <p className="error-message">{errors.email || errorr}</p>
                   )}
                 </label>
-                <button type="submit">Log In</button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={loading ? "submitting btn" : "btn"}
+                >
+                  {loading ? "Submitting" : "Log In"}
+                </button>
               </Form>
             )}
           </Formik>
