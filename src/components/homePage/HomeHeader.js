@@ -5,7 +5,7 @@ const HomeHeader = () => {
     <div className="HomeHeader">
       <div className="home-desc">
         <h1>Search for the latest movies, TV shows, and more.</h1>
-        <span>log in or sig up.</span>
+        <span>log in or sign up.</span>
       </div>
     </div>
   );
