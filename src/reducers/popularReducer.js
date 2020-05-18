@@ -13,11 +13,11 @@ export const popularReducer = (state = initialValue, action) => {
         popular: [...state.popular, ...action.payload],
         loading: false,
       };
-    case "ADD_FAVORITE":
-      return {
-        ...state,
-        favoriteList: [...state.favoriteList, action.payload],
-      };
+    //  case "ADD_FAVORITE":
+    //    return {
+    //      ...state,
+    //      favoriteList: [...state.favoriteList, action.payload],
+    //    };
     case "NEXT_PAGE":
       return {
         ...state,
