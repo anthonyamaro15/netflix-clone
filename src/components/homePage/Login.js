@@ -34,7 +34,7 @@ const Login = () => {
                 .then((res) => {
                   localStorage.setItem("token", JSON.stringify(res.data.token));
                   localStorage.setItem(
-                    "token",
+                    "name",
                     JSON.stringify(res.data.username)
                   );
                   history.push("/browse");
@@ -78,7 +78,7 @@ const Login = () => {
                   disabled={loading}
                   className={loading ? "submitting btn" : "btn"}
                 >
-                  {loading ? "Submitting" : "Log In"}
+                  {loading ? "Submitting..." : "Log In"}
                 </button>
               </Form>
             )}

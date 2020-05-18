@@ -52,7 +52,6 @@ const Signup = () => {
               axiosWithAuthDB()
                 .post("/api/auth/register", storeValues)
                 .then((res) => {
-                  console.log("response", res);
                   history.push("/login");
                   setLoading(false);
                 })
