@@ -42,11 +42,12 @@ const SingleMovieInfo = ({
     latestRated,
     movieSearchResponse,
     favoriteList,
+    playingMovie,
   ]);
 
   useEffect(() => {
     setMovie(data.find((movie) => movie.id === Number(id)));
-  }, [data]);
+  }, [data, id]);
 
   useEffect(() => {
     dispatch({ type: "FETCHING_SINGLE_VIDEO" });
@@ -60,7 +61,7 @@ const SingleMovieInfo = ({
       .catch((err) => {
         dispatch({ type: "ERROR_WHILE_FETCHING_SINGLE_VIDEO", payload: err });
       });
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   const ops = {
     playerVars: {

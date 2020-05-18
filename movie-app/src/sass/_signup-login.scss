@@ -40,6 +40,7 @@
       margin-top: 1rem;
       border-radius: 5px;
       outline: none;
+      font-weight: 300;
     }
 
     .error-message {
@@ -48,7 +49,7 @@
       color: #e87c03;
     }
 
-    button {
+    .btn {
       display: block;
       width: 100%;
       font-size: 1.1rem;
@@ -60,6 +61,11 @@
       color: $white;
       border: none;
       cursor: pointer;
+    }
+
+    .submitting {
+      background: lighten($red, 7%);
+      cursor: not-allowed;
     }
 
     .already-member {

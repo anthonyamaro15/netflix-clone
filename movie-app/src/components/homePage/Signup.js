@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
@@ -25,6 +25,8 @@ const validationSchema = yup.object().shape({
 
 const Signup = () => {
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [errorr, setError] = useState("");
   return (
     <div>
       <Navbar />
@@ -46,17 +48,23 @@ const Signup = () => {
                 username,
                 password,
               };
+              setLoading(true);
               axiosWithAuthDB()
                 .post("/api/auth/register", storeValues)
                 .then((res) => {
                   console.log("response", res);
                   history.push("/login");
+                  setLoading(false);
                 })
                 .catch((err) => {
-                  console.log(err.message);
+                  console.log(err.response.data.message);
+                  setError(err.response.data.message);
+                  setLoading(false);
                 });
-              // console.log(storeValues);
-              resetForm();
+
+              if (loading) {
+                resetForm();
+              }
             }}
           >
             {({ errors, touched }) => (
@@ -79,8 +87,8 @@ const Signup = () => {
                     id="email"
                     placeholder="email"
                   />
-                  {errors && touched && (
-                    <p className="error-message">{errors.email}</p>
+                  {errors && touched && errorr && (
+                    <p className="error-message">{errors.email || errorr}</p>
                   )}
                 </label>
                 <label htmlFor="password">
@@ -105,7 +113,14 @@ const Signup = () => {
                     <p className="error-message">{errors.confirm}</p>
                   )}
                 </label>
-                <button type="submit">Sign Up</button>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={loading ? "submitting btn" : "btn"}
+                >
+                  {loading ? "Creating account..." : "Sign Up"}
+                </button>
               </Form>
             )}
           </Formik>
