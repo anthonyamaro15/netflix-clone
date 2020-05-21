@@ -13,6 +13,13 @@ export const playingNowReducer = (state = initialValue, action) => {
         playingMovie: [...state.playingMovie, ...action.payload],
         loading: false,
       };
+
+    case "MANIPULATED_PLAYING_MOVIES_DATA":
+      return {
+        ...state,
+        playingMovie: action.payload,
+      };
+
     case "NEXT_PAGE_PLAYING":
       return {
         ...state,

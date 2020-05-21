@@ -3,7 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import la from "../img/people.jpg";
 
-const MovieCard = ({ movie }) => {
+const MyListSingleMovie = ({ movie }) => {
   const { url } = useRouteMatch();
   const [movies, setMovies] = useState(movie);
 
@@ -18,6 +18,7 @@ const MovieCard = ({ movie }) => {
   } = movies;
 
   //   console.log("single movie here ", movie);
+  //   console.log("url here ", url);
 
   useEffect(() => {
     setMovies(movie);
@@ -27,15 +28,6 @@ const MovieCard = ({ movie }) => {
     <div className="single-movie-container">
       <Link to={`${url}/${id}`}>
         <div className="img-container">
-          <div
-            className={
-              joined
-                ? "added-to-favorites showAddedMovies"
-                : "added-to-favorites"
-            }
-          >
-            <h2>in my list</h2>
-          </div>
           <img
             src={
               poster_path || backdrop_path
@@ -57,4 +49,4 @@ const MovieCard = ({ movie }) => {
   );
 };
 
-export default MovieCard;
+export default MyListSingleMovie;

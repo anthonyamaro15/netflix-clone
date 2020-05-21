@@ -13,6 +13,13 @@ export const tvPopularReducer = (state = initialValue, action) => {
         tvPopular: [...state.tvPopular, ...action.payload],
         loading: false,
       };
+
+    case "MANIPULATED_TV_POPULAR_DATA":
+      return {
+        ...state,
+        tvPopular: action.payload,
+      };
+
     case "NEXT_PAGE_POPULAR":
       return {
         ...state,

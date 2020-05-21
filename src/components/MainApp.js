@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Route } from "react-router-dom";
+import {
+  addNewProp,
+  addedToFavoritesArray,
+} from "../helperFuncs/helperFunctions";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
@@ -22,7 +26,7 @@ const MainApp = () => {
     popular,
     loading,
     error,
-    favoriteList,
+    //  favoriteList,
     popularPage,
   } = reducer.popularReducer;
 
@@ -39,7 +43,10 @@ const MainApp = () => {
         `/search/movie?api_key=${process.env.REACT_APP_API}&language=en-US&query=${movieSearch}&page=1&include_adult=false`
       )
       .then((res) => {
-        dispatch({ type: "GETTING_SEARCH_VALUES", payload: res.data.results });
+        dispatch({
+          type: "GETTING_SEARCH_VALUES",
+          payload: addNewProp(res.data.results),
+        });
       })
       .catch((err) => {
         dispatch({
@@ -57,7 +64,10 @@ const MainApp = () => {
         `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`
       )
       .then((res) => {
-        dispatch({ type: "GETTING_DATA", payload: res.data.results });
+        dispatch({
+          type: "GETTING_DATA",
+          payload: addNewProp(res.data.results),
+        });
         //   localStorage.setItem("popular", JSON.stringify(res.data.results));
       })
       .catch((err) => {
@@ -74,7 +84,10 @@ const MainApp = () => {
         `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${tvPopularPage}`
       )
       .then((res) => {
-        dispatch({ type: "GETTING_TV_DATA", payload: res.data.results });
+        dispatch({
+          type: "GETTING_TV_DATA",
+          payload: addNewProp(res.data.results),
+        });
       })
       .catch((err) => {
         dispatch({
@@ -92,7 +105,10 @@ const MainApp = () => {
         `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=${latestRatedPage}`
       )
       .then((res) => {
-        dispatch({ type: "GETTING_RATED_DATA", payload: res.data.results });
+        dispatch({
+          type: "GETTING_RATED_DATA",
+          payload: addNewProp(res.data.results),
+        });
       })
       .catch((err) => {
         dispatch({
@@ -110,7 +126,10 @@ const MainApp = () => {
         `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=${playingMoviePage}`
       )
       .then((res) => {
-        dispatch({ type: "GETTING_LATEST_DATA", payload: res.data.results });
+        dispatch({
+          type: "GETTING_LATEST_DATA",
+          payload: addNewProp(res.data.results),
+        });
       })
       .catch((err) => {
         dispatch({
@@ -131,8 +150,25 @@ const MainApp = () => {
     localStorage.setItem("favMovie", JSON.stringify(favMovie));
   }, [favMovie]);
 
-  const addToFavorites = (movies) => {
-    setFavMovie([...favMovie, movies]);
+  const addToFavorites = (data, movie, type) => {
+    const obj = { ...movie, joined: true };
+    const newArr = data.map((movies) => {
+      if (movies.id === obj.id) {
+        return {
+          ...obj,
+        };
+      } else {
+        return movies;
+      }
+    });
+
+    dispatch({
+      type: "ADD_FAVORITE",
+      payload: newArr,
+    });
+
+    addedToFavoritesArray(type, dispatch, newArr);
+    setFavMovie([...favMovie, obj]);
   };
 
   const nextPage = (type) => {
@@ -203,7 +239,7 @@ const MainApp = () => {
               tvPopular={tvPopular}
               addToFavorites={addToFavorites}
               movieSearchResponse={movieSearchResponse}
-              favoriteList={favoriteList}
+              favoriteList={favMovie}
             />
 
             {/**

@@ -13,6 +13,13 @@ export const ratedReducer = (state = initialValue, action) => {
         latestRated: [...state.latestRated, ...action.payload],
         loading: false,
       };
+
+    case "MANIPULATED_LATEST_RATED_DATA":
+      return {
+        ...state,
+        latestRated: action.payload,
+      };
+
     case "NEXT_PAGE_LATEST":
       return {
         ...state,

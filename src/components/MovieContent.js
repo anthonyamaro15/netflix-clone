@@ -1,17 +1,7 @@
 import React from "react";
 import MovieCard from "./MovieCard";
-import { useDispatch } from "react-redux";
 
 const MovieContent = ({ popular, nextPage }) => {
-  const dispatch = useDispatch();
-
-  //   const [movieArr] = popular;
-  //   console.log("new data from movie content ", popular);
-
-  const addToFavorites = (movie) => {
-    dispatch({ type: "ADD_FAVORITE", payload: movie });
-    //  console.log("item clicked", movie);
-  };
   return (
     <div className="movie-content-container">
       <h2>Most popular</h2>
@@ -21,7 +11,8 @@ const MovieContent = ({ popular, nextPage }) => {
             key={movie.id}
             movie={movie}
             movieArr={popular}
-            addToFavorites={() => addToFavorites(movie)}
+
+            // addToFavorites={() => addToFavorites(movie)}
           />
         ))}
       </div>

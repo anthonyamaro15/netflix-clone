@@ -1,5 +1,5 @@
 import React from "react";
-import MovieCard from "./MovieCard";
+import MyListSingleMovie from "./MyListSingleMovie";
 
 const MyList = ({ favMovie }) => {
   return (
@@ -7,7 +7,7 @@ const MyList = ({ favMovie }) => {
       <h1>my list</h1>
       <div className="display-cards">
         {favMovie.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MyListSingleMovie key={movie.id} movie={movie} />
         ))}
       </div>
     </div>
