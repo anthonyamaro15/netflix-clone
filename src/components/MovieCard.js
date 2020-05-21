@@ -7,7 +7,15 @@ const MovieCard = ({ movie }) => {
   const { url } = useRouteMatch();
   const [movies, setMovies] = useState(movie);
 
-  const { poster_path, title, name, vote_average, backdrop_path, id } = movies;
+  const {
+    poster_path,
+    title,
+    name,
+    vote_average,
+    backdrop_path,
+    id,
+    joined,
+  } = movies;
 
   //   console.log("single movie here ", movie);
 
@@ -19,6 +27,15 @@ const MovieCard = ({ movie }) => {
     <div className="single-movie-container">
       <Link to={`${url}/${id}`}>
         <div className="img-container">
+          <div
+            className={
+              joined
+                ? "added-to-favorites showAddedMovies"
+                : "added-to-favorites"
+            }
+          >
+            <h2>in my list</h2>
+          </div>
           <img
             src={
               poster_path || backdrop_path
@@ -29,7 +46,7 @@ const MovieCard = ({ movie }) => {
             }
             alt={title}
           />
-          <div className="hover-info">
+          <div className={joined ? "hover-info" : "hover-info"}>
             <h3>{name ? name : title}</h3>
             <p>rating: {vote_average}</p>
             <div className="add-icon"></div>

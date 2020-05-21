@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Route } from "react-router-dom";
-import { addNewProp } from "../helperFuncs/helperFunctions";
+import {
+  addNewProp,
+  addedToFavoritesArray,
+} from "../helperFuncs/helperFunctions";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
@@ -164,16 +167,7 @@ const MainApp = () => {
       payload: newArr,
     });
 
-    if (type === "browse") {
-      dispatch({ type: "MANIPULATED_POPULAR_DATA", payload: newArr });
-    } else if (type === "tvshows") {
-      dispatch({ type: "MANIPULATED_TV_POPULAR_DATA", payload: newArr });
-    } else if (type === "movies") {
-      dispatch({ type: "MANIPULATED_LATEST_RATED_DATA", payload: newArr });
-    } else if (type === "latest") {
-      dispatch({ type: "MANIPULATED_PLAYING_MOVIES_DATA", payload: newArr });
-    }
-
+    addedToFavoritesArray(type, dispatch, newArr);
     setFavMovie([...favMovie, obj]);
   };
 

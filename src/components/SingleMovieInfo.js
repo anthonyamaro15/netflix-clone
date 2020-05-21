@@ -70,27 +70,6 @@ const SingleMovieInfo = ({
     },
   };
 
-  //   const toggle = () => {
-  //     setAddToFav(!addToFav);
-  //   };
-
-  //   const {joined} = movie;
-
-  //   console.log("movie", movie.joined);
-
-  //   const wait = setTimeout(() => {
-  //     return (
-  //       <button onClick={() => addToFavorites(movie)} disabled={movie.joined}>
-  //         {" "}
-  //         <span>
-  //           <FaPlus />{" "}
-  //         </span>
-  //         {movie.joined ? "added" : "my list"}
-  //       </button>
-  //     );
-  //   }, 2000);
-  //   console.log("data ", data);
-
   return movie && data ? (
     <div className="single-movie-info-container">
       <div className="single-movie-info">
@@ -104,7 +83,11 @@ const SingleMovieInfo = ({
           </span>
         </div>
         <p className="single-movie-description">{movie.overview}</p>
-        <div className="single-more-info">
+        <div
+          className={
+            movie.joined ? "added single-more-info" : "single-more-info"
+          }
+        >
           {movie && (
             <button
               onClick={() => addToFavorites(data, movie, browse)}
