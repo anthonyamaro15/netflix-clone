@@ -2,6 +2,7 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 const MyList = ({ favMovie }) => {
+  console.log("favmovies here ", favMovie);
   return (
     <div className="my-list">
       <h1>my list</h1>

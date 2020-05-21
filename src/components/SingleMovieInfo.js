@@ -17,6 +17,7 @@ const SingleMovieInfo = ({
 }) => {
   const { browse, id } = useParams();
   const dispatch = useDispatch();
+  //   const [addToFav, setAddToFav] = useState(false);
   const [data, setData] = useState([]);
   const [movie, setMovie] = useState({});
   const { singleMovie } = useSelector((state) => state.singleMovieReducer);
@@ -69,7 +70,26 @@ const SingleMovieInfo = ({
     },
   };
 
-  //   console.log("movie", movie);
+  //   const toggle = () => {
+  //     setAddToFav(!addToFav);
+  //   };
+
+  //   const {joined} = movie;
+
+  //   console.log("movie", movie.joined);
+
+  //   const wait = setTimeout(() => {
+  //     return (
+  //       <button onClick={() => addToFavorites(movie)} disabled={movie.joined}>
+  //         {" "}
+  //         <span>
+  //           <FaPlus />{" "}
+  //         </span>
+  //         {movie.joined ? "added" : "my list"}
+  //       </button>
+  //     );
+  //   }, 2000);
+  //   console.log("data ", data);
 
   return movie && data ? (
     <div className="single-movie-info-container">
@@ -85,13 +105,21 @@ const SingleMovieInfo = ({
         </div>
         <p className="single-movie-description">{movie.overview}</p>
         <div className="single-more-info">
-          <button onClick={() => addToFavorites(movie)}>
-            {" "}
-            <span>
-              <FaPlus />{" "}
-            </span>
-            my list
-          </button>
+          {movie && (
+            <button
+              onClick={() => addToFavorites(data, movie, browse)}
+              disabled={movie.joined}
+            >
+              {" "}
+              <span>
+                <FaPlus />{" "}
+              </span>
+              {movie.joined ? "added" : "my list"}
+            </button>
+          )}
+          {/**
+      
+      */}
         </div>
       </div>
       <div className="image-movie-info">

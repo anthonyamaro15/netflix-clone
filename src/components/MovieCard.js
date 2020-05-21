@@ -9,6 +9,8 @@ const MovieCard = ({ movie }) => {
 
   const { poster_path, title, name, vote_average, backdrop_path, id } = movies;
 
+  //   console.log("single movie here ", movie);
+
   useEffect(() => {
     setMovies(movie);
   }, [movies, movie]);
