@@ -26,7 +26,7 @@ const MainApp = () => {
     popular,
     loading,
     error,
-    favoriteList,
+    //  favoriteList,
     popularPage,
   } = reducer.popularReducer;
 
@@ -239,7 +239,7 @@ const MainApp = () => {
               tvPopular={tvPopular}
               addToFavorites={addToFavorites}
               movieSearchResponse={movieSearchResponse}
-              favoriteList={favoriteList}
+              favoriteList={favMovie}
             />
 
             {/**
