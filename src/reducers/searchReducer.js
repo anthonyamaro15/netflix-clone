@@ -13,11 +13,25 @@ export const searchReducer = (state = initialValue, action) => {
         loading: true,
       };
     case "GETTING_SEARCH_VALUES":
+      // console.log();
       return {
         ...state,
         movieSearchResponse: action.payload,
         loading: false,
       };
+
+    case "MANIPULATED_RESULTS_MOVIES_DATA":
+      return {
+        ...state,
+        movieSearchResponse: action.payload,
+      };
+
+    case "REMOVED_RESULTS_MOVIES_DATA":
+      return {
+        ...state,
+        movieSearchResponse: action.payload,
+      };
+
     case "ERROR_SEARCH":
       return {
         ...state,

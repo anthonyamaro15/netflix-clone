@@ -20,6 +20,11 @@ export const playingNowReducer = (state = initialValue, action) => {
         playingMovie: action.payload,
       };
 
+    case "REMOVED_PLAYING_MOVIES_DATA_FAVORITE":
+      return {
+        ...state,
+        playingMovie: action.payload,
+      };
     case "NEXT_PAGE_PLAYING":
       return {
         ...state,

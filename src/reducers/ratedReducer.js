@@ -20,6 +20,12 @@ export const ratedReducer = (state = initialValue, action) => {
         latestRated: action.payload,
       };
 
+    case "REMOVED_LATEST_RATED_DATA_FAVORITE":
+      return {
+        ...state,
+        latestRated: action.payload,
+      };
+
     case "NEXT_PAGE_LATEST":
       return {
         ...state,

@@ -20,6 +20,12 @@ export const tvPopularReducer = (state = initialValue, action) => {
         tvPopular: action.payload,
       };
 
+    case "REMOVED_TV_POPULAR_DATA_FAVORITE":
+      return {
+        ...state,
+        tvPopular: action.payload,
+      };
+
     case "NEXT_PAGE_POPULAR":
       return {
         ...state,

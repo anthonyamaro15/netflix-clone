@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 import {
   addNewProp,
   addedToFavoritesArray,
+  removeFromFavoritesAndUpdate,
 } from "../helperFuncs/helperFunctions";
 import Navbar from "./Navbar";
 import Header from "./Header";
@@ -45,7 +46,7 @@ const MainApp = () => {
       .then((res) => {
         dispatch({
           type: "GETTING_SEARCH_VALUES",
-          payload: addNewProp(res.data.results),
+          payload: addNewProp(res.data.results, "results"),
         });
       })
       .catch((err) => {
@@ -66,7 +67,7 @@ const MainApp = () => {
       .then((res) => {
         dispatch({
           type: "GETTING_DATA",
-          payload: addNewProp(res.data.results),
+          payload: addNewProp(res.data.results, "browse"),
         });
         //   localStorage.setItem("popular", JSON.stringify(res.data.results));
       })
@@ -86,7 +87,7 @@ const MainApp = () => {
       .then((res) => {
         dispatch({
           type: "GETTING_TV_DATA",
-          payload: addNewProp(res.data.results),
+          payload: addNewProp(res.data.results, "tvshows"),
         });
       })
       .catch((err) => {
@@ -107,7 +108,7 @@ const MainApp = () => {
       .then((res) => {
         dispatch({
           type: "GETTING_RATED_DATA",
-          payload: addNewProp(res.data.results),
+          payload: addNewProp(res.data.results, "movies"),
         });
       })
       .catch((err) => {
@@ -128,7 +129,7 @@ const MainApp = () => {
       .then((res) => {
         dispatch({
           type: "GETTING_LATEST_DATA",
-          payload: addNewProp(res.data.results),
+          payload: addNewProp(res.data.results, "latest"),
         });
       })
       .catch((err) => {
@@ -151,24 +152,40 @@ const MainApp = () => {
   }, [favMovie]);
 
   const addToFavorites = (data, movie, type) => {
-    const obj = { ...movie, joined: true };
-    const newArr = data.map((movies) => {
-      if (movies.id === obj.id) {
-        return {
-          ...obj,
-        };
-      } else {
-        return movies;
-      }
-    });
+    const obj = { ...movie, joined: !movie.joined };
 
-    dispatch({
-      type: "ADD_FAVORITE",
-      payload: newArr,
-    });
+    if (movie.joined) {
+      const filtered = favMovie.filter((fav) => fav.id !== movie.id);
+      setFavMovie(filtered);
+      const mapToUpdateData = data.map((dt) => {
+        if (dt.id === movie.id) {
+          return {
+            ...dt,
+            joined: !dt.joined,
+          };
+        } else {
+          return dt;
+        }
+      });
+      removeFromFavoritesAndUpdate(type, dispatch, mapToUpdateData);
+    } else {
+      const newArr = data.map((movies) => {
+        if (movies.id === obj.id) {
+          return {
+            ...obj,
+          };
+        } else {
+          return movies;
+        }
+      });
+      addedToFavoritesArray(type, dispatch, newArr);
+      setFavMovie([...favMovie, obj]);
+    }
 
-    addedToFavoritesArray(type, dispatch, newArr);
-    setFavMovie([...favMovie, obj]);
+    //  dispatch({
+    //    type: "ADD_FAVORITE",
+    //    payload: newArr,
+    //  });
   };
 
   const nextPage = (type) => {

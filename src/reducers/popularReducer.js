@@ -23,6 +23,13 @@ export const popularReducer = (state = initialValue, action) => {
         ...state,
         popular: action.payload,
       };
+
+    case "REMOVED_POPULAR_DATA_FAVORITE":
+      return {
+        ...state,
+        popular: action.payload,
+      };
+
     case "NEXT_PAGE":
       return {
         ...state,

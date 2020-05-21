@@ -91,7 +91,7 @@ const SingleMovieInfo = ({
           {movie && (
             <button
               onClick={() => addToFavorites(data, movie, browse)}
-              disabled={movie.joined}
+              //   disabled={movie.joined}
             >
               {" "}
               <span>
