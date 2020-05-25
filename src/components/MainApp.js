@@ -12,7 +12,6 @@ import Header from "./Header";
 import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
-import Footer from "./Footer";
 
 /// CREATE USER PROFILES
 
@@ -264,7 +263,6 @@ const MainApp = () => {
             
             */}
           </Route>
-          <Footer />
         </div>
       )}
     </div>
