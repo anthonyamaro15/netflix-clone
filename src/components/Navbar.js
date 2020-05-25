@@ -22,7 +22,7 @@ const Navbar = () => {
       }
     });
     return () => setScrolling(false);
-  }, [setScrolling]);
+  }, []);
 
   const toggleForm = () => {
     setShowForm(!showForm);

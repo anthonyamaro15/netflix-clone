@@ -1,6 +1,8 @@
 .single-movie-info-container {
   height: 55vh;
   display: flex;
+  //   border: 1px solid red;
+  margin-top: 5rem;
   @media (max-width: $fourteen-hundred) {
     flex-direction: column;
     height: 100vh;
