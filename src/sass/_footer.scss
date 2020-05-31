@@ -2,6 +2,10 @@
   padding: 5rem 0 3rem;
   background: rgb(2, 2, 2);
 
+  @media (max-width: $iphone6) {
+    padding: 4rem 0 3rem;
+  }
+
   margin-top: 10rem;
 
   footer {
@@ -17,6 +21,10 @@
 
       @media (max-width: $mobile) {
         font-size: 2rem;
+      }
+
+      @media (max-width: $iphone6) {
+        font-size: 1.6rem;
       }
 
       a {
@@ -37,6 +45,10 @@
       margin: 2rem 0 0;
       text-align: center;
       font-size: 0.9rem;
+
+      @media (max-width: $iphone6) {
+        font-size: 0.7rem;
+      }
     }
   }
 }

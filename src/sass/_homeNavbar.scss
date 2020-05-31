@@ -11,10 +11,19 @@
   left: 0;
   right: 0;
 
+  @media (max-width: $iphone6) {
+    width: 100%;
+    padding: 1rem 2rem 0;
+  }
+
   .logo {
     font-size: 1.8rem;
     font-weight: 600;
     color: $red;
+
+    @media (max-width: $iphone6) {
+      font-size: 1.5rem;
+    }
   }
 
   .nav-links {
@@ -30,6 +39,11 @@
       border-radius: 3px;
       font-size: 0.9rem;
 
+      @media (max-width: $iphone6) {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.7rem;
+      }
+
       &:first-child {
         margin-right: 0.7rem;
       }
@@ -40,7 +54,6 @@
 // HOME HEADER STARTS HERE
 
 .HomeHeader {
-  //   border: 1px solid red;
   height: 55vh;
   width: 100%;
   padding-top: 8rem;
@@ -70,13 +83,17 @@
     z-index: 10;
 
     @media (max-width: $lap-top) {
-      width: 50%;
+      width: 70%;
     }
 
     h1 {
       font-size: 3rem;
       @media (max-width: $lap-top) {
         font-size: 2rem;
+      }
+
+      @media (max-width: $iphone6) {
+        font-size: 1.5rem;
       }
     }
 
@@ -86,6 +103,10 @@
 
       @media (max-width: $lap-top) {
         font-size: 1.1rem;
+      }
+
+      @media (max-width: $iphone6) {
+        font-size: 0.9rem;
       }
     }
   }

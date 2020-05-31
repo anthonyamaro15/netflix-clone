@@ -3,6 +3,12 @@
   border-bottom: 6px solid rgb(70, 67, 67);
   padding: 7rem 0 4rem;
 
+  @media (max-width: $iphone6) {
+    border-top: 3px solid rgb(70, 67, 67);
+    border-bottom: 3px solid rgb(70, 67, 67);
+    padding: 4rem 0;
+  }
+
   .MainContent {
     max-width: 1100px;
     margin: 0 auto;
@@ -25,6 +31,10 @@
         @media (max-width: $lap-top) {
           font-size: 2rem;
         }
+
+        @media (max-width: $lap-top) {
+          font-size: 1.5rem;
+        }
       }
       .p-desc {
         font-size: 1.5rem;
@@ -36,6 +46,10 @@
           font-size: 1.1rem;
           line-height: 1.4;
         }
+
+        @media (max-width: $lap-top) {
+          font-size: 0.9rem;
+        }
       }
     }
 
@@ -44,11 +58,19 @@
       @media (max-width: $med-desktop) {
         width: 100%;
       }
+
       img {
         border: 3px solid rgb(90, 88, 88);
         width: 100%;
         height: 290px;
         object-fit: cover;
+        @media (max-width: $med-desktop) {
+          height: 450px;
+        }
+
+        @media (max-width: $lap-top) {
+          height: 300px;
+        }
       }
     }
   }
@@ -57,13 +79,17 @@
 .second-border {
   border-bottom: 6px solid rgb(70, 67, 67);
 
+  @media (max-width: $lap-top) {
+    border-bottom: 3px solid rgb(70, 67, 67);
+    margin-bottom: -4rem;
+  }
+
   .downloading-example {
     max-width: 1100px;
     margin: 0 auto;
     @include flex(space-between);
     height: 30vh;
     align-items: center;
-    //  border: 1px solid red;
 
     @media (max-width: $med-desktop) {
       flex-direction: column;
@@ -72,19 +98,27 @@
       height: 25vh;
     }
 
+    @media (max-width: $lap-top) {
+      height: 20vh;
+    }
+
     .downloading-icon {
       display: flex;
       align-items: center;
+      margin-bottom: 1.5rem;
 
       p {
         margin-right: 2rem;
         font-size: 1.2rem;
+
+        @media (max-width: $lap-top) {
+          font-size: 0.9rem;
+        }
       }
     }
 
     .download-desc {
       width: 50%;
-      // border: 1px solid red;
       @media (max-width: $med-desktop) {
         width: 100%;
       }
@@ -94,17 +128,23 @@
         margin-bottom: 1rem;
 
         @media (max-width: $med-desktop) {
-          //  border: 1px solid blue;
           font-size: 2rem;
           margin-bottom: 2rem;
+        }
+
+        @media (max-width: $lap-top) {
+          font-size: 1.5rem;
         }
       }
 
       p {
         font-size: 1.5rem;
         @media (max-width: $med-desktop) {
-          //  border: 1px solid blue;
           font-size: 1.1rem;
+        }
+
+        @media (max-width: $lap-top) {
+          font-size: 0.9rem;
         }
       }
     }

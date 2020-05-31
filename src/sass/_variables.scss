@@ -13,8 +13,15 @@ $med-desktop: 1150px;
 $desktop: 1040px;
 $lap-top: 800px;
 $mobile: 500px;
+$iphone6: 414px;
+$iphone5: 375px;
+$iphone4: 320px;
 
 @mixin flex($justify) {
   display: flex;
   justify-content: $justify;
 }
+
+// h1 1.5
+// p 0.9
+// h2 1.3
