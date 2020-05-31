@@ -6,6 +6,16 @@
       "src": "./tv.png",
       "sizes": "48x48",
       "type": "image/png"
+    },
+    {
+      "src": "./tv.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./tv.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
