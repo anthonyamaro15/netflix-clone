@@ -9,15 +9,28 @@
   right: 0;
   z-index: 1000;
   transition: all 0.5s ease;
-  //   border: 1px solid red;
-  //   background: red;
 
   @media (max-width: $mobile) {
     flex-direction: column;
   }
 
+  @media (max-width: $iphone6) {
+    height: 11vh;
+    padding: 1rem 2rem 0;
+  }
+
+  @media (max-width: $iphone5) {
+    height: 12vh;
+  }
+
+  @media (max-width: $iphone4) {
+    height: 13vh;
+    padding: 0.5rem 2rem;
+  }
+
   header {
     width: 30%;
+
     @include flex(space-between);
 
     @media (max-width: $big-desktop) {
@@ -44,11 +57,14 @@
       @media (max-width: $mobile) {
         text-align: center;
         margin: 1rem 0;
+        display: none;
+      }
+
+      @media (max-width: $mobile) {
       }
 
       a {
         color: $red;
-
         font-size: 1.6rem;
       }
     }
@@ -67,6 +83,14 @@
         color: $white;
         transition: color 0.5s ease;
 
+        @media (max-width: $iphone6) {
+          font-size: 0.9rem;
+        }
+
+        @media (max-width: $iphone4) {
+          font-size: 0.8rem;
+        }
+
         &:hover {
           color: grey;
         }
@@ -76,6 +100,11 @@
 
   .search-logout {
     display: flex;
+
+    @media (max-width: $iphone6) {
+      margin-top: -1rem;
+    }
+
     .search {
       display: flex;
       transition: all 0.3s ease;
@@ -86,6 +115,14 @@
         color: $white;
         cursor: pointer;
         padding-top: 0.5rem;
+
+        @media (max-width: $iphone6) {
+          font-size: 0.9rem;
+        }
+
+        @media (max-width: $iphone4) {
+          font-size: 0.8rem;
+        }
       }
 
       form {
@@ -99,6 +136,11 @@
           color: $white;
           width: 250px;
           font-weight: 300;
+
+          @media (max-width: $iphone6) {
+            font-size: 0.9rem;
+            width: 200px;
+          }
         }
 
         .error {
@@ -120,6 +162,14 @@
       color: $white;
       text-transform: capitalize;
       cursor: pointer;
+
+      @media (max-width: $iphone6) {
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: $iphone4) {
+        font-size: 0.8rem;
+      }
     }
   }
 
@@ -147,9 +197,3 @@
     color: $white;
   }
 }
-
-// .Navbar-wrapper {
-//   //   border: 1px solid blue;
-//   width: 100%;
-//   height: 6vh;
-// }
