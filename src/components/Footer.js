@@ -2,6 +2,7 @@ import React from "react";
 import { FaGithub } from "react-icons/fa";
 import { MdPerson } from "react-icons/md";
 
+// footer
 const Footer = () => {
   return (
     <div className="footer-container">
