@@ -17,7 +17,12 @@ const validationSchema = yup.object().shape({
 const Login = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [togglePass, setTogglePass] = useState(false);
   const [errorr, setError] = useState("");
+
+  const toggle = () => {
+    setTogglePass(!togglePass);
+  };
   return (
     <div>
       <Navbar />
@@ -64,11 +69,14 @@ const Login = () => {
                 </label>
                 <label htmlFor="password">
                   <Field
-                    type="password"
+                    type={!togglePass ? "password" : "text"}
                     name="password"
                     id="password"
                     placeholder="password"
                   />
+                  <span className="togglePassword" onClick={toggle}>
+                    {!togglePass ? "show" : "hide"}
+                  </span>
                   {errors && touched && errorr && (
                     <p className="error-message">{errors.email || errorr}</p>
                   )}

@@ -45,29 +45,51 @@
       }
     }
 
-    input {
+    label {
+      position: relative;
       display: block;
       width: 100%;
-      padding: 0.7rem;
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      border-radius: 5px;
-      outline: none;
-      font-weight: 300;
 
-      @media (max-width: $iphone6) {
-        padding: 0.3rem;
-        font-size: 0.9rem;
+      input {
+        display: block;
+        width: 100%;
+        padding: 0.7rem;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        border-radius: 5px;
+        outline: none;
+        font-weight: 300;
+        color: $black;
+
+        @media (max-width: $iphone6) {
+          padding: 0.3rem;
+          font-size: 0.9rem;
+        }
       }
-    }
 
-    .error-message {
-      font-size: 0.8rem;
-      padding-top: 0.3rem;
-      color: #e87c03;
+      .togglePassword {
+        position: absolute;
+        font-size: 0.8rem;
+        z-index: 100;
 
-      @media (max-width: $iphone6) {
-        font-size: 0.7rem;
+        top: 35%;
+        left: 85%;
+        cursor: pointer;
+
+        @media (max-width: $iphone6) {
+          font-size: 0.6rem;
+          top: 30%;
+        }
+      }
+
+      .error-message {
+        font-size: 0.8rem;
+        padding-top: 0.3rem;
+        color: #e87c03;
+
+        @media (max-width: $iphone6) {
+          font-size: 0.7rem;
+        }
       }
     }
 
