@@ -27,6 +27,11 @@ const Signup = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [errorr, setError] = useState("");
+  const [togglePass, setTogglePass] = useState(false);
+
+  const toggle = () => {
+    setTogglePass(!togglePass);
+  };
   return (
     <div>
       <Navbar />
@@ -92,22 +97,28 @@ const Signup = () => {
                 </label>
                 <label htmlFor="password">
                   <Field
-                    type="password"
+                    type={!togglePass ? "password" : "text"}
                     name="password"
                     id="password"
                     placeholder="password"
                   />
+                  <span className="togglePassword" onClick={toggle}>
+                    {!togglePass ? "show" : "hide"}
+                  </span>
                   {errors && touched && (
                     <p className="error-message">{errors.password}</p>
                   )}
                 </label>
                 <label htmlFor="confirm">
                   <Field
-                    type="password"
+                    type={!togglePass ? "password" : "text"}
                     name="confirm"
                     id="confirm"
                     placeholder="confirm password"
                   />
+                  <span className="togglePassword" onClick={toggle}>
+                    {!togglePass ? "show" : "hide"}
+                  </span>
                   {errors && touched && (
                     <p className="error-message">{errors.confirm}</p>
                   )}
