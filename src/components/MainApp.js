@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { Route } from "react-router-dom";
@@ -17,6 +17,7 @@ import MyList from "./MyList";
 
 const MainApp = () => {
   const [favMovie, setFavMovie] = useState([]);
+
   const dispatch = useDispatch();
   const reducer = useSelector((state) => ({
     ...state,
@@ -68,7 +69,6 @@ const MainApp = () => {
           type: "GETTING_DATA",
           payload: addNewProp(res.data.results, "browse"),
         });
-        //   localStorage.setItem("popular", JSON.stringify(res.data.results));
       })
       .catch((err) => {
         dispatch({ type: "ERROR", payload: err.response.data.status_message });
@@ -180,11 +180,6 @@ const MainApp = () => {
       addedToFavoritesArray(type, dispatch, newArr);
       setFavMovie([...favMovie, obj]);
     }
-
-    //  dispatch({
-    //    type: "ADD_FAVORITE",
-    //    payload: newArr,
-    //  });
   };
 
   const nextPage = (type) => {

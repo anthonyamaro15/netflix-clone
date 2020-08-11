@@ -1,5 +1,5 @@
-.Signup {
-  height: 100vh;
+.ForgotPassword {
+  height: 80vh;
   background: rgba(0, 0, 0, 0.5);
   position: relative;
   padding-top: 5rem;
@@ -9,7 +9,7 @@
   }
   &::after {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     content: "";
     position: absolute;
     top: 0;
@@ -21,29 +21,13 @@
     background-repeat: no-repeat;
   }
 
-  .Signup-form {
+  form {
     width: 450px;
     margin: 10rem auto 0;
     padding: 4rem;
     color: grey;
-    z-index: 1000;
     background: rgba(0, 0, 0, 0.8);
-
-    @media (max-width: $iphone6) {
-      width: 85%;
-      margin-top: 5rem;
-      padding: 3rem;
-    }
-
-    h2 {
-      margin-bottom: 2rem;
-      font-size: 2rem;
-      color: $white;
-
-      @media (max-width: $iphone6) {
-        font-size: 1.3rem;
-      }
-    }
+    z-index: 1000;
 
     label {
       position: relative;
@@ -58,7 +42,6 @@
         margin-top: 1rem;
         border-radius: 5px;
         outline: none;
-        font-weight: 300;
         color: $black;
 
         @media (max-width: $iphone6) {
@@ -84,7 +67,7 @@
 
       .error-message {
         font-size: 0.8rem;
-        padding-top: 0.3rem;
+        padding-top: 0.4rem;
         color: #e87c03;
 
         @media (max-width: $iphone6) {
@@ -93,7 +76,7 @@
       }
     }
 
-    .btn {
+    button {
       display: block;
       width: 100%;
       font-size: 1.1rem;
@@ -110,43 +93,6 @@
       @media (max-width: $iphone6) {
         font-size: 0.9rem;
         padding: 0.4rem;
-      }
-    }
-
-    .submitting {
-      background: lighten($red, 7%);
-      cursor: not-allowed;
-    }
-
-    .already-member {
-      font-size: 0.9rem;
-      margin: 1rem 0;
-
-      @media (max-width: $iphone6) {
-        font-size: 0.7rem;
-      }
-
-      a {
-        display: inline-block;
-        margin-left: 0.5rem;
-        color: $white;
-
-        @media (max-width: $iphone6) {
-          font-size: 0.7rem;
-        }
-      }
-    }
-
-    .terms {
-      font-size: 0.8rem;
-      margin-bottom: 3rem;
-
-      @media (max-width: $iphone6) {
-        font-size: 0.6rem;
-      }
-
-      a {
-        color: rgb(23, 83, 212);
       }
     }
   }
