@@ -95,8 +95,7 @@ const Login = () => {
             Not a member? <Link to="/signup">Sign Up</Link>.
           </p>
           <p className="terms">
-            This page is protected by Google reCAPTCHA to ensure you're not a
-            bot. <Link to="www.google.com">Learn more.</Link>
+            Forgot password? <Link to="/forgot">Click here</Link>
           </p>
         </div>
       </div>

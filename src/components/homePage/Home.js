@@ -5,8 +5,8 @@ import HomeHeader from "./HomeHeader";
 import MainContent from "./MainContent";
 import Signup from "./Signup";
 import Login from "./Login";
+import ForgotPassword from "./ForgotPassword";
 
-// add media queries
 // find a way to make page load faster
 
 const Home = () => {
@@ -23,6 +23,10 @@ const Home = () => {
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/forgot">
+        <Navbar />
+        <ForgotPassword />
       </Route>
     </div>
   );
