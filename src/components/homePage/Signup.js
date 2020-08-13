@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 const Signup = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [errorr, setError] = useState("");
+  const [setError] = useState("");
   const [togglePass, setTogglePass] = useState(false);
   const { register, handleSubmit, errors, reset } = useForm();
 

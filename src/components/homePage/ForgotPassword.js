@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { axiosWithAuthDB } from "../../utils/axiosWithAuth";
+// import { axiosWithAuthDB } from "../../utils/axiosWithAuth";
 
 const ForgotPassword = () => {
   const { register, handleSubmit, errors } = useForm();

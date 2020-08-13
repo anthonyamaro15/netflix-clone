@@ -8,7 +8,7 @@ const Login = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [togglePass, setTogglePass] = useState(false);
-  const [errorr, setError] = useState("");
+  const [setError] = useState("");
   const { register, handleSubmit, errors, reset } = useForm();
 
   const toggle = () => {
