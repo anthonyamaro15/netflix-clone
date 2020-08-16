@@ -1,3 +1,5 @@
+// function to add new properties to data object when we get the data from the API
+// added joined and category because thats how we base to add and remove from favorite list.
 export const addNewProp = (arr, category) => {
   const newArr = arr.map((movie) => {
     return {
@@ -9,6 +11,8 @@ export const addNewProp = (arr, category) => {
   return newArr;
 };
 
+// important this takes care of adding movies to favorites array
+// check the type to know from wich array get the favorite movie from
 export const addedToFavoritesArray = (type, dispatch, newArr) => {
   if (type === "browse") {
     dispatch({ type: "MANIPULATED_POPULAR_DATA", payload: newArr });
@@ -23,6 +27,8 @@ export const addedToFavoritesArray = (type, dispatch, newArr) => {
   }
 };
 
+// important this takes care of removing favorite movies from favorite array
+// check the type to know from which array to remove favorite movie from.
 export const removeFromFavoritesAndUpdate = (type, dispatch, newArr) => {
   if (type === "browse") {
     dispatch({ type: "REMOVED_POPULAR_DATA_FAVORITE", payload: newArr });

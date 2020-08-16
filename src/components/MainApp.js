@@ -13,11 +13,8 @@ import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 
-/// CREATE USER PROFILES
-
 const MainApp = () => {
   const [favMovie, setFavMovie] = useState([]);
-
   const dispatch = useDispatch();
   const reducer = useSelector((state) => ({
     ...state,
@@ -30,115 +27,88 @@ const MainApp = () => {
     //  favoriteList,
     popularPage,
   } = reducer.popularReducer;
-
   const { tvPopular, tvPopularPage } = reducer.tvPopularReducer;
   const { latestRated, latestRatedPage } = reducer.ratedReducer;
   const { playingMovie, playingMoviePage } = reducer.playingNowReducer;
   const { movieSearch, movieSearchResponse } = reducer.searchReducer;
 
-  // this axios call is getting the data for the search form
-  useEffect(() => {
-    dispatch({ type: "FETCHING_SEARCH" });
-    axiosWithAuth()
-      .get(
-        `/search/movie?api_key=${process.env.REACT_APP_API}&language=en-US&query=${movieSearch}&page=1&include_adult=false`
-      )
+  const getMovieData = async (...args) => {
+    const [FetchType, url, dataType, category, dataError] = args;
+
+    dispatch({ type: FetchType });
+    return axiosWithAuth()
+      .get(url)
       .then((res) => {
         dispatch({
-          type: "GETTING_SEARCH_VALUES",
-          payload: addNewProp(res.data.results, "results"),
+          type: dataType,
+          payload: addNewProp(res.data.results, category),
         });
       })
       .catch((err) => {
         dispatch({
-          type: "ERROR_SEARCH",
+          type: dataError,
           payload: err.response.data.status_message,
         });
+        console.log(err.response.data.status_message);
       });
+  };
+
+  // this axios call is getting the data for the search form
+  useEffect(() => {
+    getMovieData(
+      "FETCHING_SEARCH",
+      `/search/movie?api_key=${process.env.REACT_APP_API}&language=en-US&query=${movieSearch}&page=1&include_adult=false`,
+      "GETTING_SEARCH_VALUES",
+      "results",
+      "ERROR_SEARCH"
+    );
   }, [movieSearch, dispatch]);
 
   // this axios call is getting the data for the /browse
   useEffect(() => {
-    dispatch({ type: "FETCHING_DATA" });
-    axiosWithAuth()
-      .get(
-        `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`
-      )
-      .then((res) => {
-        dispatch({
-          type: "GETTING_DATA",
-          payload: addNewProp(res.data.results, "browse"),
-        });
-      })
-      .catch((err) => {
-        dispatch({ type: "ERROR", payload: err.response.data.status_message });
-        console.log(err.response.data.status_message);
-      });
+    getMovieData(
+      "FETCHING_DATA",
+      `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`,
+      "GETTING_DATA",
+      "browse",
+      "ERROR"
+    );
   }, [popularPage, dispatch]);
 
   // this axios call is getting the data for the /tvshows
   useEffect(() => {
-    dispatch({ type: "FETCHING_TV_DATA" });
-    axiosWithAuth()
-      .get(
-        `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${tvPopularPage}`
-      )
-      .then((res) => {
-        dispatch({
-          type: "GETTING_TV_DATA",
-          payload: addNewProp(res.data.results, "tvshows"),
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: "ERROR_TV",
-          payload: err.response.data.status_message,
-        });
-      });
+    getMovieData(
+      "FETCHING_TV_DATA",
+      `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${tvPopularPage}`,
+      "GETTING_TV_DATA",
+      "tvshows",
+      "ERROR_TV"
+    );
   }, [tvPopularPage, dispatch]);
 
   // this axios call is getting the data for /movies
   useEffect(() => {
-    dispatch({ type: "FETCHING_RATED_DATA" });
-    axiosWithAuth()
-      .get(
-        `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=${latestRatedPage}`
-      )
-      .then((res) => {
-        dispatch({
-          type: "GETTING_RATED_DATA",
-          payload: addNewProp(res.data.results, "movies"),
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: "ERROR_RATED",
-          payload: err.response.data.status_message,
-        });
-      });
+    getMovieData(
+      "FETCHING_RATED_DATA",
+      `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=${latestRatedPage}`,
+      "GETTING_RATED_DATA",
+      "movies",
+      "ERROR_RATED"
+    );
   }, [latestRatedPage, dispatch]);
 
   // this axios call is getting the data for /latest
   useEffect(() => {
-    dispatch({ type: "FETCHING_LATEST_DATA" });
-    axiosWithAuth()
-      .get(
-        `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=${playingMoviePage}`
-      )
-      .then((res) => {
-        dispatch({
-          type: "GETTING_LATEST_DATA",
-          payload: addNewProp(res.data.results, "latest"),
-        });
-      })
-      .catch((err) => {
-        dispatch({
-          type: "ERROR_LATEST",
-          payload: err.response.data.status_message,
-        });
-      });
+    getMovieData(
+      "FETCHING_LATEST_DATA",
+      `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=${playingMoviePage}`,
+      "GETTING_LATEST_DATA",
+      "latest",
+      "ERROR_LATEST"
+    );
   }, [playingMoviePage, dispatch]);
 
+  // check localStorage favorite movies, if there are then save them in the favMovie variable.
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favMovie"));
     if (favorites) {
@@ -146,6 +116,7 @@ const MainApp = () => {
     }
   }, []);
 
+  // add favorite movies to localStorage
   useEffect(() => {
     localStorage.setItem("favMovie", JSON.stringify(favMovie));
   }, [favMovie]);
@@ -182,6 +153,7 @@ const MainApp = () => {
     }
   };
 
+  // helper function to load more movies depending on the type
   const nextPage = (type) => {
     dispatch({ type: type });
   };
