@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
-import la from "../img/people.jpg";
+import backUpImg from "../img/people.jpg";
 
 const Header = ({ popular }) => {
   const { url } = useRouteMatch();
 
+  // function takes care of selecting a random movie every time the page loads
   function random() {
     let randomMovie = Math.floor(Math.random() * popular.length) + 1;
     return randomMovie;
@@ -22,10 +23,10 @@ const Header = ({ popular }) => {
       <img
         src={
           popular[num] === undefined
-            ? la
+            ? backUpImg
             : `https://image.tmdb.org/t/p/original${
                 popular[num].backdrop_path || popular[num].poster_path
-              }` || la
+              }` || backUpImg
         }
         alt="header of the application"
       />

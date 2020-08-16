@@ -22,6 +22,7 @@ const SingleMovieInfo = ({
   const [movie, setMovie] = useState({});
   const { singleMovie } = useSelector((state) => state.singleMovieReducer);
 
+  // check the type from the url so we know in which category to find movie clicked.
   useEffect(() => {
     if (browse === "browse") {
       setData(popular);
@@ -50,6 +51,7 @@ const SingleMovieInfo = ({
     setMovie(data.find((movie) => movie.id === Number(id)));
   }, [data, id]);
 
+  // get movie ID for the video player component.
   useEffect(() => {
     dispatch({ type: "FETCHING_SINGLE_VIDEO" });
     axiosWithAuth()
