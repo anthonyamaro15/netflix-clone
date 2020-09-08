@@ -49,6 +49,8 @@ const SingleMovieInfo = ({
     playingMovie,
   ]);
 
+  //   console.log("browe here ", browse, " id here ", id);
+
   useEffect(() => {
     let userInfo = JSON.parse(localStorage.getItem("id"));
     if (userInfo) {
@@ -80,6 +82,7 @@ const SingleMovieInfo = ({
   }, [dispatch, id]);
 
   const addToFavoriteList = (obj) => {
+    //  console.log("check this ojbect ", obj);
     delete obj.genre_ids;
     delete obj.adult;
     delete obj.video;
@@ -94,7 +97,7 @@ const SingleMovieInfo = ({
         getFavoriteData();
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response.data.errorMessage);
       });
   };
 

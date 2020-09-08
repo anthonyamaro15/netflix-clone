@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import la from "../img/people.jpg";
 
 const MyListSingleMovie = ({ movie }) => {
-  const { url } = useRouteMatch();
   const [movies, setMovies] = useState(movie);
 
   const {
@@ -13,7 +11,7 @@ const MyListSingleMovie = ({ movie }) => {
     //  name,
     //  vote_average,
     backdrop_path,
-    id,
+    movie_id,
     joined,
   } = movies;
 
@@ -23,7 +21,7 @@ const MyListSingleMovie = ({ movie }) => {
 
   return (
     <div className="single-movie-container">
-      <Link to={`${url}/${id}`}>
+      <Link to={`/browse/${movie_id}`}>
         <div className="img-container">
           <img
             src={

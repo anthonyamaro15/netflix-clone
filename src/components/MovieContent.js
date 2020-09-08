@@ -2,6 +2,7 @@ import React from "react";
 import MovieCard from "./MovieCard";
 
 const MovieContent = ({ popular, nextPage }) => {
+  //   console.log("popular data here ", popular);
   return (
     <div className="movie-content-container">
       <h2>Most popular</h2>
