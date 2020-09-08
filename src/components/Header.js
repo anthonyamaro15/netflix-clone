@@ -15,11 +15,6 @@ const Header = ({ popular }) => {
 
   return (
     <div className="header-container">
-      {/**
-    <div className="video">
-        <YouTube videoId={"F95Fk255I4M"} opts={ops} className="youtube" />
-      </div>
-   */}
       <img
         src={
           popular[num] === undefined

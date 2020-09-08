@@ -13,7 +13,6 @@ export const searchReducer = (state = initialValue, action) => {
         loading: true,
       };
     case "GETTING_SEARCH_VALUES":
-      // console.log();
       return {
         ...state,
         movieSearchResponse: action.payload,
