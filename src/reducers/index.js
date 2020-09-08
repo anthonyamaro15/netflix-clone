@@ -6,6 +6,7 @@ import { playingNowReducer } from "./playingNowReducer";
 import { searchReducer } from "./searchReducer";
 import { videoReducer } from "./videoReducer";
 import { singleMovieReducer } from "./singleMovieReducer";
+import { favoriteListReducer } from "./favoriteListReducer";
 
 export const rootReducer = combineReducers({
   popularReducer,
@@ -15,4 +16,5 @@ export const rootReducer = combineReducers({
   searchReducer,
   videoReducer,
   singleMovieReducer,
+  favoriteListReducer,
 });

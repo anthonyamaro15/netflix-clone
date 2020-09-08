@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 import { Route } from "react-router-dom";
-import {
-  addNewProp,
-  addedToFavoritesArray,
-  removeFromFavoritesAndUpdate,
-} from "../helperFuncs/helperFunctions";
+
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
@@ -14,23 +11,18 @@ import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
 
 const MainApp = () => {
-  const [favMovie, setFavMovie] = useState([]);
+  const [userId, setUserId] = useState("");
   const dispatch = useDispatch();
   const reducer = useSelector((state) => ({
     ...state,
   }));
 
-  const {
-    popular,
-    loading,
-    error,
-    //  favoriteList,
-    popularPage,
-  } = reducer.popularReducer;
+  const { popular, loading, error, popularPage } = reducer.popularReducer;
   const { tvPopular, tvPopularPage } = reducer.tvPopularReducer;
   const { latestRated, latestRatedPage } = reducer.ratedReducer;
   const { playingMovie, playingMoviePage } = reducer.playingNowReducer;
-  const { movieSearch, movieSearchResponse } = reducer.searchReducer;
+  const { movieSearchResponse } = reducer.searchReducer;
+  const { favoriteList } = useSelector((state) => state.favoriteListReducer);
 
   const getMovieData = async (...args) => {
     const [FetchType, url, dataType, category, dataError] = args;
@@ -41,34 +33,22 @@ const MainApp = () => {
       .then((res) => {
         dispatch({
           type: dataType,
-          payload: addNewProp(res.data.results, category),
+          payload: res.data,
+          category,
         });
       })
       .catch((err) => {
         dispatch({
           type: dataError,
-          payload: err.response.data.status_message,
+          payload: err.response.data,
         });
-        console.log(err.response.data.status_message);
       });
   };
 
-  // this axios call is getting the data for the search form
-  useEffect(() => {
-    getMovieData(
-      "FETCHING_SEARCH",
-      `/search/movie?api_key=${process.env.REACT_APP_API}&language=en-US&query=${movieSearch}&page=1&include_adult=false`,
-      "GETTING_SEARCH_VALUES",
-      "results",
-      "ERROR_SEARCH"
-    );
-  }, [movieSearch, dispatch]);
-
-  // this axios call is getting the data for the /browse
   useEffect(() => {
     getMovieData(
       "FETCHING_DATA",
-      `/movie/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${popularPage}`,
+      `${process.env.REACT_APP_API_SERVER_URL}/browse/${popularPage}`,
       "GETTING_DATA",
       "browse",
       "ERROR"
@@ -79,7 +59,7 @@ const MainApp = () => {
   useEffect(() => {
     getMovieData(
       "FETCHING_TV_DATA",
-      `/tv/popular?api_key=${process.env.REACT_APP_API}&language=en-US&page=${tvPopularPage}`,
+      `${process.env.REACT_APP_API_SERVER_URL}/tvpopular/${tvPopularPage}`,
       "GETTING_TV_DATA",
       "tvshows",
       "ERROR_TV"
@@ -90,7 +70,7 @@ const MainApp = () => {
   useEffect(() => {
     getMovieData(
       "FETCHING_RATED_DATA",
-      `/movie/top_rated?api_key=${process.env.REACT_APP_API}&language=en-US&page=${latestRatedPage}`,
+      `${process.env.REACT_APP_API_SERVER_URL}/latestrated/${latestRatedPage}`,
       "GETTING_RATED_DATA",
       "movies",
       "ERROR_RATED"
@@ -101,57 +81,40 @@ const MainApp = () => {
   useEffect(() => {
     getMovieData(
       "FETCHING_LATEST_DATA",
-      `/movie/now_playing?api_key=${process.env.REACT_APP_API}&language=en-US&page=${playingMoviePage}`,
+      `${process.env.REACT_APP_API_SERVER_URL}/playingmovie/${playingMoviePage}`,
       "GETTING_LATEST_DATA",
       "latest",
       "ERROR_LATEST"
     );
   }, [playingMoviePage, dispatch]);
 
-  // check localStorage favorite movies, if there are then save them in the favMovie variable.
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem("favMovie"));
-    if (favorites) {
-      setFavMovie(favorites);
+    let userInfo = JSON.parse(localStorage.getItem("id"));
+    if (userInfo) {
+      setUserId(userInfo);
     }
-  }, []);
+  }, [userId, setUserId]);
 
-  // add favorite movies to localStorage
   useEffect(() => {
-    localStorage.setItem("favMovie", JSON.stringify(favMovie));
-  }, [favMovie]);
+    getFavoriteData();
+  }, [userId]);
 
-  const addToFavorites = (data, movie, type) => {
-    const obj = { ...movie, joined: !movie.joined };
-
-    if (movie.joined) {
-      const filtered = favMovie.filter((fav) => fav.id !== movie.id);
-      setFavMovie(filtered);
-      const mapToUpdateData = data.map((dt) => {
-        if (dt.id === movie.id) {
-          return {
-            ...dt,
-            joined: !dt.joined,
-          };
-        } else {
-          return dt;
-        }
-      });
-      removeFromFavoritesAndUpdate(type, dispatch, mapToUpdateData);
-    } else {
-      const newArr = data.map((movies) => {
-        if (movies.id === obj.id) {
-          return {
-            ...obj,
-          };
-        } else {
-          return movies;
-        }
-      });
-      addedToFavoritesArray(type, dispatch, newArr);
-      setFavMovie([...favMovie, obj]);
+  function getFavoriteData() {
+    if (userId) {
+      return axios
+        .get(
+          `https://netflix-${process.env.REACT_APP_API_SERVER_URL}/getfavorites/${userId}`
+        )
+        .then((res) => {
+          console.log("favorites ", res.data);
+          //   setFavoriteList(res.data);
+          dispatch({ type: "GET_FAVORITE_LIST", payload: res.data });
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+        });
     }
-  };
+  }
 
   // helper function to load more movies depending on the type
   const nextPage = (type) => {
@@ -204,7 +167,7 @@ const MainApp = () => {
             <Navbar />
             {/**
              */}
-            <MyList favMovie={favMovie} />
+            <MyList favMovie={favoriteList} />
           </Route>
 
           <Route exact path="/results">
@@ -220,9 +183,9 @@ const MainApp = () => {
               playingMovie={playingMovie}
               latestRated={latestRated}
               tvPopular={tvPopular}
-              addToFavorites={addToFavorites}
               movieSearchResponse={movieSearchResponse}
-              favoriteList={favMovie}
+              favoriteList={favoriteList}
+              getFavoriteData={getFavoriteData}
             />
 
             {/**

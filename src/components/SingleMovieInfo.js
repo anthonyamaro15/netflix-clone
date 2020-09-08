@@ -2,25 +2,27 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import axios from "axios";
 import YouTube from "react-youtube";
 
-import { FaPlus } from "react-icons/fa";
+import { BiMinus, BiPlus } from "react-icons/bi";
 
 const SingleMovieInfo = ({
   popular,
   playingMovie,
   latestRated,
   tvPopular,
-  addToFavorites,
   movieSearchResponse,
   favoriteList,
+  getFavoriteData,
 }) => {
   const { browse, id } = useParams();
   const dispatch = useDispatch();
-  //   const [addToFav, setAddToFav] = useState(false);
   const [data, setData] = useState([]);
   const [movie, setMovie] = useState({});
   const { singleMovie } = useSelector((state) => state.singleMovieReducer);
+  const [userId, setUserId] = useState("");
+  const [ourMovie, setOurMovie] = useState({});
 
   // check the type from the url so we know in which category to find movie clicked.
   useEffect(() => {
@@ -48,8 +50,19 @@ const SingleMovieInfo = ({
   ]);
 
   useEffect(() => {
+    let userInfo = JSON.parse(localStorage.getItem("id"));
+    if (userInfo) {
+      setUserId(userInfo);
+    }
+  }, []);
+
+  useEffect(() => {
     setMovie(data.find((movie) => movie.id === Number(id)));
   }, [data, id]);
+
+  useEffect(() => {
+    setOurMovie(favoriteList.find((fv) => fv.movie_id === Number(id)));
+  }, [favoriteList, data, id]);
 
   // get movie ID for the video player component.
   useEffect(() => {
@@ -65,6 +78,38 @@ const SingleMovieInfo = ({
         dispatch({ type: "ERROR_WHILE_FETCHING_SINGLE_VIDEO", payload: err });
       });
   }, [dispatch, id]);
+
+  const addToFavoriteList = (obj) => {
+    delete obj.genre_ids;
+    delete obj.adult;
+    delete obj.video;
+    let movie_id = obj.id;
+    delete obj.id;
+
+    let values = { ...obj, user_id: userId, movie_id, joined: true };
+    console.log("we need to add it");
+    axios
+      .post("https://netflix-clone00.herokuapp.com/tofavorites", values)
+      .then(() => {
+        getFavoriteData();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
+
+  const removeFavorite = (obj) => {
+    axios
+      .delete(
+        `https://netflix-clone00.herokuapp.com/remove/${userId}/${obj.id}`
+      )
+      .then(() => {
+        getFavoriteData();
+      })
+      .catch((err) => {
+        console.log(err.data);
+      });
+  };
 
   const ops = {
     playerVars: {
@@ -87,24 +132,24 @@ const SingleMovieInfo = ({
         <p className="single-movie-description">{movie.overview}</p>
         <div
           className={
-            movie.joined ? "added single-more-info" : "single-more-info"
+            ourMovie && ourMovie.joined
+              ? "added single-more-info"
+              : "single-more-info"
           }
         >
-          {movie && (
-            <button
-              onClick={() => addToFavorites(data, movie, browse)}
-              //   disabled={movie.joined}
-            >
-              {" "}
-              <span>
-                <FaPlus />{" "}
-              </span>
-              {movie.joined ? "added" : "my list"}
-            </button>
-          )}
-          {/**
-      
-      */}
+          <button
+            onClick={
+              ourMovie && ourMovie.joined
+                ? () => removeFavorite(ourMovie)
+                : () => addToFavoriteList(movie)
+            }
+          >
+            {" "}
+            <span>
+              {ourMovie && ourMovie.joined ? <BiMinus /> : <BiPlus />}
+            </span>
+            {ourMovie && ourMovie.joined ? "in my list" : "add to my list"}
+          </button>
         </div>
       </div>
       <div className="image-movie-info">

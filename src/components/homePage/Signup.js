@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { axiosWithAuthDB } from "../../utils/axiosWithAuth";
+import axios from "axios";
 import Navbar from "./Navbar";
 
 const Signup = () => {
@@ -23,9 +23,12 @@ const Signup = () => {
       password,
     };
     setLoading(true);
-    axiosWithAuthDB()
-      .post("/api/auth/register", storeValues)
-      .then((res) => {
+    axios
+      .post(
+        `${process.env.REACT_APP_API_SERVER_URL}/api/auth/register`,
+        storeValues
+      )
+      .then(() => {
         history.push("/login");
         setLoading(false);
       })

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { axiosWithAuthDB } from "../../utils/axiosWithAuth";
+import axios from "axios";
 import Navbar from "./Navbar";
 
 const Login = () => {
@@ -17,11 +17,11 @@ const Login = () => {
 
   const onSubmit = (values) => {
     setLoading(true);
-    axiosWithAuthDB()
-      .post("/api/auth/login", values)
+    axios
+      .post(`${process.env.REACT_APP_API_SERVER_URL}/api/auth/login`, values)
       .then((res) => {
         localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("name", JSON.stringify(res.data.username));
+        localStorage.setItem("id", JSON.stringify(res.data.id));
         history.push("/browse");
         setLoading(false);
       })

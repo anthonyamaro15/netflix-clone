@@ -10,15 +10,12 @@ const MyListSingleMovie = ({ movie }) => {
   const {
     poster_path,
     title,
-    name,
-    vote_average,
+    //  name,
+    //  vote_average,
     backdrop_path,
     id,
     joined,
   } = movies;
-
-  //   console.log("single movie here ", movie);
-  //   console.log("url here ", url);
 
   useEffect(() => {
     setMovies(movie);
@@ -39,8 +36,11 @@ const MyListSingleMovie = ({ movie }) => {
             alt={title}
           />
           <div className={joined ? "hover-info" : "hover-info"}>
-            <h3>{name ? name : title}</h3>
+            {/**
+          <h3>{name ? name : title}</h3>
             <p>rating: {vote_average}</p>
+         */}
+
             <div className="add-icon"></div>
           </div>
         </div>
