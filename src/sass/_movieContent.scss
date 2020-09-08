@@ -21,6 +21,7 @@
     @include flex(center);
 
     button {
+      font-family: "Open Sans", sans-serif;
       font-size: 1.2rem;
       padding: 0.5rem 3rem;
       border: none;
@@ -37,9 +38,8 @@
       }
 
       &:hover {
-        color: $black;
-        background: $white;
-        transform: scale(1.1);
+        background: grey;
+        opacity: 0.8;
       }
     }
   }

@@ -9,6 +9,7 @@
   right: 0;
   z-index: 1000;
   transition: all 0.5s ease;
+  font-family: "Raleway", sans-serif;
 
   @media (max-width: $mobile) {
     flex-direction: column;
@@ -50,9 +51,14 @@
     }
 
     h2 {
+      font-family: "Open Sans", sans-serif;
       font-size: 1.5rem;
       color: $red;
       margin-right: 2rem;
+      // font-weight: bold;
+      a {
+        font-weight: bold;
+      }
 
       @media (max-width: $mobile) {
         text-align: center;
@@ -72,7 +78,8 @@
     nav {
       width: 65%;
       @include flex(space-between);
-      padding-top: 0.3rem;
+      // padding-top: 0.3rem;
+      align-items: center;
       text-transform: capitalize;
 
       @media (max-width: $desktop) {
@@ -82,14 +89,15 @@
       a {
         color: $white;
         transition: color 0.5s ease;
+        font-size: 0.9rem;
 
         @media (max-width: $iphone6) {
-          font-size: 0.9rem;
-        }
-
-        @media (max-width: $iphone4) {
           font-size: 0.8rem;
         }
+
+        //   @media (max-width: $iphone4) {
+        //     font-size: 0.8rem;
+        //   }
 
         &:hover {
           color: grey;
@@ -129,6 +137,7 @@
         position: relative;
 
         input {
+          font-family: "Open Sans", sans-serif;
           font-size: 1.1rem;
           border: none;
           height: 100%;
@@ -154,6 +163,8 @@
     }
 
     button {
+      font-family: "Open Sans", sans-serif;
+
       border-radius: 4px;
       border: none;
       padding: 0 1rem;
@@ -162,6 +173,7 @@
       color: $white;
       text-transform: capitalize;
       cursor: pointer;
+      font-weight: 300;
 
       @media (max-width: $iphone6) {
         font-size: 0.9rem;

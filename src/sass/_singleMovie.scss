@@ -1,5 +1,5 @@
 .single-movie-info-container {
-  height: 55vh;
+  height: 65vh;
   display: flex;
   margin-top: 5rem;
 
@@ -40,6 +40,7 @@
     .display-movie-info {
       display: flex;
       flex-direction: column;
+      font-weight: 300;
 
       .rating {
         color: $green;
@@ -51,7 +52,7 @@
       }
 
       .date-release {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         margin-top: 1.5rem;
 
         @media (max-width: $iphone6) {
@@ -62,9 +63,11 @@
 
     .single-movie-description {
       color: grey;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       margin: 2rem 0;
-      line-height: 1.6;
+      line-height: 1.5;
+
+      font-weight: 300;
 
       @media (max-width: $desktop) {
         font-size: 1.2rem;
@@ -77,8 +80,6 @@
     }
 
     .single-more-info {
-      //   border: 1px solid red;
-      // width: 200px;
       display: inline-block;
       button {
         width: 100%;
@@ -92,7 +93,6 @@
         background: none;
 
         color: $white;
-        //  border: 1px solid red;
 
         @media (max-width: $iphone6) {
           font-size: 0.9rem;
@@ -100,7 +100,6 @@
         }
 
         span {
-          //  border: 1px solid red;
           margin-right: 0.3rem;
           padding-top: 0.4rem;
           font-size: 1rem;
