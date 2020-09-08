@@ -68,10 +68,11 @@
     }
 
     .movie-description {
-      font-size: 1.3rem;
-      line-height: 1.5;
+      font-size: 1.5rem;
+      line-height: 1.4;
       margin: 2rem 0;
       width: 38%;
+      font-weight: 300;
 
       @media (max-width: $desktop) {
         width: 100%;
@@ -96,6 +97,7 @@
         color: $white;
         border-radius: 4px;
         transition: all 0.2s ease;
+        font-weight: 300;
 
         @media (max-width: $iphone6) {
           font-size: 0.9rem;
@@ -108,9 +110,8 @@
         }
 
         &:hover {
-          color: $black;
-          background: $white;
-          transform: scale(1.1);
+          background: grey;
+          opacity: 0.8;
         }
       }
     }

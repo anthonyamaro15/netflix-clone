@@ -3,6 +3,7 @@
   background: rgba(0, 0, 0, 0.5);
   position: relative;
   padding-top: 5rem;
+  font-weight: 300;
 
   @media (max-width: $iphone6) {
     margin-bottom: -10rem;
@@ -49,8 +50,10 @@
       position: relative;
       display: block;
       width: 100%;
+      font-weight: 300;
 
       input {
+        font-family: "Lato", sans-serif;
         display: block;
         width: 100%;
         padding: 0.7rem;
@@ -138,7 +141,7 @@
     }
 
     .terms {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       margin-bottom: 3rem;
 
       @media (max-width: $iphone6) {
