@@ -87,9 +87,9 @@ const SingleMovieInfo = ({
     delete obj.id;
 
     let values = { ...obj, user_id: userId, movie_id, joined: true };
-    console.log("we need to add it");
+
     axios
-      .post("https://netflix-clone00.herokuapp.com/tofavorites", values)
+      .post(`${process.env.REACT_APP_API_SERVER_URL}/tofavorites`, values)
       .then(() => {
         getFavoriteData();
       })
@@ -101,7 +101,7 @@ const SingleMovieInfo = ({
   const removeFavorite = (obj) => {
     axios
       .delete(
-        `https://netflix-clone00.herokuapp.com/remove/${userId}/${obj.id}`
+        `${process.env.REACT_APP_API_SERVER_URL}/remove/${userId}/${obj.id}`
       )
       .then(() => {
         getFavoriteData();

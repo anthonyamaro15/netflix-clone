@@ -102,12 +102,8 @@ const MainApp = () => {
   function getFavoriteData() {
     if (userId) {
       return axios
-        .get(
-          `https://netflix-${process.env.REACT_APP_API_SERVER_URL}/getfavorites/${userId}`
-        )
+        .get(`${process.env.REACT_APP_API_SERVER_URL}/getfavorites/${userId}`)
         .then((res) => {
-          console.log("favorites ", res.data);
-          //   setFavoriteList(res.data);
           dispatch({ type: "GET_FAVORITE_LIST", payload: res.data });
         })
         .catch((err) => {
