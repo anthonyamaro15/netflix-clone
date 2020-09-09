@@ -5,15 +5,7 @@ import la from "../img/people.jpg";
 const MyListSingleMovie = ({ movie }) => {
   const [movies, setMovies] = useState(movie);
 
-  const {
-    poster_path,
-    title,
-    //  name,
-    //  vote_average,
-    backdrop_path,
-    movie_id,
-    joined,
-  } = movies;
+  const { poster_path, title, backdrop_path, movie_id, joined } = movies;
 
   useEffect(() => {
     setMovies(movie);
@@ -21,7 +13,7 @@ const MyListSingleMovie = ({ movie }) => {
 
   return (
     <div className="single-movie-container">
-      <Link to={`/browse/${movie_id}`}>
+      <Link to={`/mylist/${movie_id}`}>
         <div className="img-container">
           <img
             src={
@@ -34,11 +26,6 @@ const MyListSingleMovie = ({ movie }) => {
             alt={title}
           />
           <div className={joined ? "hover-info" : "hover-info"}>
-            {/**
-          <h3>{name ? name : title}</h3>
-            <p>rating: {vote_average}</p>
-         */}
-
             <div className="add-icon"></div>
           </div>
         </div>

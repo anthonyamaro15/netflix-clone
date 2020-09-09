@@ -24,9 +24,9 @@ const MainApp = () => {
   const { movieSearchResponse } = reducer.searchReducer;
   const { favoriteList } = useSelector((state) => state.favoriteListReducer);
 
+  // helper function to make the GET request
   const getMovieData = async (...args) => {
     const [FetchType, url, dataType, category, dataError] = args;
-
     dispatch({ type: FetchType });
     return axiosWithAuth()
       .get(url)
@@ -45,6 +45,7 @@ const MainApp = () => {
       });
   };
 
+  // this axios call is getting the data for the /browse
   useEffect(() => {
     getMovieData(
       "FETCHING_DATA",
@@ -88,6 +89,7 @@ const MainApp = () => {
     );
   }, [playingMoviePage, dispatch]);
 
+  // we need user id to know which user we adding favorite movies from
   useEffect(() => {
     let userInfo = JSON.parse(localStorage.getItem("id"));
     if (userInfo) {
@@ -99,6 +101,7 @@ const MainApp = () => {
     getFavoriteData();
   }, [userId]);
 
+  // get favorite list for user
   function getFavoriteData() {
     if (userId) {
       return axios
@@ -117,6 +120,7 @@ const MainApp = () => {
     dispatch({ type: type });
   };
 
+  // we are using same component to render movie categories
   return (
     <div className="MainApp">
       {error ? (
@@ -161,8 +165,7 @@ const MainApp = () => {
 
           <Route exact path="/mylist">
             <Navbar />
-            {/**
-             */}
+
             <MyList favMovie={favoriteList} />
           </Route>
 
@@ -183,19 +186,11 @@ const MainApp = () => {
               favoriteList={favoriteList}
               getFavoriteData={getFavoriteData}
             />
-
-            {/**
-            <MovieContent popular={popular} />
-            
-            */}
           </Route>
         </div>
       )}
     </div>
   );
 };
-
-///browse/419704
-///browse/419704
 
 export default MainApp;

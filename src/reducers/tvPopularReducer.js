@@ -14,18 +14,6 @@ export const tvPopularReducer = (state = initialValue, action) => {
         loading: false,
       };
 
-    case "MANIPULATED_TV_POPULAR_DATA":
-      return {
-        ...state,
-        tvPopular: action.payload,
-      };
-
-    case "REMOVED_TV_POPULAR_DATA_FAVORITE":
-      return {
-        ...state,
-        tvPopular: action.payload,
-      };
-
     case "NEXT_PAGE_POPULAR":
       return {
         ...state,

@@ -7,7 +7,8 @@ const MyList = () => {
 
   return (
     <div className="my-list">
-      <h1>my list</h1>
+      {favoriteList.length ? <h1>my list</h1> : <h1>list empty</h1>}
+
       <div className="display-cards">
         {favoriteList.map((movie) => (
           <MyListSingleMovie key={movie.id} movie={movie} />

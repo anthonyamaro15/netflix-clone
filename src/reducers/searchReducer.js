@@ -19,18 +19,6 @@ export const searchReducer = (state = initialValue, action) => {
         loading: false,
       };
 
-    case "MANIPULATED_RESULTS_MOVIES_DATA":
-      return {
-        ...state,
-        movieSearchResponse: action.payload,
-      };
-
-    case "REMOVED_RESULTS_MOVIES_DATA":
-      return {
-        ...state,
-        movieSearchResponse: action.payload,
-      };
-
     case "ERROR_SEARCH":
       return {
         ...state,

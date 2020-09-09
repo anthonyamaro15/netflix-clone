@@ -1,9 +1,10 @@
 .my-list {
   margin: 7rem 0 0;
-  padding: 0 $padd-lr 0;
+  padding: 0 $padd-lr 6rem;
 
-  @media (max-width: $iphone6) {
+  @media (max-width: $mobile) {
     margin-bottom: -7rem;
+    padding: 0 $padd-lr 0;
   }
 
   h1 {
