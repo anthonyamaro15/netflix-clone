@@ -7,18 +7,9 @@ const MovieCard = ({ movie }) => {
   const { url } = useRouteMatch();
   const [movies, setMovies] = useState(movie);
 
-  const {
-    poster_path,
-    title,
-    //  name,
-    //  vote_average,
-    backdrop_path,
-    id,
-    joined,
-  } = movies;
+  const { poster_path, title, backdrop_path, id, joined } = movies;
 
-  //   console.log("single movie here ", movie);
-
+  // save movie data to state. if you refresh you still will get the data
   useEffect(() => {
     setMovies(movie);
   }, [movies, movie]);
@@ -47,11 +38,6 @@ const MovieCard = ({ movie }) => {
             alt={title}
           />
           <div className={joined ? "hover-info" : "hover-info"}>
-            {/**
-           <h3>{name ? name : title}</h3>
-            <p>rating: {vote_average}</p>
-         */}
-
             <div className="add-icon"></div>
           </div>
         </div>

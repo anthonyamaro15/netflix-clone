@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory, useRouteMatch } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 import YouTube from "react-youtube";
@@ -23,6 +23,8 @@ const SingleMovieInfo = ({
   const { singleMovie } = useSelector((state) => state.singleMovieReducer);
   const [userId, setUserId] = useState("");
   const [ourMovie, setOurMovie] = useState({});
+  const history = useHistory();
+  const route = useRouteMatch();
 
   // check the type from the url so we know in which category to find movie clicked.
   useEffect(() => {
@@ -49,8 +51,6 @@ const SingleMovieInfo = ({
     playingMovie,
   ]);
 
-  //   console.log("browe here ", browse, " id here ", id);
-
   useEffect(() => {
     let userInfo = JSON.parse(localStorage.getItem("id"));
     if (userInfo) {
@@ -59,8 +59,12 @@ const SingleMovieInfo = ({
   }, []);
 
   useEffect(() => {
-    setMovie(data.find((movie) => movie.id === Number(id)));
-  }, [data, id]);
+    if (browse === "mylist") {
+      setMovie(data.find((movie) => movie.movie_id === Number(id)));
+    } else {
+      setMovie(data.find((movie) => movie.id === Number(id)));
+    }
+  }, [data, id, browse]);
 
   useEffect(() => {
     setOurMovie(favoriteList.find((fv) => fv.movie_id === Number(id)));
@@ -82,7 +86,9 @@ const SingleMovieInfo = ({
   }, [dispatch, id]);
 
   const addToFavoriteList = (obj) => {
-    //  console.log("check this ojbect ", obj);
+    if (obj.origin_country) {
+      delete obj.origin_country;
+    }
     delete obj.genre_ids;
     delete obj.adult;
     delete obj.video;
@@ -104,10 +110,13 @@ const SingleMovieInfo = ({
   const removeFavorite = (obj) => {
     axios
       .delete(
-        `${process.env.REACT_APP_API_SERVER_URL}/remove/${userId}/${obj.id}`
+        `${process.env.REACT_APP_API_SERVER_URL}/remove/${userId}/${obj.movie_id}`
       )
       .then(() => {
         getFavoriteData();
+        if (browse === "mylist") {
+          history.push(`/${route.url.split("/")[1]}`);
+        }
       })
       .catch((err) => {
         console.log(err.data);

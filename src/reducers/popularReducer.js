@@ -13,22 +13,6 @@ export const popularReducer = (state = initialValue, action) => {
         popular: [...state.popular, ...action.payload],
         loading: false,
       };
-    //  case "ADD_FAVORITE":
-    //    return {
-    //      ...state,
-    //      favoriteList: [...state.favoriteList, action.payload],
-    //    };
-    case "MANIPULATED_POPULAR_DATA":
-      return {
-        ...state,
-        popular: action.payload,
-      };
-
-    //  case "REMOVED_POPULAR_DATA_FAVORITE":
-    //    return {
-    //      ...state,
-    //      popular: action.payload,
-    //    };
 
     case "NEXT_PAGE":
       return {

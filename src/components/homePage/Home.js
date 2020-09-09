@@ -7,8 +7,6 @@ import Signup from "./Signup";
 import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
 
-// find a way to make page load faster
-
 const Home = () => {
   return (
     <div>
