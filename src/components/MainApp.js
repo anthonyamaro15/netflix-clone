@@ -127,7 +127,7 @@ const MainApp = () => {
         <h1 className="error-found">{error}</h1>
       ) : (
         <div>
-          <Route exact path={`/browse`}>
+          <Route exact path="/browse">
             <Navbar />
             <Header popular={popular} loading={loading} />
             <MovieContent
