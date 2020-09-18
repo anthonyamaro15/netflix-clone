@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <Home />
-      <PrivateRoute component={MainApp} />
+      <PrivateRoute path="/browse" component={MainApp} />
       <Footer />
     </div>
   );

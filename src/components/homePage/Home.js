@@ -6,6 +6,7 @@ import MainContent from "./MainContent";
 import Signup from "./Signup";
 import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 
 const Home = () => {
   return (
@@ -25,6 +26,9 @@ const Home = () => {
       <Route exact path="/forgot">
         <Navbar />
         <ForgotPassword />
+      </Route>
+      <Route exact path="/resetpassword/:token">
+        <ResetPassword />
       </Route>
     </div>
   );

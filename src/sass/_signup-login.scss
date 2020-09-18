@@ -72,15 +72,16 @@
 
       .togglePassword {
         position: absolute;
-        font-size: 0.8rem;
+        font-size: 1rem;
         z-index: 100;
 
         top: 35%;
-        left: 85%;
+        left: 90%;
         cursor: pointer;
+        color: $black;
 
         @media (max-width: $iphone6) {
-          font-size: 0.6rem;
+          font-size: 0.7rem;
           top: 30%;
         }
       }

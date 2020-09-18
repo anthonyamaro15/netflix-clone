@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { BiHide, BiShow } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Navbar from "./Navbar";
@@ -7,9 +8,17 @@ import Navbar from "./Navbar";
 const Signup = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [setError] = useState("");
+  const [error, setError] = useState("");
   const [togglePass, setTogglePass] = useState(false);
   const { register, handleSubmit, errors, reset } = useForm();
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
+  }, [error]);
 
   const toggle = () => {
     setTogglePass(!togglePass);
@@ -80,7 +89,7 @@ const Signup = () => {
                 ref={register({ required: true })}
               />
               <span className="togglePassword" onClick={toggle}>
-                {!togglePass ? "show" : "hide"}
+                {!togglePass ? <BiHide /> : <BiShow />}
               </span>
               <p className="error-message">
                 {errors.password && "Require Field"}
@@ -94,9 +103,7 @@ const Signup = () => {
                 placeholder="confirm password"
                 ref={register({ required: true })}
               />
-              <span className="togglePassword" onClick={toggle}>
-                {!togglePass ? "show" : "hide"}
-              </span>
+              <p className="error-message">{error && error}</p>
               <p className="error-message">
                 {errors.confirm && "Require Field"}
               </p>
