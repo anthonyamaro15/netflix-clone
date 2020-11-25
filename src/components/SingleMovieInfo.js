@@ -86,7 +86,6 @@ const SingleMovieInfo = ({
   }, [dispatch, id]);
 
   const addToFavoriteList = (obj) => {
-   //   console.log('what is this?? ', obj);
     if (obj.origin_country) {
       delete obj.origin_country;
     }
