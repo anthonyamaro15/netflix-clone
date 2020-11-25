@@ -13,7 +13,7 @@ const MyListSingleMovie = ({ movie }) => {
 
   return (
     <div className="single-movie-container">
-      <Link to={`/mylist/${movie_id}`}>
+      <Link to={`/acc/mylist/${movie_id}`}>
         <div className="img-container">
           <img
             src={
