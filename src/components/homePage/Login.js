@@ -31,7 +31,7 @@ const Login = () => {
       .then((res) => {
         localStorage.setItem("token", JSON.stringify(res.data.token));
         localStorage.setItem("id", JSON.stringify(res.data.id));
-        history.push("/browse");
+        history.push("/acc/browse");
         setLoading(false);
       })
       .catch((err) => {
