@@ -46,19 +46,19 @@ const Navbar = () => {
           </h2>
         </div>
         <nav>
-          <NavLink exact to="/browse" activeClassName="active">
+          <NavLink exact to="/acc/browse" activeClassName="active">
             home
           </NavLink>
-          <NavLink to="/tvshows" activeClassName="active">
+          <NavLink to="/acc/tvshows" activeClassName="active">
             TV shows
           </NavLink>
-          <NavLink to="/movies" activeClassName="active">
+          <NavLink to="/acc/movies" activeClassName="active">
             movies
           </NavLink>
-          <NavLink to="/latest" activeClassName="active">
+          <NavLink to="/acc/latest" activeClassName="active">
             Latest
           </NavLink>
-          <NavLink to="/mylist" activeClassName="active">
+          <NavLink to="/acc/mylist" activeClassName="active">
             my list
           </NavLink>
         </nav>
