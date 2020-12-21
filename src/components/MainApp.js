@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
-import { Route } from "react-router-dom";
+import { Route, Router } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import Header from "./Header";

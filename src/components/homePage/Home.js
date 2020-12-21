@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Router } from "react-router-dom";
 import Navbar from "./Navbar";
 import HomeHeader from "./HomeHeader";
 import MainContent from "./MainContent";
@@ -17,6 +17,7 @@ const Home = () => {
         <MainContent />
       </Route>
 
+ 
       <Route exact path="/signup">
         <Signup />
       </Route>
