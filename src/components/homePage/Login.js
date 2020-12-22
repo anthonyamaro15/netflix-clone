@@ -29,7 +29,6 @@ const Login = () => {
     setLoading(true);
     try {
       const { data } = await loginReq(values);
-      console.log("what is data? ", data);
       localStorage.setItem("token", JSON.stringify(data.token));
       localStorage.setItem("id", JSON.stringify(data.id));
       history.push("/acc/browse");

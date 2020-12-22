@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Login from '../Login';
 
 import { loginReq } from '../apiRequest/index';
-import { serverUrl } from '../../../envVariables/index';
+import { serverUrl } from '../../../envVariables';
 const userInfo = {email: "exmaple@gmail.com", password: "pass12"};
 
 const server = setupServer(
