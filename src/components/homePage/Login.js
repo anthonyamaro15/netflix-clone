@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { BiHide, BiShow } from "react-icons/bi";
-import axios from "axios";
 import Navbar from "./Navbar";
 import { loginReq } from './apiRequest/index';
 
