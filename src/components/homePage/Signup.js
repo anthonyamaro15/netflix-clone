@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import Navbar from "./Navbar";
+import { signupRequest } from './apiRequest';
 
 const Signup = () => {
   const history = useHistory();
@@ -24,7 +24,7 @@ const Signup = () => {
     setTogglePass(!togglePass);
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     const { username, email, password } = values;
     const storeValues = {
       email,
@@ -32,21 +32,16 @@ const Signup = () => {
       password,
     };
     setLoading(true);
-    axios
-      .post(
-        `${process.env.REACT_APP_API_SERVER_URL}/api/auth/register`,
-        storeValues
-      )
-      .then(() => {
-        history.push("/login");
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-        setError(err.response.data.message);
-        setLoading(false);
-      });
-
+    try {
+       await signupRequest(storeValues);
+       history.push("/login");
+       setLoading(false);
+    } catch (error) {
+       console.log(error.response.data.message);
+       setError(error.response.data.message);
+       setLoading(false);
+    }
+    
     if (loading) {
       reset();
     }

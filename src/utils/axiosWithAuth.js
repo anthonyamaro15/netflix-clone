@@ -2,6 +2,6 @@ import axios from "axios";
 
 export const axiosWithAuth = () => {
   return axios.create({
-    baseURL: "https://api.themoviedb.org/3",
+    baseURL: "https://netflix-clone00.herokuapp.com",
   });
 };

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
-import { Route, Router } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { serverUrl } from '../envVariables';
 
 import Navbar from "./Navbar";
 import Header from "./Header";
@@ -31,6 +32,7 @@ const MainApp = () => {
     return axiosWithAuth()
       .get(url)
       .then((res) => {
+         console.log("resposne hrere ", res);
         dispatch({
           type: dataType,
           payload: res.data,
@@ -49,7 +51,7 @@ const MainApp = () => {
   useEffect(() => {
     getMovieData(
       "FETCHING_DATA",
-      `${process.env.REACT_APP_API_SERVER_URL}/browse/${popularPage}`,
+      `${serverUrl}/browse/${popularPage}`,
       "GETTING_DATA",
       "browse",
       "ERROR"
@@ -60,7 +62,7 @@ const MainApp = () => {
   useEffect(() => {
     getMovieData(
       "FETCHING_TV_DATA",
-      `${process.env.REACT_APP_API_SERVER_URL}/tvpopular/${tvPopularPage}`,
+      `${serverUrl}/tvpopular/${tvPopularPage}`,
       "GETTING_TV_DATA",
       "tvshows",
       "ERROR_TV"
@@ -71,7 +73,7 @@ const MainApp = () => {
   useEffect(() => {
     getMovieData(
       "FETCHING_RATED_DATA",
-      `${process.env.REACT_APP_API_SERVER_URL}/latestrated/${latestRatedPage}`,
+      `${serverUrl}/latestrated/${latestRatedPage}`,
       "GETTING_RATED_DATA",
       "movies",
       "ERROR_RATED"
@@ -82,7 +84,7 @@ const MainApp = () => {
   useEffect(() => {
     getMovieData(
       "FETCHING_LATEST_DATA",
-      `${process.env.REACT_APP_API_SERVER_URL}/playingmovie/${playingMoviePage}`,
+      `${serverUrl}/playingmovie/${playingMoviePage}`,
       "GETTING_LATEST_DATA",
       "latest",
       "ERROR_LATEST"
@@ -105,7 +107,7 @@ const MainApp = () => {
   function getFavoriteData() {
     if (userId) {
       return axios
-        .get(`${process.env.REACT_APP_API_SERVER_URL}/getfavorites/${userId}`)
+        .get(`${serverUrl}/getfavorites/${userId}`)
         .then((res) => {
           dispatch({ type: "GET_FAVORITE_LIST", payload: res.data });
         })

@@ -56,7 +56,7 @@ describe("Login form working properly", () => {
 
    test("check for error messge when entering the wrong email/password", async () => {
       server.use(
-         rest.post(`${process.env.REACT_APP_API_SERVER_URL}/api/auth/login`, (req, res, ctx) => {
+         rest.post(`${serverUrl}/api/auth/login`, (req, res, ctx) => {
             return res(ctx.status(500));
          })
       )
