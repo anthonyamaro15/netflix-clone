@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { BiHide, BiShow } from "react-icons/bi";
-import axios from "axios";
 import Navbar from "./Navbar";
+import { loginReq } from './apiRequest/index';
 
 const Login = () => {
   const history = useHistory();
@@ -24,20 +24,19 @@ const Login = () => {
     setTogglePass(!togglePass);
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     setLoading(true);
-    axios
-      .post(`${process.env.REACT_APP_API_SERVER_URL}/api/auth/login`, values)
-      .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("id", JSON.stringify(res.data.id));
-        history.push("/acc/browse");
+    try {
+      const { data } = await loginReq(values);
+      localStorage.setItem("token", JSON.stringify(data.token));
+      localStorage.setItem("id", JSON.stringify(data.id));
+      history.push("/acc/browse");
+      setLoading(false)
+
+    } catch (error) {
+        setError(error.response.data.message);
         setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.response.data.message);
-        setLoading(false);
-      });
+    }
     if (loading) {
       reset();
     }
