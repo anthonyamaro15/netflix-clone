@@ -6,10 +6,10 @@ import MovieContent from '../MovieContent';
 
 describe("renders MovieContent without crashing", () => {
 
-   test("renders MovieContent", () => {
+   test("renders MovieContent", async () => {
      const nextPage = () => "";
       <Router>
          <MovieContent popular={[]} nextPage={nextPage} />
       </Router>
-   })
+   });
 })
