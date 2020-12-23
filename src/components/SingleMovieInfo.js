@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory, useRouteMatch } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 import YouTube from "react-youtube";
 import { BiMinus, BiPlus } from "react-icons/bi";
@@ -73,15 +72,15 @@ const SingleMovieInfo = ({
   // get movie ID for the video player component.
   useEffect(() => {
     dispatch({ type: "FETCHING_SINGLE_VIDEO" });
-    axiosWithAuth()
+    axios
       .get(
-        `/movie/${id}/videos?api_key=${process.env.REACT_APP_API}&language=en-US`
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_API}&language=en-US`
       )
       .then((res) => {
         dispatch({ type: "SAVING_SINGLE_VIDEO_ID", payload: res.data.results });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR_WHILE_FETCHING_SINGLE_VIDEO", payload: err });
+        dispatch({ type: "ERROR_WHILE_FETCHING_SINGLE_VIDEO", payload: err.response.data });
       });
   }, [dispatch, id]);
 
@@ -115,7 +114,7 @@ const SingleMovieInfo = ({
       .then(() => {
         getFavoriteData();
         if (browse === "mylist") {
-          history.push(`/${route.url.split("/")[1]}`);
+            history.push('/acc/browse');
         }
       })
       .catch((err) => {
