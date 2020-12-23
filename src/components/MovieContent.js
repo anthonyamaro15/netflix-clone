@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 const MovieContent = ({ popular, nextPage }) => {
   return (
     <div className="movie-content-container">
-      <h2>Most popular</h2>
+      <h2 datatest-id="t">Most popular</h2>
       <div className="display-cards">
         {popular.map((movie) => (
           <MovieCard key={movie.id} movie={movie} movieArr={popular} />

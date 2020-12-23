@@ -4,8 +4,8 @@ import { useParams, useHistory, useRouteMatch } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 import YouTube from "react-youtube";
-
 import { BiMinus, BiPlus } from "react-icons/bi";
+import { serverUrl } from '../envVariables';
 
 const SingleMovieInfo = ({
   popular,
@@ -98,7 +98,7 @@ const SingleMovieInfo = ({
     let values = { ...obj, user_id: userId, movie_id, joined: true };
 
     axios
-      .post(`${process.env.REACT_APP_API_SERVER_URL}/tofavorites`, values)
+      .post(`${serverUrl}/tofavorites`, values)
       .then(() => {
         getFavoriteData();
       })
@@ -110,7 +110,7 @@ const SingleMovieInfo = ({
   const removeFavorite = (obj) => {
     axios
       .delete(
-        `${process.env.REACT_APP_API_SERVER_URL}/remove/${userId}/${obj.movie_id}`
+        `${serverUrl}/remove/${userId}/${obj.movie_id}`
       )
       .then(() => {
         getFavoriteData();

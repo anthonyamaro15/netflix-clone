@@ -10,18 +10,22 @@ const Navbar = () => {
   const history = useHistory();
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY >= 3) {
-        setScrolling(true);
-      } else {
-        setScrolling(false);
-      }
+     let mounted = true;
+     if(mounted) {
+       window.addEventListener("scroll", () => {
+         if (window.scrollY >= 3) {
+         setScrolling(true);
+         } else {
+         setScrolling(false);
+         }
 
-      if (window.scrollY === 0) {
-        setScrolling(false);
-      }
-    });
-    return () => setScrolling(false);
+         if (window.scrollY === 0) {
+         setScrolling(false);
+         }
+      });
+     }
+   //  return () => setScrolling(false);
+   return () => { mounted = false; }
   }, []);
 
   const toggleForm = () => {

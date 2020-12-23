@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import backUpImg from "../img/people.jpg";
 
 const Header = ({ popular }) => {
   const { url } = useRouteMatch();
+  const [num, setRandom] = useState([]);
 
   // function takes care of selecting a random movie every time the page loads
-  function random() {
-    let randomMovie = Math.floor(Math.random() * popular.length) + 1;
-    return randomMovie;
-  }
+  useEffect(() => {
+   function random() {
+      let randomMovie = Math.floor(Math.random() * popular.length) + 1;
+      return randomMovie;
+   }
+   setRandom(random());
+  },[popular]);
 
-  let num = random();
 
   // cut string if too long.
   popular.map((des) => {

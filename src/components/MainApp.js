@@ -32,7 +32,6 @@ const MainApp = () => {
     return axiosWithAuth()
       .get(url)
       .then((res) => {
-         console.log("resposne hrere ", res);
         dispatch({
           type: dataType,
           payload: res.data,
