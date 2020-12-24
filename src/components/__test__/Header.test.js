@@ -1,8 +1,10 @@
 import React from 'react';
-import {  render, screen, jest } from '@testing-library/react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import {  render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from "react-router-dom";
-
 import Header from '../Header';
+import { getMovies } from '../apiRequest';
 
 const movie = [
    {
@@ -14,6 +16,16 @@ const movie = [
       id: 4343
    }
 ];
+
+const server = setupServer(
+   rest.get('https://api.themoviedb.org/3/movie/', (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(movie));
+   })
+);
+
+beforeAll(() => server.listen());
+afterAll(() => server.close());
+afterEach(() => server.resetHandlers());
 
 describe("Renders Header", () => {
    it("renders header wihtout crashing", () => {
@@ -32,5 +44,15 @@ describe("Renders Header", () => {
       )
 
       expect(screen.getByText(/loading.../i)).toBeInTheDocument();
+   });
+
+   it("displays movie data", async () => {
+      render(
+         <Router>
+            <Header popular={movie} />
+         </Router>
+      );
+      const { data } = await getMovies();
+      await expect(data).toHaveLength(1);
    });
 })
