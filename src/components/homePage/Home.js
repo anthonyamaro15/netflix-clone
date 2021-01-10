@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import HomeHeader from "./HomeHeader";
@@ -7,8 +7,18 @@ import Signup from "./Signup";
 import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import axios from 'axios';
+import { serverUrl } from '../../envVariables';
 
 const Home = () => {
+
+   useEffect(() => {
+       const wakeHerokuUp = async () => {
+          const { data } = await axios.get(`${serverUrl}`);
+          console.log(data.message);
+       }
+       wakeHerokuUp();
+   },[]);
   return (
     <div>
       <Route exact path="/">
