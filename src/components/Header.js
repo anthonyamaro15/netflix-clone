@@ -15,23 +15,6 @@ const Header = ({ popular }) => {
    setRandom(random());
   },[popular]);
 
-
-  // cut string if too long.
-  useEffect(() => {
-     console.log('inside useEffect');
-     if(popular.length) {
-        console.log('data is valid now');
-         // popular.map((des) => {
-         //    if (des.overview.length > 450) {
-         //       des.overview = des.overview.slice(0, 450) + "...";
-         //       return des;
-         //    }
-         //    return des;
-         // });
-     }
-  },[popular]);
-
-
   // checking if we have data avaliable if not then display a default img
   return (
     <div className="header-container">

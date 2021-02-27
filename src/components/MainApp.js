@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 import { Route } from "react-router-dom";
 import { serverUrl } from '../envVariables';
@@ -41,8 +40,7 @@ const MainApp = () => {
       .catch((err) => {
         dispatch({
           type: dataError,
-          payload: err.response.data,
-         //  payload: err
+          payload: err
         });
       });
   };
