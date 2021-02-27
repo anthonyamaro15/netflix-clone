@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory, useRouteMatch } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import YouTube from "react-youtube";
 import { BiMinus, BiPlus } from "react-icons/bi";
-import { serverUrl } from '../envVariables';
+import { apiKey, serverUrl } from '../envVariables';
 
 const SingleMovieInfo = ({
   popular,
@@ -23,7 +23,6 @@ const SingleMovieInfo = ({
   const [userId, setUserId] = useState("");
   const [ourMovie, setOurMovie] = useState({});
   const history = useHistory();
-  const route = useRouteMatch();
 
   // check the type from the url so we know in which category to find movie clicked.
   useEffect(() => {
@@ -74,7 +73,7 @@ const SingleMovieInfo = ({
     dispatch({ type: "FETCHING_SINGLE_VIDEO" });
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_API}&language=en-US`
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${apiKey}&language=en-US`
       )
       .then((res) => {
         dispatch({ type: "SAVING_SINGLE_VIDEO_ID", payload: res.data.results });
@@ -91,10 +90,9 @@ const SingleMovieInfo = ({
     delete obj.genre_ids;
     delete obj.adult;
     delete obj.video;
-    let movie_id = obj.id;
     delete obj.id;
 
-    let values = { ...obj, user_id: userId, movie_id, joined: true };
+    let values = { ...obj, user_id: userId, movie_id: id, joined: true };
 
     axios
       .post(`${serverUrl}/tofavorites`, values)

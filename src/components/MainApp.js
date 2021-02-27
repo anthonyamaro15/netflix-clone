@@ -4,12 +4,12 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 import axios from "axios";
 import { Route } from "react-router-dom";
 import { serverUrl } from '../envVariables';
-
 import Navbar from "./Navbar";
 import Header from "./Header";
 import MovieContent from "./MovieContent";
 import SingleMovieInfo from "./SingleMovieInfo";
 import MyList from "./MyList";
+
 
 const MainApp = () => {
   const [userId, setUserId] = useState("");
@@ -29,7 +29,7 @@ const MainApp = () => {
   const getMovieData = async (...args) => {
     const [FetchType, url, dataType, category, dataError] = args;
     dispatch({ type: FetchType });
-    return axiosWithAuth()
+    return axios
       .get(url)
       .then((res) => {
         dispatch({
@@ -42,6 +42,7 @@ const MainApp = () => {
         dispatch({
           type: dataError,
           payload: err.response.data,
+         //  payload: err
         });
       });
   };
@@ -55,9 +56,9 @@ const MainApp = () => {
       "browse",
       "ERROR"
     );
-  }, [popularPage, dispatch]);
+  }, [popularPage]);
 
-  // this axios call is getting the data for the /tvshows
+//   this axios call is getting the data for the /tvshows
   useEffect(() => {
     getMovieData(
       "FETCHING_TV_DATA",
@@ -68,7 +69,7 @@ const MainApp = () => {
     );
   }, [tvPopularPage, dispatch]);
 
-  // this axios call is getting the data for /movies
+//   this axios call is getting the data for /movies
   useEffect(() => {
     getMovieData(
       "FETCHING_RATED_DATA",
@@ -79,7 +80,7 @@ const MainApp = () => {
     );
   }, [latestRatedPage, dispatch]);
 
-  // this axios call is getting the data for /latest
+//   this axios call is getting the data for /latest
   useEffect(() => {
     getMovieData(
       "FETCHING_LATEST_DATA",
