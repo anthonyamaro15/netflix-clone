@@ -15,16 +15,6 @@ const Header = ({ popular }) => {
    setRandom(random());
   },[popular]);
 
-
-  // cut string if too long.
-  popular.map((des) => {
-    if (des.overview.length > 450) {
-      des.overview = des.overview.slice(0, 450) + "...";
-      return des;
-    }
-    return des;
-  });
-
   // checking if we have data avaliable if not then display a default img
   return (
     <div className="header-container">
