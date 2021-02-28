@@ -9,46 +9,50 @@ const Header = ({ popular }) => {
   // function takes care of selecting a random movie every time the page loads
   useEffect(() => {
    function random() {
-      let randomMovie = Math.floor(Math.random() * popular.length) + 1;
-      return randomMovie;
+      if(popular.length) {
+         let randomMovie = Math.floor(Math.random() * popular.length) + 1;
+         return randomMovie;
+      }
    }
    setRandom(random());
   },[popular]);
 
   // checking if we have data avaliable if not then display a default img
   return (
-    <div className="header-container">
-      <img
-        src={
-          popular[num] === undefined
-            ? backUpImg
-            : `https://image.tmdb.org/t/p/original${
-                popular[num].backdrop_path || popular[num].poster_path
-              }` || backUpImg
-        }
-        alt="header of the application"
-      />
+     popular.length ? (
+      <div className="header-container">
+         <img
+         src={
+            popular[num] === undefined
+               ? backUpImg
+               : `https://image.tmdb.org/t/p/original${
+                  popular[num].backdrop_path || popular[num].poster_path
+               }` || backUpImg
+         }
+         alt="header of the application"
+         />
 
-      <div className="movie-info">
-        <h1>
-          {popular[num] === undefined
-            ? "all american"
-            : popular[num].original_title || popular[num].original_name}
-        </h1>
-        <p className="movie-description">
-          {popular[num] === undefined ? "loading..." : popular[num].overview}
-        </p>
-        <div className="more-info">
-          <Link
-            to={`${url}/${
-              popular[num] === undefined ? "/moreinfo" : popular[num].id
-            }`}
-          >
-            more info
-          </Link>
-        </div>
+         <div className="movie-info">
+         <h1>
+            {popular[num] === undefined
+               ? "all american"
+               : popular[num].original_title || popular[num].original_name}
+         </h1>
+         <p className="movie-description">
+            { popular[num] === undefined ? "loading..." : popular[num].overview.slice(0, 450) + '...' }
+         </p>
+         <div className="more-info">
+            <Link
+               to={`${url}/${
+               popular[num] === undefined ? "/moreinfo" : popular[num].id
+               }`}
+            >
+               more info
+            </Link>
+         </div>
+         </div>
       </div>
-    </div>
+    ) : <h1>loadin</h1>
   );
 };
 
