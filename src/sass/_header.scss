@@ -117,3 +117,14 @@
     }
   }
 }
+
+.loading-movie {
+  text-align: center;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../img/people.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
