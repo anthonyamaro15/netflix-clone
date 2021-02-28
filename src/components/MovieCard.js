@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouteMatch } from "react-router-dom";
 import { Link } from "react-router-dom";
-import la from "../img/people.jpg";
+import backupImg from "../img/people.jpg";
 
 const MovieCard = ({ movie }) => {
   const { url } = useRouteMatch();
@@ -14,30 +14,18 @@ const MovieCard = ({ movie }) => {
     setMovies(movie);
   }, [movies, movie]);
 
+  const movieImg = `https://image.tmdb.org/t/p/original${poster_path || backdrop_path}` || backupImg;
+  const addToFavorites = joined ? "added-to-favorites showAddedMovies" : "added-to-favorites";
+
   return (
     <div className="single-movie-container">
       <Link to={`${url}/${id}`}>
         <div className="img-container">
-          <div
-            className={
-              joined
-                ? "added-to-favorites showAddedMovies"
-                : "added-to-favorites"
-            }
-          >
+          <div className={addToFavorites}>
             <h2>in my list</h2>
           </div>
-          <img
-            src={
-              poster_path || backdrop_path
-                ? `https://image.tmdb.org/t/p/original${
-                    poster_path || backdrop_path
-                  }`
-                : la
-            }
-            alt={title}
-          />
-          <div className={joined ? "hover-info" : "hover-info"}>
+          <img src={movieImg} alt={title} />
+          <div className="hover-info">
             <div className="add-icon"></div>
           </div>
         </div>
