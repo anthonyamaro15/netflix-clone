@@ -14,9 +14,10 @@ export const popularReducer = (state = initialValue, action) => {
         loading: true,
       };
     case GETTING_DATA:
+       let movieData = action.payload[0].page ? [...action.payload.slice(1)] : action.payload;
       return {
         ...state,
-        popular: [...state.popular, ...action.payload],
+        popular: [...state.popular, ...movieData],
         loading: false,
       };
 
