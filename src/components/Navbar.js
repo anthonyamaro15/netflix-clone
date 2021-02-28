@@ -8,24 +8,21 @@ const Navbar = () => {
   const [showForm, setShowForm] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const history = useHistory();
+  const ac = new AbortController();
 
   useEffect(() => {
-     let mounted = true;
-     if(mounted) {
-       window.addEventListener("scroll", () => {
-         if (window.scrollY >= 3) {
+      window.addEventListener("scroll", () => {
+      if (window.scrollY >= 3) {
          setScrolling(true);
-         } else {
+      } else {
          setScrolling(false);
-         }
+      }
 
-         if (window.scrollY === 0) {
+      if (window.scrollY === 0) {
          setScrolling(false);
-         }
-      });
-     }
-   //  return () => setScrolling(false);
-   return () => { mounted = false; }
+      }
+   });
+   return () =>  ac.abort();
   }, []);
 
   const toggleForm = () => {
