@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import YouTube from "react-youtube";
-import { BiMinus, BiPlus } from "react-icons/bi";
+import RenderSingleMovieInfo from './innerComponents/RenderSingleMovieInfo';
 import { apiKey, serverUrl } from '../envVariables';
 
 const SingleMovieInfo = ({
@@ -120,62 +119,14 @@ const SingleMovieInfo = ({
       });
   };
 
-  const ops = {
-    playerVars: {
-      autoplay: 1,
-    },
-  };
-
   return movie && data ? (
-    <div className="single-movie-info-container">
-      <div className="single-movie-info">
-        <h1>{movie.original_name ? movie.original_name : movie.title}</h1>
-        <div className="display-movie-info">
-          <span className="rating">Rating: {movie.vote_average}</span>
-          <span className="date-release">
-            {" "}
-            date released: {""}{" "}
-            {movie.first_air_date ? movie.first_air_date : movie.release_date}
-          </span>
-        </div>
-        <p className="single-movie-description">{movie.overview}</p>
-        <div
-          className={
-            ourMovie && ourMovie.joined
-              ? "added single-more-info"
-              : "single-more-info"
-          }
-        >
-          <button
-            onClick={
-              ourMovie && ourMovie.joined
-                ? () => removeFavorite(ourMovie)
-                : () => addToFavoriteList(movie)
-            }
-          >
-            {" "}
-            <span>
-              {ourMovie && ourMovie.joined ? <BiMinus /> : <BiPlus />}
-            </span>
-            {ourMovie && ourMovie.joined ? "in my list" : "add to my list"}
-          </button>
-        </div>
-      </div>
-      <div className="image-movie-info">
-        {singleMovie.length > 0 ? (
-          <YouTube
-            videoId={singleMovie[0].key}
-            opts={ops}
-            className="youtubes"
-          />
-        ) : (
-          <img
-            src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-            alt=""
-          />
-        )}
-      </div>
-    </div>
+     <RenderSingleMovieInfo 
+         movie={movie} 
+         ourMovie={ourMovie} 
+         singleMovie={singleMovie} 
+         removeFavorite={removeFavorite} 
+         addToFavoriteList={addToFavoriteList} 
+      />
   ) : (
     <h2>Loading...</h2>
   );
